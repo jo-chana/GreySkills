@@ -8,8 +8,10 @@ Plataforma de aprendizaje de Greystar Chile. Referencia visual y funcional: [doc
 |---|---|---|
 | Código | GitHub | Repositorio, historial y respaldo |
 | Aplicación | Next.js (TypeScript) + Tailwind | Pantallas y lógica |
-| Base de datos y login | Supabase (Postgres, Auth, Storage) | Datos, ingreso con RUT, archivos de cursos (videos, PDFs) |
+| Base de datos y login | Supabase (Postgres, Auth) | Datos e ingreso con RUT |
 | Publicación | Vercel | Cada cambio en GitHub se publica solo |
+
+Material de los cursos: videos y PDFs se cargan como **links** (como en LARning), no se suben archivos a la plataforma. Los links deben poder abrirse sin cuenta corporativa de Microsoft si el curso es para personal sin correo de la empresa.
 
 Seguridad: los permisos por rol se aplican en la base de datos (Row Level Security), no solo en las pantallas.
 
@@ -27,7 +29,7 @@ Seguridad: los permisos por rol se aplican en la base de datos (Row Level Securi
 
 - **Estructura:** `unidades` (gerencias, edificios y oficina central, en jerarquía), `cargos`
 - **Personas:** `perfiles` (RUT, nombre, rol, unidad, cargo, jefatura, activo), `visualizador_unidades`
-- **Cursos:** `cursos` (estado: borrador / en revisión / devuelto / publicado / archivado, categoría, portada, autor), `curso_alcance` (edificios y cargos), `modulos` (video, documento o checklist, orden), `preguntas` (quiz), `valoraciones`
+- **Cursos:** `cursos` (estado: borrador / en revisión / devuelto / publicado / archivado, categoría, portada, autor), `curso_alcance` (edificios y cargos), `modulos` (video o documento con su link, o checklist; orden), `preguntas` (quiz), `valoraciones`
 - **Avance:** `inscripciones` (origen asignado o inscrito, plazo, % de avance, fecha de término), `progreso_modulos`, `certificados`
 - **Rutas:** `rutas` (de cargo o complementarias), `ruta_cursos`, `persona_rutas`
 - **Flujos:** `propuestas`, `solicitudes_ayuda`, `revisiones` (la bandeja de la administradora se arma con esto)
