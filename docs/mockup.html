@@ -1,0 +1,2277 @@
+<!doctype html>
+<html lang="es">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+<meta name="color-scheme" content="light">
+<title>Grey Skills · Mockup</title>
+<style>
+:root{box-sizing:border-box;padding-top:env(safe-area-inset-top,0px);padding-bottom:env(safe-area-inset-bottom,0px);--navy:#0A2245;--ocean:#0077D4;--sky:#92C9EB;--stucco:#F5EBDC}
+html{scroll-padding-top:env(safe-area-inset-top,0px)}
+html,body{margin:0;background:#F4F6F9;color:#0A2245}
+*,*::before,*::after{box-sizing:inherit}
+img{max-width:100%}
+.pv{position:sticky;top:env(safe-area-inset-top,0px);z-index:50;background:#FFFFFF;border-bottom:1px solid #DDE3EA}
+.pv-in{max-width:1200px;margin:0 auto;padding:8px 24px;display:flex;flex-wrap:wrap;align-items:center;gap:6px 14px}
+.pv-t{font:700 14px "Helvetica Neue",Arial,sans-serif;color:#0A2245;margin-right:6px}
+.pv-tabs{display:flex;flex-wrap:wrap;gap:6px}
+.pv-tab{min-height:38px;padding:0 14px;border-radius:12px;border:1px solid #9AA6B5;background:#FFFFFF;color:#0A2245;font:700 14px "Helvetica Neue",Arial,sans-serif;cursor:pointer}
+.pv-tab[aria-current="page"]{background:#0A2245;border-color:#0A2245;color:#FFFFFF}
+.pv-tab:focus-visible{outline:3px solid #92C9EB;outline-offset:2px}
+#root{min-height:calc(100vh - 56px)}
+#root > div{min-height:calc(100vh - 56px)}
+@media (prefers-reduced-motion: reduce){*{scroll-behavior:auto!important}}
+.scr-Login{margin:0;background:#FFFFFF;color:#0A2245;font-family:Georgia,"Times New Roman",serif}
+.scr-Login a{color:#0077D4}
+.scr-Login a:hover{color:#0A2245}
+.scr-Login .gs-input{box-sizing:border-box;width:100%;min-height:48px;padding:12px 14px;border:1px solid #9AA6B5;border-radius:12px;font:16px Georgia,serif;color:#0A2245;background:#fff}
+.scr-Login .gs-input:focus{outline:2px solid #0077D4;outline-offset:1px;border-color:#0077D4}
+.scr-Login .gs-label{display:block;margin-bottom:6px;font:700 14px "Helvetica Neue",Arial,sans-serif;color:#0A2245}
+.scr-Login .gs-go{display:flex;align-items:center;justify-content:center;min-height:50px;border-radius:12px;background:#0A2245;color:#FFFFFF;font:700 16px "Helvetica Neue",Arial,sans-serif;text-decoration:none}
+.scr-Login .gs-go:hover{background:#0077D4;color:#FFFFFF}
+.scr-Login a:focus-visible,.scr-Login input:focus-visible{outline:3px solid #92C9EB;outline-offset:2px}
+.scr-Main{margin:0;background:#F4F6F9;color:#0A2245;font-family:Georgia,"Times New Roman",serif}
+.scr-Main a{color:#0077D4}
+.scr-Main a:hover{color:#0A2245}
+.scr-Main .gs-input{box-sizing:border-box;width:100%;min-height:44px;padding:10px 12px;border:1px solid #9AA6B5;border-radius:12px;font:15px Georgia,serif;color:#0A2245;background:#fff}
+.scr-Main .gs-input:focus{outline:2px solid #0077D4;outline-offset:1px;border-color:#0077D4}
+.scr-Main .gs-label{display:block;margin-bottom:6px;font:700 14px "Helvetica Neue",Arial,sans-serif;color:#0A2245}
+.scr-Main .gs-btn{min-height:44px;padding:0 20px;border:none;border-radius:12px;background:#0A2245;color:#fff;font:700 15px "Helvetica Neue",Arial,sans-serif;cursor:pointer}
+.scr-Main .gs-btn:hover{background:#0077D4}
+.scr-Main .gs-btn2{min-height:44px;padding:0 20px;border:1px solid #0A2245;border-radius:12px;background:#fff;color:#0A2245;font:700 15px "Helvetica Neue",Arial,sans-serif;cursor:pointer;text-decoration:none;display:inline-flex;align-items:center}
+.scr-Main .gs-btn2:hover{background:#F5EBDC;color:#0A2245}
+.scr-Main button:focus-visible,.scr-Main a:focus-visible,.scr-Main input:focus-visible{outline:3px solid #92C9EB;outline-offset:2px}
+.scr-Main .gs-card{background:#fff;border:1px solid #DDE3EA;border-radius:12px}
+.scr-Main .gs-chip{display:inline-flex;align-items:center;min-height:26px;padding:0 10px;border-radius:12px;font:700 12px "Helvetica Neue",Arial,sans-serif;letter-spacing:.2px;white-space:nowrap}
+.scr-Main .gs-muted{color:#4A5A70}
+.scr-Main .gs-h2{margin:0;font:700 22px "Helvetica Neue",Arial,sans-serif;color:#0A2245}
+.scr-Main .gs-h3{margin:0;font:700 18px/1.3 "Helvetica Neue",Arial,sans-serif;color:#0A2245}
+.scr-Main table{border-collapse:collapse;width:100%}
+.scr-Main th{text-align:left;font:700 13px "Helvetica Neue",Arial,sans-serif;color:#4A5A70;padding:12px 16px;border-bottom:1px solid #DDE3EA;white-space:nowrap}
+.scr-Main td{padding:14px 16px;border-bottom:1px solid #EEF1F5;font-size:15px;vertical-align:middle}
+.scr-CrearCurso{margin:0;background:#F4F6F9;color:#0A2245;font-family:Georgia,"Times New Roman",serif}
+.scr-CrearCurso a{color:#0077D4}
+.scr-CrearCurso a:hover{color:#0A2245}
+.scr-CrearCurso .gs-input{box-sizing:border-box;width:100%;min-height:44px;padding:10px 12px;border:1px solid #9AA6B5;border-radius:12px;font:15px Georgia,serif;color:#0A2245;background:#fff}
+.scr-CrearCurso .gs-input:focus{outline:2px solid #0077D4;outline-offset:1px;border-color:#0077D4}
+.scr-CrearCurso .gs-label{display:block;margin-bottom:6px;font:700 14px "Helvetica Neue",Arial,sans-serif;color:#0A2245}
+.scr-CrearCurso .gs-btn{min-height:44px;padding:0 20px;border:none;border-radius:12px;background:#0A2245;color:#fff;font:700 15px "Helvetica Neue",Arial,sans-serif;cursor:pointer}
+.scr-CrearCurso .gs-btn:hover{background:#0077D4}
+.scr-CrearCurso .gs-btn2{min-height:44px;padding:0 18px;border:1px solid #0A2245;border-radius:12px;background:#fff;color:#0A2245;font:700 15px "Helvetica Neue",Arial,sans-serif;cursor:pointer;text-decoration:none;display:inline-flex;align-items:center;justify-content:center}
+.scr-CrearCurso .gs-btn2:hover{background:#F5EBDC;color:#0A2245}
+.scr-CrearCurso .gs-btn2:disabled{opacity:.35;cursor:default;background:#fff}
+.scr-CrearCurso .gs-icon{width:38px;height:38px;min-height:38px;padding:0;border:1px solid #9AA6B5;border-radius:12px;background:#fff;color:#0A2245;font:700 15px "Helvetica Neue",Arial,sans-serif;cursor:pointer}
+.scr-CrearCurso .gs-icon:hover{background:#F5EBDC}
+.scr-CrearCurso .gs-icon:disabled{opacity:.3;cursor:default;background:#fff}
+.scr-CrearCurso button:focus-visible,.scr-CrearCurso a:focus-visible,.scr-CrearCurso input:focus-visible{outline:3px solid #92C9EB;outline-offset:2px}
+.scr-CrearCurso .gs-card{background:#fff;border:1px solid #DDE3EA;border-radius:12px}
+.scr-CrearCurso .gs-chip{display:inline-flex;align-items:center;min-height:26px;padding:0 10px;border-radius:12px;font:700 12px "Helvetica Neue",Arial,sans-serif;letter-spacing:.2px;white-space:nowrap}
+.scr-CrearCurso .gs-muted{color:#4A5A70}
+.scr-CrearCurso .gs-h2{margin:0;font:700 22px "Helvetica Neue",Arial,sans-serif;color:#0A2245}
+.scr-CrearCurso .gs-h3{margin:0;font:700 17px/1.3 "Helvetica Neue",Arial,sans-serif;color:#0A2245}
+.scr-Curso{margin:0;background:#F4F6F9;color:#0A2245;font-family:Georgia,"Times New Roman",serif}
+.scr-Curso a{color:#0077D4}
+.scr-Curso a:hover{color:#0A2245}
+.scr-Curso .gs-input{box-sizing:border-box;width:100%;min-height:44px;padding:10px 12px;border:1px solid #9AA6B5;border-radius:12px;font:15px Georgia,serif;color:#0A2245;background:#fff}
+.scr-Curso .gs-label{display:block;margin-bottom:6px;font:700 14px "Helvetica Neue",Arial,sans-serif;color:#0A2245}
+.scr-Curso .gs-btn{min-height:46px;padding:0 22px;border:none;border-radius:12px;background:#0A2245;color:#fff;font:700 15px "Helvetica Neue",Arial,sans-serif;cursor:pointer;text-decoration:none;display:inline-flex;align-items:center;justify-content:center}
+.scr-Curso .gs-btn:hover{background:#0077D4;color:#fff}
+.scr-Curso .gs-btn:disabled{background:#B2B3B5;color:#0A2245;cursor:default}
+.scr-Curso .gs-btn2{min-height:46px;padding:0 20px;border:1px solid #0A2245;border-radius:12px;background:#fff;color:#0A2245;font:700 15px "Helvetica Neue",Arial,sans-serif;cursor:pointer;text-decoration:none;display:inline-flex;align-items:center;justify-content:center}
+.scr-Curso .gs-btn2:hover{background:#F5EBDC;color:#0A2245}
+.scr-Curso button:focus-visible,.scr-Curso a:focus-visible,.scr-Curso input:focus-visible{outline:3px solid #92C9EB;outline-offset:2px}
+.scr-Curso .gs-card{background:#fff;border:1px solid #DDE3EA;border-radius:12px}
+.scr-Curso .gs-chip{display:inline-flex;align-items:center;min-height:24px;padding:0 9px;border-radius:12px;font:700 12px "Helvetica Neue",Arial,sans-serif;white-space:nowrap}
+.scr-Curso .gs-muted{color:#4A5A70}
+.scr-Curso .gs-h2{margin:0;font:700 24px "Helvetica Neue",Arial,sans-serif;color:#0A2245}
+</style>
+</head>
+<body>
+<div class="pv"><div class="pv-in"><span class="pv-t">Mockup Grey Skills</span><nav class="pv-tabs" aria-label="Pantallas del mockup"><button class="pv-tab" data-go="Login">Ingreso</button><button class="pv-tab" data-go="Main">Plataforma</button><button class="pv-tab" data-go="CrearCurso">Crear curso</button><button class="pv-tab" data-go="Curso">Curso por dentro</button></nav></div></div>
+<div id="root"></div>
+<template id="tpl-Login">
+
+<div style="min-height: 100vh; display: flex; flex-wrap: wrap">
+<div style="flex: 1 1 420px; background: #0A2245; color: #FFFFFF; padding: 56px; box-sizing: border-box; display: flex; flex-direction: column; justify-content: space-between; gap: 48px">
+<div style="display: flex; align-items: baseline; gap: 10px">
+<span style="font-family: Georgia, serif; font-size: 26px">Grey Skills</span>
+<span style="font: 700 11px 'Helvetica Neue', Arial, sans-serif; color: #92C9EB; letter-spacing: 1.5px; text-transform: uppercase">Greystar Chile</span>
+</div>
+<div style="max-width: 460px">
+<h1 style="margin: 0 0 16px; font: 700 44px/1.1 'Helvetica Neue', Arial, sans-serif">Aprende algo nuevo para tu día a día.</h1>
+<p style="margin: 0; font-size: 18px; line-height: 1.55; color: #C9D3E0">Tus cursos, los que te asignaron y los que eliges tú, en un solo lugar.</p>
+</div>
+<div style="height: 6px; width: 120px; background: #92C9EB; border-radius: 12px"></div>
+</div>
+<div style="flex: 1 1 420px; padding: 56px 24px; box-sizing: border-box; display: flex; align-items: center; justify-content: center">
+<div style="width: 100%; max-width: 380px; display: flex; flex-direction: column; gap: 20px">
+<h2 style="margin: 0; font: 700 28px 'Helvetica Neue', Arial, sans-serif">Ingresa</h2>
+<div><label class="gs-label" for="rut">RUT</label><input id="rut" class="gs-input" placeholder="12.345.678-9" autocomplete="username"></div>
+<div><label class="gs-label" for="pw">Contraseña</label><input id="pw" class="gs-input" type="password" autocomplete="current-password"></div>
+<a class="gs-go" href="Main.dc.html">Ingresar</a>
+<p style="margin: 0; font-size: 15px; line-height: 1.5; color: #4A5A70">¿Olvidaste tu contraseña? Escríbele a Josefina y te asigna una nueva.</p>
+</div>
+</div>
+</div>
+</template>
+<template id="tpl-Main">
+
+<div style="min-height: 100%; display: flex; flex-direction: column">
+<div style="background: #F5EBDC; border-bottom: 1px solid #E2D6C4">
+<div style="max-width: 1200px; margin: 0 auto; padding: 8px 24px; display: flex; flex-wrap: wrap; align-items: center; gap: 8px">
+<span style="font: 700 13px 'Helvetica Neue', Arial, sans-serif; color: #0A2245; margin-right: 6px">Ver el mockup como:</span>
+<sc-for list="{{rolesDemo}}" as="r" hint-placeholder-count="5">
+<button onClick="{{r.go}}" aria-pressed="{{r.on}}" style="min-height: 36px; padding: 0 14px; border-radius: 12px; border: 1px solid {{r.bd}}; background: {{r.bg}}; color: {{r.fg}}; font: 700 13px 'Helvetica Neue', Arial, sans-serif; cursor: pointer">{{r.l}}</button>
+</sc-for>
+</div>
+</div>
+
+<header style="background: #0A2245">
+<div style="max-width: 1200px; margin: 0 auto; padding: 0 24px; display: flex; flex-wrap: wrap; align-items: center; gap: 8px 32px; min-height: 68px">
+<div style="display: flex; align-items: baseline; gap: 10px">
+<span style="font-family: Georgia, serif; font-size: 24px; color: #FFFFFF; letter-spacing: 0.3px">Grey Skills</span>
+<span style="font: 700 11px 'Helvetica Neue', Arial, sans-serif; color: #92C9EB; letter-spacing: 1.5px; text-transform: uppercase">Greystar Chile</span>
+</div>
+<nav aria-label="Secciones" style="display: flex; flex-wrap: wrap; gap: 4px; flex: 1 1 auto">
+<sc-for list="{{tabs}}" as="t" hint-placeholder-count="4">
+<button onClick="{{t.go}}" aria-current="{{t.current}}" style="background: none; border: none; border-bottom: 3px solid {{t.border}}; padding: 22px 12px 19px; font: {{t.weight}} 15px 'Helvetica Neue', Arial, sans-serif; color: {{t.color}}; cursor: pointer">{{t.label}}</button>
+</sc-for>
+</nav>
+<div style="display: flex; align-items: center; gap: 10px">
+<span style="width: 40px; height: 40px; border-radius: 12px; background: #92C9EB; color: #0A2245; display: flex; align-items: center; justify-content: center; font: 700 14px 'Helvetica Neue', Arial, sans-serif">{{p.ini}}</span>
+<span style="display: flex; flex-direction: column; font-family: 'Helvetica Neue', Arial, sans-serif">
+<span style="font-size: 14px; font-weight: 700; color: #FFFFFF">{{p.nombre}}</span>
+<span style="font-size: 12px; color: #C9D3E0">{{p.cargo}} · {{p.unidad}}</span>
+</span>
+</div>
+</div>
+</header>
+<sc-if value="{{viendoComo}}" hint-placeholder-val="{{ false }}">
+<div style="background: #FFD972; color: #0A2245">
+<div style="max-width: 1200px; margin: 0 auto; padding: 10px 24px; display: flex; flex-wrap: wrap; align-items: center; justify-content: space-between; gap: 10px">
+<span style="font: 700 14px 'Helvetica Neue', Arial, sans-serif">Estás viendo Grey Skills como {{viewAsName}} ({{viewAsRol}}). Modo solo lectura: nada de lo que hagas se guarda.</span>
+<button class="gs-btn" onClick="{{salirVerComo}}" style="min-height: 38px; font-size: 14px">Volver a mi vista</button>
+</div>
+</div>
+</sc-if>
+
+<main style="flex: 1; width: 100%; max-width: 1200px; margin: 0 auto; padding: 36px 24px 72px; box-sizing: border-box">
+
+<sc-if value="{{isCursos}}" hint-placeholder-val="{{ true }}">
+<section style="display: flex; flex-direction: column; gap: 28px">
+<div style="display: flex; flex-wrap: wrap; justify-content: space-between; align-items: flex-end; gap: 16px">
+<div>
+<h1 style="margin: 0 0 6px; font: 700 32px 'Helvetica Neue', Arial, sans-serif">Hola, {{p.first}}</h1>
+<p class="gs-muted" style="margin: 0; font-size: 17px">Esto es lo que tienes pendiente.</p>
+</div>
+<div style="display: flex; flex-wrap: wrap; gap: 10px">
+<span class="gs-chip" style="background: #FFFFFF; color: #0A2245; border: 1px solid #DDE3EA; min-height: 36px; padding: 0 14px; font-size: 13px">{{res.curso}} en curso</span>
+<span class="gs-chip" style="background: #FFD972; color: #0A2245; min-height: 36px; padding: 0 14px; font-size: 13px">{{res.vencer}} por vencer</span>
+<span class="gs-chip" style="background: #9E3B2E; color: #FFFFFF; min-height: 36px; padding: 0 14px; font-size: 13px">{{res.vencidos}} vencido</span>
+</div>
+</div>
+
+<div class="gs-card" style="padding: 24px 26px; display: flex; flex-wrap: wrap; align-items: center; gap: 20px 32px">
+<div style="display: flex; flex-direction: column; gap: 2px; flex: 0 0 auto">
+<span style="font: 700 48px/1 'Helvetica Neue', Arial, sans-serif; color: #0A2245">{{asig.pw}}</span>
+<span class="gs-muted" style="font: 700 13px 'Helvetica Neue', Arial, sans-serif">avance de tus cursos asignados</span>
+</div>
+<div style="flex: 1 1 320px; display: flex; flex-direction: column; gap: 10px">
+<div style="height: 14px; background: #E3E8EF; border-radius: 12px; overflow: hidden"><div style="height: 100%; width: {{asig.pw}}; background: #0077D4"></div></div>
+<span class="gs-muted" style="font-size: 15px">{{asig.txt}}</span>
+</div>
+</div>
+
+<div style="display: flex; flex-direction: column; gap: 14px">
+<h2 class="gs-h2">Asignados por tu jefatura</h2>
+<div style="display: grid; grid-template-columns: repeat(auto-fill, minmax(280px, 1fr)); gap: 20px">
+<sc-for list="{{asignados}}" as="c" hint-placeholder-count="3">
+<article class="gs-card" style="overflow: hidden; display: flex; flex-direction: column">
+<div style="height: 84px; background: {{c.thumb}}; display: flex; align-items: flex-end; padding: 16px; box-sizing: border-box">
+<svg width="30" height="30" viewBox="0 0 24 24" fill="none" stroke="{{c.ink}}" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M4 5a2 2 0 0 1 2-2h13v16H6a2 2 0 0 0-2 2z"></path><path d="M4 21a2 2 0 0 1 2-2h13v2H6"></path><path d="M9 7h6"></path></svg>
+</div>
+<div style="padding: 20px; display: flex; flex-direction: column; gap: 12px; flex: 1">
+<span class="gs-chip" style="align-self: flex-start; background: {{c.sem.bg}}; color: {{c.sem.fg}}">{{c.sem.l}}</span>
+<h3 class="gs-h3">{{c.t}}</h3>
+<p class="gs-muted" style="margin: 0; font-size: 14px">{{c.meta}} · {{c.plazo}}</p>
+<div style="display: flex; align-items: center; gap: 10px; margin-top: auto">
+<div style="flex: 1; height: 8px; background: #E3E8EF; border-radius: 12px; overflow: hidden"><div style="height: 100%; width: {{c.pw}}; background: #0077D4"></div></div>
+<span style="font: 700 13px 'Helvetica Neue', Arial, sans-serif">{{c.pw}}</span>
+</div>
+<a class="gs-btn" href="Curso.dc.html" style="align-self: flex-start; display: inline-flex; align-items: center; text-decoration: none; color: #FFFFFF">{{c.cta}}</a>
+</div>
+</article>
+</sc-for>
+</div>
+</div>
+
+<div style="display: flex; flex-direction: column; gap: 14px">
+<h2 class="gs-h2">Inscritos por ti</h2>
+<div style="display: grid; grid-template-columns: repeat(auto-fill, minmax(280px, 1fr)); gap: 20px">
+<sc-for list="{{inscritos}}" as="c" hint-placeholder-count="1">
+<article class="gs-card" style="overflow: hidden; display: flex; flex-direction: column">
+<div style="height: 84px; background: {{c.thumb}}; display: flex; align-items: flex-end; padding: 16px; box-sizing: border-box">
+<svg width="30" height="30" viewBox="0 0 24 24" fill="none" stroke="{{c.ink}}" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M4 5a2 2 0 0 1 2-2h13v16H6a2 2 0 0 0-2 2z"></path><path d="M4 21a2 2 0 0 1 2-2h13v2H6"></path><path d="M9 7h6"></path></svg>
+</div>
+<div style="padding: 20px; display: flex; flex-direction: column; gap: 12px; flex: 1">
+<span class="gs-chip" style="align-self: flex-start; background: {{c.sem.bg}}; color: {{c.sem.fg}}">{{c.sem.l}}</span>
+<h3 class="gs-h3">{{c.t}}</h3>
+<p class="gs-muted" style="margin: 0; font-size: 14px">{{c.meta}}</p>
+<div style="display: flex; align-items: center; gap: 10px; margin-top: auto">
+<div style="flex: 1; height: 8px; background: #E3E8EF; border-radius: 12px; overflow: hidden"><div style="height: 100%; width: {{c.pw}}; background: #0077D4"></div></div>
+<span style="font: 700 13px 'Helvetica Neue', Arial, sans-serif">{{c.pw}}</span>
+</div>
+<a class="gs-btn" href="Curso.dc.html" style="align-self: flex-start; display: inline-flex; align-items: center; text-decoration: none; color: #FFFFFF">{{c.cta}}</a>
+</div>
+</article>
+</sc-for>
+<button onClick="{{goExplorar}}" style="min-height: 220px; border: 2px dashed #9AA6B5; border-radius: 12px; background: transparent; color: #0A2245; font: 700 15px 'Helvetica Neue', Arial, sans-serif; cursor: pointer">Buscar más cursos en el explorador</button>
+</div>
+</div>
+</section>
+</sc-if>
+
+<sc-if value="{{isExplorar}}" hint-placeholder-val="{{ false }}">
+<section style="display: flex; flex-direction: column; gap: 24px">
+<div>
+<h1 style="margin: 0 0 6px; font: 700 32px 'Helvetica Neue', Arial, sans-serif">Explorador de cursos</h1>
+<p class="gs-muted" style="margin: 0; font-size: 17px">Cursos abiertos para todos y los que corresponden a tu cargo. Te inscribes cuando quieras.</p>
+</div>
+<div style="display: flex; flex-wrap: wrap; gap: 12px; align-items: center">
+<div style="flex: 1 1 320px">
+<label class="gs-label" for="buscar" style="position: absolute; left: -9999px">Buscar curso</label>
+<input id="buscar" class="gs-input" type="search" placeholder="Buscar por nombre o tema">
+</div>
+<div style="display: flex; flex-wrap: wrap; gap: 8px">
+<sc-for list="{{cats}}" as="k" hint-placeholder-count="5">
+<button onClick="{{k.go}}" aria-pressed="{{k.on}}" style="min-height: 40px; padding: 0 14px; border-radius: 12px; border: 1px solid {{k.bd}}; background: {{k.bg}}; color: {{k.fg}}; font: 700 14px 'Helvetica Neue', Arial, sans-serif; cursor: pointer">{{k.l}}</button>
+</sc-for>
+</div>
+</div>
+<div style="display: grid; grid-template-columns: repeat(auto-fill, minmax(320px, 1fr)); gap: 20px">
+<sc-for list="{{catalogo}}" as="c" hint-placeholder-count="6">
+<article class="gs-card" style="padding: 22px; display: flex; flex-direction: column; gap: 12px">
+<div style="display: flex; justify-content: space-between; align-items: center; gap: 8px">
+<span class="gs-chip" style="background: {{c.vbg}}; color: #0A2245">{{c.vl}}</span>
+<span class="gs-muted" style="font: 13px 'Helvetica Neue', Arial, sans-serif">{{c.meta}}</span>
+</div>
+<h3 class="gs-h3">{{c.t}}</h3>
+<p class="gs-muted" style="margin: 0; font-size: 15px; line-height: 1.5">{{c.d}}</p>
+<button onClick="{{c.toggle}}" style="margin-top: auto; align-self: flex-start; min-height: 44px; padding: 0 20px; border-radius: 12px; border: 1px solid {{c.bbd}}; background: {{c.bbg}}; color: {{c.bfg}}; font: 700 15px 'Helvetica Neue', Arial, sans-serif; cursor: pointer">{{c.bl}}</button>
+</article>
+</sc-for>
+</div>
+</section>
+</sc-if>
+
+<sc-if value="{{isProponer}}" hint-placeholder-val="{{ false }}">
+<section style="display: flex; flex-direction: column; gap: 24px">
+<div>
+<h1 style="margin: 0 0 6px; font: 700 32px 'Helvetica Neue', Arial, sans-serif">Proponer un curso</h1>
+<p class="gs-muted" style="margin: 0; font-size: 17px">¿Echas de menos algo que te ayudaría en tu trabajo? Cuéntanos. Josefina revisa cada propuesta.</p>
+</div>
+<div style="display: flex; flex-wrap: wrap; gap: 24px; align-items: flex-start">
+<div class="gs-card" style="flex: 999 1 460px; min-width: 0; padding: 28px; display: flex; flex-direction: column; gap: 18px">
+<sc-if value="{{propEnviada}}" hint-placeholder-val="{{ false }}">
+<div style="background: #F5EBDC; border-radius: 12px; padding: 16px 18px; font-size: 15px">Tu propuesta llegó a Josefina. Verás su respuesta en "Mis propuestas".</div>
+</sc-if>
+<div><label class="gs-label" for="p-tema">¿Qué te gustaría aprender?</label><input id="p-tema" class="gs-input" placeholder="Ej: primeros auxilios básicos"></div>
+<div><label class="gs-label" for="p-por">¿Por qué te serviría?</label><textarea id="p-por" class="gs-input" rows="4" style="resize: vertical" placeholder="Cuéntanos en qué situación lo usarías"></textarea></div>
+<div><label class="gs-label" for="p-para">¿Para quién sería?</label>
+<select id="p-para" class="gs-input"><option>Para todos</option><option>Para mi cargo</option><option>Para otro cargo</option></select></div>
+<div><label class="gs-label" for="p-quien">¿Conoces a alguien que podría enseñarlo? (opcional)</label><input id="p-quien" class="gs-input" placeholder="Nombre o área"></div>
+<button class="gs-btn" onClick="{{enviarProp}}" style="align-self: flex-start">Enviar propuesta</button>
+</div>
+<div style="flex: 1 1 320px; display: flex; flex-direction: column; gap: 12px">
+<h2 class="gs-h2">Mis propuestas</h2>
+<sc-for list="{{propuestas}}" as="x" hint-placeholder-count="3">
+<div class="gs-card" style="padding: 18px; display: flex; flex-direction: column; gap: 8px">
+<div style="display: flex; justify-content: space-between; gap: 8px; align-items: center">
+<strong style="font: 700 16px 'Helvetica Neue', Arial, sans-serif">{{x.t}}</strong>
+<span class="gs-chip" style="background: {{x.bg}}; color: {{x.fg}}">{{x.e}}</span>
+</div>
+<span class="gs-muted" style="font-size: 14px">{{x.nota}}</span>
+</div>
+</sc-for>
+</div>
+</div>
+</section>
+</sc-if>
+
+<sc-if value="{{isEquipo}}" hint-placeholder-val="{{ false }}">
+<section style="display: flex; flex-direction: column; gap: 22px">
+<div style="display: flex; flex-wrap: wrap; justify-content: space-between; align-items: flex-end; gap: 16px">
+<div>
+<h1 style="margin: 0 0 6px; font: 700 32px 'Helvetica Neue', Arial, sans-serif">{{equipoTitulo}}</h1>
+<p class="gs-muted" style="margin: 0; font-size: 17px">{{unidadLabel}}</p>
+</div>
+<sc-if value="{{readOnly}}" hint-placeholder-val="{{ false }}">
+<span class="gs-chip" style="background: #B2B3B5; color: #0A2245; min-height: 34px; padding: 0 14px; font-size: 13px">Solo lectura</span>
+</sc-if>
+</div>
+
+<sc-if value="{{showUnits}}" hint-placeholder-val="{{ false }}">
+<div style="display: flex; flex-wrap: wrap; gap: 8px; align-items: center">
+<span class="gs-muted" style="font: 700 13px 'Helvetica Neue', Arial, sans-serif; margin-right: 4px">Ver:</span>
+<sc-for list="{{unidades}}" as="u" hint-placeholder-count="4">
+<button onClick="{{u.go}}" aria-pressed="{{u.on}}" style="min-height: 40px; padding: 0 14px; border-radius: 12px; border: 1px solid {{u.bd}}; background: {{u.bg}}; color: {{u.fg}}; font: 700 14px 'Helvetica Neue', Arial, sans-serif; cursor: pointer">{{u.l}}</button>
+</sc-for>
+</div>
+</sc-if>
+
+<sc-if value="{{readOnly}}" hint-placeholder-val="{{ false }}">
+<div style="background: #F5EBDC; border-radius: 12px; padding: 14px 18px; font-size: 15px">{{readOnlyMsg}}</div>
+</sc-if>
+
+<sc-if value="{{showSubtabs}}" hint-placeholder-val="{{ true }}">
+<nav aria-label="Herramientas de equipo" style="display: flex; flex-wrap: wrap; gap: 6px; border-bottom: 1px solid #DDE3EA">
+<sc-for list="{{subtabs}}" as="t" hint-placeholder-count="5">
+<button onClick="{{t.go}}" aria-current="{{t.current}}" style="background: none; border: none; border-bottom: 3px solid {{t.border}}; padding: 12px 14px; margin-bottom: -1px; font: {{t.weight}} 15px 'Helvetica Neue', Arial, sans-serif; color: #0A2245; cursor: pointer">{{t.label}}</button>
+</sc-for>
+</nav>
+</sc-if>
+
+<sc-if value="{{subAvances}}" hint-placeholder-val="{{ true }}">
+<div style="display: flex; flex-direction: column; gap: 20px">
+<div style="display: grid; grid-template-columns: repeat(auto-fit, minmax(220px, 1fr)); gap: 16px">
+<div class="gs-card" style="padding: 20px"><div style="font: 700 34px 'Helvetica Neue', Arial, sans-serif">{{eqKpi.avance}}</div><div class="gs-muted" style="font-size: 14px">avance general del equipo</div></div>
+<div class="gs-card" style="padding: 20px"><div style="font: 700 34px 'Helvetica Neue', Arial, sans-serif">{{eqKpi.personas}}</div><div class="gs-muted" style="font-size: 14px">personas con cursos</div></div>
+<div class="gs-card" style="padding: 20px"><div style="font: 700 34px 'Helvetica Neue', Arial, sans-serif; color: #9E3B2E">{{eqKpi.vencidos}}</div><div class="gs-muted" style="font-size: 14px">personas con algún curso vencido</div></div>
+</div>
+<sc-if value="{{eqVacio}}" hint-placeholder-val="{{ false }}">
+<div class="gs-card" style="padding: 28px; text-align: center"><p class="gs-muted" style="margin: 0">Esta unidad todavía no tiene personas con cursos.</p></div>
+</sc-if>
+<sc-if value="{{eqHay}}" hint-placeholder-val="{{ true }}">
+<div class="gs-card" style="overflow-x: auto">
+<div style="min-width: 880px">
+<div style="display: grid; grid-template-columns: minmax(170px, 2fr) minmax(170px, 1.7fr) 90px minmax(180px, 2fr) 90px 40px; gap: 12px; padding: 12px 18px; border-bottom: 1px solid #DDE3EA; font: 700 13px 'Helvetica Neue', Arial, sans-serif; color: #4A5A70">
+<span>Persona</span><span>Unidad y cargo</span><span>Cursos</span><span>Avance general</span><span>Vencidos</span><span></span>
+</div>
+<sc-for list="{{eqPersonas}}" as="r" hint-placeholder-count="6">
+<div style="border-bottom: 1px solid #EEF1F5; background: {{r.rowBg}}">
+<button onClick="{{r.toggle}}" aria-expanded="{{r.exp}}" style="width: 100%; display: grid; grid-template-columns: minmax(170px, 2fr) minmax(170px, 1.7fr) 90px minmax(180px, 2fr) 90px 40px; gap: 12px; align-items: center; padding: 14px 18px; background: none; border: none; text-align: left; cursor: pointer; color: #0A2245; font: 15px Georgia, serif">
+<span style="font: 700 15px 'Helvetica Neue', Arial, sans-serif">{{r.n}}</span>
+<span style="display: flex; flex-direction: column"><span>{{r.unidad}}</span><span class="gs-muted" style="font-size: 13px">{{r.cargo}}</span></span>
+<span>{{r.total}}</span>
+<span style="display: flex; align-items: center; gap: 10px"><span style="flex: 1; height: 10px; background: #E3E8EF; border-radius: 12px; overflow: hidden"><span style="display: block; height: 100%; width: {{r.pw}}; background: #0077D4"></span></span><span style="font: 700 14px 'Helvetica Neue', Arial, sans-serif; width: 42px; text-align: right">{{r.pw}}</span></span>
+<span><span class="gs-chip" style="background: {{r.vbg}}; color: {{r.vfg}}">{{r.venc}}</span></span>
+<span style="font: 700 18px 'Helvetica Neue', Arial, sans-serif; text-align: center" aria-hidden="true">{{r.flecha}}</span>
+</button>
+<sc-if value="{{r.abierto}}" hint-placeholder-val="{{ false }}">
+<div style="padding: 4px 18px 18px 18px">
+<div style="border: 1px solid #DDE3EA; border-radius: 12px; background: #FFFFFF; overflow: hidden">
+<div style="display: grid; grid-template-columns: minmax(200px, 2.4fr) 110px minmax(130px, 1.2fr) minmax(160px, 1.6fr) 130px; gap: 12px; padding: 10px 16px; background: #F4F6F9; font: 700 12px 'Helvetica Neue', Arial, sans-serif; color: #4A5A70">
+<span>Curso</span><span>Origen</span><span>Plazo</span><span>Avance</span><span>Estado</span>
+</div>
+<sc-for list="{{r.cursos}}" as="c" hint-placeholder-count="4">
+<div style="display: grid; grid-template-columns: minmax(200px, 2.4fr) 110px minmax(130px, 1.2fr) minmax(160px, 1.6fr) 130px; gap: 12px; padding: 12px 16px; border-top: 1px solid #EEF1F5; align-items: center; font-size: 14px">
+<span style="font-weight: 700">{{c.t}}</span>
+<span class="gs-muted">{{c.origen}}</span>
+<span class="gs-muted">{{c.plazo}}</span>
+<span style="display: flex; align-items: center; gap: 8px"><span style="flex: 1; height: 8px; background: #E3E8EF; border-radius: 12px; overflow: hidden"><span style="display: block; height: 100%; width: {{c.pw}}; background: #0077D4"></span></span><span style="font: 700 13px 'Helvetica Neue', Arial, sans-serif; width: 38px; text-align: right">{{c.pw}}</span></span>
+<span><span class="gs-chip" style="background: {{c.sem.bg}}; color: {{c.sem.fg}}">{{c.sem.l}}</span></span>
+</div>
+</sc-for>
+</div>
+</div>
+</sc-if>
+</div>
+</sc-for>
+</div>
+</div>
+</sc-if>
+<p class="gs-muted" style="margin: 0; font-size: 14px">Haz clic en una persona para ver el detalle de cada curso. La lista parte por quien tiene menor avance.</p>
+</div>
+</sc-if>
+
+<sc-if value="{{subAsignar}}" hint-placeholder-val="{{ false }}">
+<div class="gs-card" style="padding: 28px; display: flex; flex-direction: column; gap: 22px; max-width: 760px">
+<sc-if value="{{asignado}}" hint-placeholder-val="{{ false }}">
+<div style="background: #F5EBDC; border-radius: 12px; padding: 16px 18px; font-size: 15px">Listo. El curso ya aparece en "Mis cursos" de cada persona seleccionada.</div>
+</sc-if>
+<div><label class="gs-label" for="a-curso">1. Elige el curso</label>
+<select id="a-curso" class="gs-input"><option data-for="{{catalogo}}" data-as="c">{{c.t}}</option></select></div>
+<fieldset style="border: none; padding: 0; margin: 0; display: flex; flex-direction: column; gap: 10px">
+<legend class="gs-label">2. Elige a quiénes</legend>
+<label style="display: flex; align-items: center; gap: 10px; min-height: 36px; font-weight: 700"><input type="checkbox" style="width: 20px; height: 20px">Todo el equipo</label>
+<sc-for list="{{equipo}}" as="r" hint-placeholder-count="5">
+<label style="display: flex; align-items: center; gap: 10px; min-height: 36px"><input type="checkbox" style="width: 20px; height: 20px">{{r.n}} <span class="gs-muted" style="font-size: 14px">· {{r.cargo}}</span></label>
+</sc-for>
+</fieldset>
+<div style="display: flex; flex-direction: column; gap: 10px">
+<span class="gs-label" style="margin: 0">3. Fecha límite (opcional)</span>
+<label style="display: flex; align-items: center; gap: 10px; min-height: 36px"><input type="checkbox" checked="{{conPlazo}}" onChange="{{togglePlazo}}" style="width: 20px; height: 20px">Agregar fecha límite</label>
+<sc-if value="{{conPlazo}}" hint-placeholder-val="{{ true }}">
+<div style="max-width: 260px"><label class="gs-label" for="a-fecha">Fecha</label><input id="a-fecha" class="gs-input" type="date"></div>
+</sc-if>
+</div>
+<button class="gs-btn" onClick="{{asignar}}" style="align-self: flex-start">Asignar curso</button>
+</div>
+</sc-if>
+
+<sc-if value="{{subUsuarios}}" hint-placeholder-val="{{ false }}">
+<div style="display: flex; flex-direction: column; gap: 18px">
+<button class="gs-btn" onClick="{{toggleAdd}}" style="align-self: flex-start">{{addLabel}}</button>
+<sc-if value="{{showAdd}}" hint-placeholder-val="{{ false }}">
+<div class="gs-card" style="padding: 24px; display: grid; grid-template-columns: repeat(auto-fit, minmax(220px, 1fr)); gap: 16px; align-items: end">
+<div><label class="gs-label" for="u-n">Nombre completo</label><input id="u-n" class="gs-input"></div>
+<div><label class="gs-label" for="u-rut">RUT</label><input id="u-rut" class="gs-input" placeholder="12.345.678-9"></div>
+<div><label class="gs-label" for="u-c">Cargo</label><select id="u-c" class="gs-input" value="{{np.cargo}}" onChange="{{np.setCargo}}"><option>Guest Service</option><option>Aseo</option><option>Mantención</option><option>Building Manager Assistant</option><option>Building Manager</option></select></div>
+<div><label class="gs-label" for="u-pw">Contraseña temporal</label><input id="u-pw" class="gs-input"></div>
+<p class="gs-muted" style="margin: 0; font-size: 14px">La persona deberá cambiar la contraseña en su primer ingreso.</p>
+<div style="grid-column: 1 / -1; border-top: 1px solid #DDE3EA; padding-top: 18px; display: flex; flex-direction: column; gap: 14px">
+<h3 class="gs-h3">Rutas de capacitación</h3>
+<label style="display: flex; align-items: center; gap: 10px; min-height: 40px; font: 700 15px 'Helvetica Neue', Arial, sans-serif"><input type="checkbox" checked="{{np.rutaCargo}}" onChange="{{np.toggleRutaCargo}}" style="width: 20px; height: 20px">Asignar la ruta de su cargo: {{np.rutaCargoNombre}}</label>
+<sc-if value="{{np.rutaCargo}}" hint-placeholder-val="{{ true }}">
+<div style="border: 1px solid #DDE3EA; border-radius: 12px; padding: 14px 16px; background: #FAFBFC; display: flex; flex-direction: column; gap: 4px">
+<div style="display: flex; flex-wrap: wrap; justify-content: space-between; align-items: center; gap: 8px; margin-bottom: 4px"><span class="gs-muted" style="font: 700 13px 'Helvetica Neue', Arial, sans-serif">{{np.cargoTxt}}</span><button onClick="{{np.todosCargo}}" style="background: none; border: none; color: #0077D4; font: 700 13px 'Helvetica Neue', Arial, sans-serif; cursor: pointer; min-height: 32px">{{np.todosCargoLbl}}</button></div>
+<sc-for list="{{np.cursosCargo}}" as="c" hint-placeholder-count="5">
+<label style="display: flex; align-items: center; gap: 10px; min-height: 36px; font-size: 15px"><input type="checkbox" checked="{{c.on}}" onChange="{{c.toggle}}" style="width: 18px; height: 18px">{{c.t}}<span class="gs-muted" style="font-size: 13px">· {{c.d}}</span></label>
+</sc-for>
+</div>
+</sc-if>
+<div style="max-width: 420px"><label class="gs-label" for="j-otra">Agregar otra ruta (opcional)</label>
+<select id="j-otra" class="gs-input" value="{{np.otra}}" onChange="{{np.elegirOtra}}"><option value="">Ninguna</option><option data-for="{{np.otras}}" data-as="o" value="{{o.id}}">{{o.n}}</option></select></div>
+<sc-if value="{{np.hayOtra}}" hint-placeholder-val="{{ false }}">
+<div style="border: 1px solid #DDE3EA; border-radius: 12px; padding: 14px 16px; background: #FAFBFC; display: flex; flex-direction: column; gap: 4px">
+<div style="display: flex; flex-wrap: wrap; justify-content: space-between; align-items: center; gap: 8px; margin-bottom: 4px"><span class="gs-muted" style="font: 700 13px 'Helvetica Neue', Arial, sans-serif">{{np.otraTxt}}</span><button onClick="{{np.todosOtra}}" style="background: none; border: none; color: #0077D4; font: 700 13px 'Helvetica Neue', Arial, sans-serif; cursor: pointer; min-height: 32px">{{np.todosOtraLbl}}</button></div>
+<sc-for list="{{np.cursosOtra}}" as="c" hint-placeholder-count="3">
+<label style="display: flex; align-items: center; gap: 10px; min-height: 36px; font-size: 15px"><input type="checkbox" checked="{{c.on}}" onChange="{{c.toggle}}" style="width: 18px; height: 18px">{{c.t}}<span class="gs-muted" style="font-size: 13px">· {{c.d}}</span></label>
+</sc-for>
+</div>
+</sc-if>
+<div style="max-width: 260px"><label class="gs-label" for="j-plazo">Fecha límite (opcional)</label><input id="j-plazo" class="gs-input" type="date"></div>
+<div style="background: #F5EBDC; border-radius: 12px; padding: 12px 16px; font-size: 15px">Se le asignarán <strong>{{np.total}}</strong> y los verá en "Mis cursos" desde su primer ingreso.</div>
+</div>
+<button class="gs-btn" style="justify-self: start">Crear usuario</button>
+</div>
+</sc-if>
+<div class="gs-card" style="overflow-x: auto">
+<table>
+<thead><tr><th>Persona</th><th>RUT</th><th>Cargo</th><th>Estado</th><th><span style="position: absolute; left: -9999px">Acciones</span></th></tr></thead>
+<tbody>
+<tr data-for="{{usuarios}}" data-as="r">
+<td style="font-weight: 700; color: {{r.ink}}">{{r.n}}</td>
+<td style="color: {{r.ink}}">{{r.rut}}</td>
+<td style="color: {{r.ink}}">{{r.cargo}}</td>
+<td><span class="gs-chip" style="background: {{r.ebg}}; color: {{r.efg}}">{{r.e}}</span></td>
+<td style="text-align: right"><button class="gs-btn2" onClick="{{r.toggle}}" style="min-height: 38px; font-size: 14px">{{r.accion}}</button></td>
+</tr>
+</tbody>
+</table>
+</div>
+</div>
+</sc-if>
+
+<sc-if value="{{subCrear}}" hint-placeholder-val="{{ false }}">
+<div style="display: flex; flex-direction: column; gap: 22px">
+<div style="display: grid; grid-template-columns: repeat(auto-fit, minmax(300px, 1fr)); gap: 18px">
+<button onClick="{{modoAyuda}}" aria-pressed="{{modo.ayudaOn}}" style="text-align: left; padding: 24px; border-radius: 12px; background: #FFFFFF; border: 2px solid {{modo.ayudaBd}}; cursor: pointer; display: flex; flex-direction: column; gap: 8px; color: #0A2245">
+<span style="font: 700 19px 'Helvetica Neue', Arial, sans-serif">Pedir ayuda a Josefina</span>
+<span class="gs-muted" style="font: 15px/1.5 Georgia, serif">Cuéntale qué necesitas y el material que tienes. Ella arma el curso contigo.</span>
+</button>
+<button onClick="{{modoSolo}}" aria-pressed="{{modo.soloOn}}" style="text-align: left; padding: 24px; border-radius: 12px; background: #FFFFFF; border: 2px solid {{modo.soloBd}}; cursor: pointer; display: flex; flex-direction: column; gap: 8px; color: #0A2245">
+<span style="font: 700 19px 'Helvetica Neue', Arial, sans-serif">Crearlo yo</span>
+<span class="gs-muted" style="font: 15px/1.5 Georgia, serif">Arma los módulos tú mismo. Antes de publicarse, Josefina lo revisa.</span>
+</button>
+</div>
+
+<sc-if value="{{modo.ayuda}}" hint-placeholder-val="{{ false }}">
+<div class="gs-card" style="padding: 28px; display: flex; flex-direction: column; gap: 18px; max-width: 760px">
+<div><label class="gs-label" for="h-tema">Tema del curso</label><input id="h-tema" class="gs-input"></div>
+<div><label class="gs-label" for="h-obj">¿Qué debería saber hacer la persona al terminarlo?</label><textarea id="h-obj" class="gs-input" rows="3"></textarea></div>
+<div style="display: grid; grid-template-columns: repeat(auto-fit, minmax(300px, 1fr)); gap: 20px">
+<fieldset style="border: 1px solid #DDE3EA; border-radius: 12px; padding: 18px; margin: 0; display: flex; flex-direction: column; gap: 6px">
+<legend class="gs-label" style="padding: 0 6px; margin: 0">¿Para qué edificios?</legend>
+<label style="display: flex; align-items: center; gap: 10px; min-height: 40px; font-weight: 700"><input type="checkbox" checked="{{edTodos}}" onChange="{{toggleEdTodos}}" style="width: 20px; height: 20px">Todos los edificios y oficina central</label>
+<sc-if value="{{edElegir}}" hint-placeholder-val="{{ false }}">
+<div style="display: grid; grid-template-columns: repeat(2, minmax(0, 1fr)); gap: 0 12px; padding-left: 4px">
+<sc-for list="{{edOpciones}}" as="o" hint-placeholder-count="12">
+<label style="display: flex; align-items: center; gap: 8px; min-height: 36px; font-size: 15px"><input type="checkbox" checked="{{o.on}}" onChange="{{o.toggle}}" style="width: 18px; height: 18px">{{o.l}}</label>
+</sc-for>
+</div>
+</sc-if>
+</fieldset>
+<fieldset style="border: 1px solid #DDE3EA; border-radius: 12px; padding: 18px; margin: 0; display: flex; flex-direction: column; gap: 6px">
+<legend class="gs-label" style="padding: 0 6px; margin: 0">¿Para qué cargos?</legend>
+<label style="display: flex; align-items: center; gap: 10px; min-height: 40px; font-weight: 700"><input type="checkbox" checked="{{cgTodos}}" onChange="{{toggleCgTodos}}" style="width: 20px; height: 20px">Todos los cargos</label>
+<sc-if value="{{cgElegir}}" hint-placeholder-val="{{ false }}">
+<div style="display: flex; flex-direction: column; padding-left: 4px">
+<sc-for list="{{cgOpciones}}" as="o" hint-placeholder-count="6">
+<label style="display: flex; align-items: center; gap: 8px; min-height: 36px; font-size: 15px"><input type="checkbox" checked="{{o.on}}" onChange="{{o.toggle}}" style="width: 18px; height: 18px">{{o.l}}</label>
+</sc-for>
+</div>
+</sc-if>
+</fieldset>
+</div>
+<div style="background: #F5EBDC; border-radius: 12px; padding: 14px 18px; font-size: 15px">Destinado a: <strong>{{alcance}}</strong></div>
+<div><label class="gs-label" for="h-mat">Material que ya tienes (opcional)</label><input id="h-mat" class="gs-input" type="file"></div>
+<div style="max-width: 260px"><label class="gs-label" for="h-f">¿Para cuándo lo necesitas?</label><input id="h-f" class="gs-input" type="date"></div>
+<button class="gs-btn" style="align-self: flex-start">Enviar solicitud a Josefina</button>
+</div>
+</sc-if>
+
+<sc-if value="{{modo.solo}}" hint-placeholder-val="{{ false }}">
+<div class="gs-card" style="padding: 28px; display: flex; flex-direction: column; gap: 18px; max-width: 860px">
+<div><label class="gs-label" for="s-t">Título</label><input id="s-t" class="gs-input"></div>
+<div><label class="gs-label" for="s-d">Descripción corta</label><textarea id="s-d" class="gs-input" rows="2"></textarea></div>
+<div style="display: grid; grid-template-columns: repeat(auto-fit, minmax(300px, 1fr)); gap: 20px">
+<fieldset style="border: 1px solid #DDE3EA; border-radius: 12px; padding: 18px; margin: 0; display: flex; flex-direction: column; gap: 6px">
+<legend class="gs-label" style="padding: 0 6px; margin: 0">¿Para qué edificios?</legend>
+<label style="display: flex; align-items: center; gap: 10px; min-height: 40px; font-weight: 700"><input type="checkbox" checked="{{edTodos}}" onChange="{{toggleEdTodos}}" style="width: 20px; height: 20px">Todos los edificios y oficina central</label>
+<sc-if value="{{edElegir}}" hint-placeholder-val="{{ false }}">
+<div style="display: grid; grid-template-columns: repeat(2, minmax(0, 1fr)); gap: 0 12px; padding-left: 4px">
+<sc-for list="{{edOpciones}}" as="o" hint-placeholder-count="12">
+<label style="display: flex; align-items: center; gap: 8px; min-height: 36px; font-size: 15px"><input type="checkbox" checked="{{o.on}}" onChange="{{o.toggle}}" style="width: 18px; height: 18px">{{o.l}}</label>
+</sc-for>
+</div>
+</sc-if>
+</fieldset>
+<fieldset style="border: 1px solid #DDE3EA; border-radius: 12px; padding: 18px; margin: 0; display: flex; flex-direction: column; gap: 6px">
+<legend class="gs-label" style="padding: 0 6px; margin: 0">¿Para qué cargos?</legend>
+<label style="display: flex; align-items: center; gap: 10px; min-height: 40px; font-weight: 700"><input type="checkbox" checked="{{cgTodos}}" onChange="{{toggleCgTodos}}" style="width: 20px; height: 20px">Todos los cargos</label>
+<sc-if value="{{cgElegir}}" hint-placeholder-val="{{ false }}">
+<div style="display: flex; flex-direction: column; padding-left: 4px">
+<sc-for list="{{cgOpciones}}" as="o" hint-placeholder-count="6">
+<label style="display: flex; align-items: center; gap: 8px; min-height: 36px; font-size: 15px"><input type="checkbox" checked="{{o.on}}" onChange="{{o.toggle}}" style="width: 18px; height: 18px">{{o.l}}</label>
+</sc-for>
+</div>
+</sc-if>
+</fieldset>
+</div>
+<div style="background: #F5EBDC; border-radius: 12px; padding: 14px 18px; font-size: 15px">Lo verán en el explorador: <strong>{{alcance}}</strong></div>
+<div style="display: flex; flex-direction: column; gap: 10px">
+<span class="gs-label" style="margin: 0">Módulos</span>
+<div style="display: flex; align-items: center; gap: 12px; padding: 14px 16px; border: 1px solid #DDE3EA; border-radius: 12px"><span class="gs-chip" style="background: #92C9EB; color: #0A2245">Video</span><span style="flex: 1">Bienvenida al edificio</span><span class="gs-muted" style="font-size: 14px">Con quiz</span></div>
+<div style="display: flex; align-items: center; gap: 12px; padding: 14px 16px; border: 1px solid #DDE3EA; border-radius: 12px"><span class="gs-chip" style="background: #F5EBDC; color: #0A2245">Checklist</span><span style="flex: 1">Recorrido por áreas comunes</span><span class="gs-muted" style="font-size: 14px">Sin quiz</span></div>
+<div style="display: flex; flex-wrap: wrap; gap: 8px">
+<button class="gs-btn2" style="min-height: 40px; font-size: 14px">+ Video</button>
+<button class="gs-btn2" style="min-height: 40px; font-size: 14px">+ Documento</button>
+<button class="gs-btn2" style="min-height: 40px; font-size: 14px">+ Checklist</button>
+<button class="gs-btn2" style="min-height: 40px; font-size: 14px">+ Política</button>
+</div>
+</div>
+<div style="display: flex; flex-wrap: wrap; gap: 10px">
+<button class="gs-btn">Enviar a revisión</button>
+<button class="gs-btn2">Guardar borrador</button>
+</div>
+</div>
+</sc-if>
+
+<div style="display: flex; flex-direction: column; gap: 12px">
+<h2 class="gs-h2">Cursos que has creado</h2>
+<div class="gs-card" style="overflow-x: auto">
+<table>
+<thead><tr><th>Curso</th><th>Estado</th><th>Comentario de revisión</th></tr></thead>
+<tbody>
+<tr data-for="{{creados}}" data-as="x"><td style="font-weight: 700">{{x.t}}</td><td><span class="gs-chip" style="background: {{x.bg}}; color: {{x.fg}}">{{x.e}}</span></td><td class="gs-muted">{{x.nota}}</td></tr>
+</tbody>
+</table>
+</div>
+</div>
+</div>
+</sc-if>
+
+<sc-if value="{{subPresencial}}" hint-placeholder-val="{{ false }}">
+<div>
+<div style="display: grid; grid-template-columns: repeat(auto-fit, minmax(300px, 1fr)); gap: 18px; margin-bottom: 22px">
+<button onClick="{{presConvocar}}" aria-pressed="{{pres.convOn}}" style="text-align: left; padding: 22px; border-radius: 12px; background: #FFFFFF; border: 2px solid {{pres.convBd}}; cursor: pointer; display: flex; flex-direction: column; gap: 8px; color: #0A2245">
+<span style="font: 700 19px 'Helvetica Neue', Arial, sans-serif">Convocar a una capacitación existente</span>
+<span class="gs-muted" style="font: 15px/1.5 Georgia, serif">Ya está en el catálogo (por ejemplo, rescate en ascensores). Eliges fecha, lugar y a quiénes convocas.</span>
+</button>
+<button onClick="{{presProponer}}" aria-pressed="{{pres.propOn}}" style="text-align: left; padding: 22px; border-radius: 12px; background: #FFFFFF; border: 2px solid {{pres.propBd}}; cursor: pointer; display: flex; flex-direction: column; gap: 8px; color: #0A2245">
+<span style="font: 700 19px 'Helvetica Neue', Arial, sans-serif">Proponer una nueva</span>
+<span class="gs-muted" style="font: 15px/1.5 Georgia, serif">Una capacitación que todavía no existe (por ejemplo, comunicación efectiva), para tu equipo u otro grupo. La revisa Josefina.</span>
+</button>
+</div>
+<div style="display: flex; flex-wrap: wrap; gap: 24px; align-items: flex-start">
+<sc-if value="{{pres.conv}}" hint-placeholder-val="{{ true }}">
+<div class="gs-card" style="flex: 1 1 380px; padding: 26px; display: flex; flex-direction: column; gap: 16px">
+<h2 class="gs-h2">Nueva convocatoria</h2>
+<div><label class="gs-label" for="c-n">Capacitación del catálogo</label>
+<select id="c-n" class="gs-input" onChange="{{pres.elegir}}"><option data-for="{{catPres}}" data-as="k" value="{{k.i}}">{{k.t}}</option></select></div>
+<div style="background: #F4F6F9; border-radius: 12px; padding: 12px 14px; font-size: 14px; display: flex; flex-direction: column; gap: 4px">
+<span><strong style="font-family: 'Helvetica Neue', Arial, sans-serif">Relator:</strong> {{presSel.rel}}</span>
+<span><strong style="font-family: 'Helvetica Neue', Arial, sans-serif">Duración:</strong> {{presSel.dur}}</span>
+<span><strong style="font-family: 'Helvetica Neue', Arial, sans-serif">Para:</strong> {{presSel.para}}</span>
+</div>
+<div style="display: grid; grid-template-columns: repeat(2, minmax(0, 1fr)); gap: 12px">
+<div><label class="gs-label" for="c-f">Fecha</label><input id="c-f" class="gs-input" type="date"></div>
+<div><label class="gs-label" for="c-h">Hora</label><input id="c-h" class="gs-input" type="time"></div>
+</div>
+<div><label class="gs-label" for="c-l">Lugar</label><input id="c-l" class="gs-input"></div>
+<fieldset style="border: none; padding: 0; margin: 0; display: flex; flex-direction: column; gap: 6px">
+<legend class="gs-label">Convocados</legend>
+<sc-for list="{{equipo}}" as="r" hint-placeholder-count="5">
+<label style="display: flex; align-items: center; gap: 10px; min-height: 34px"><input type="checkbox" style="width: 18px; height: 18px">{{r.n}}</label>
+</sc-for>
+</fieldset>
+<button class="gs-btn" style="align-self: flex-start">Enviar convocatoria</button>
+</div>
+</sc-if>
+<sc-if value="{{pres.prop}}" hint-placeholder-val="{{ false }}">
+<div class="gs-card" style="flex: 1 1 100%; padding: 26px; display: flex; flex-direction: column; gap: 18px">
+<h2 class="gs-h2">Proponer una capacitación presencial</h2>
+<sc-if value="{{pres.enviada}}" hint-placeholder-val="{{ false }}">
+<div style="background: #F5EBDC; border-radius: 12px; padding: 14px 18px; font-size: 15px">Tu propuesta llegó a la bandeja de Josefina. La verás abajo como "En revisión".</div>
+</sc-if>
+<div><label class="gs-label" for="pp-t">Tema</label><input id="pp-t" class="gs-input" placeholder="Ej: comunicación efectiva"></div>
+<div><label class="gs-label" for="pp-p">¿Por qué la necesitan?</label><textarea id="pp-p" class="gs-input" rows="3" placeholder="Qué situación quieres mejorar"></textarea></div>
+<fieldset style="border: none; padding: 0; margin: 0; display: flex; flex-direction: column; gap: 6px">
+<legend class="gs-label">¿Para quién?</legend>
+<label style="display: flex; align-items: center; gap: 10px; min-height: 40px"><input type="radio" name="pp-para" checked="{{pres.miEquipo}}" onChange="{{presMiEquipo}}" style="width: 20px; height: 20px">Para mi equipo (Edificio Nativo)</label>
+<label style="display: flex; align-items: center; gap: 10px; min-height: 40px"><input type="radio" name="pp-para" checked="{{pres.otro}}" onChange="{{presOtro}}" style="width: 20px; height: 20px">Para otro grupo (por ejemplo, todos los BM)</label>
+</fieldset>
+<sc-if value="{{pres.otro}}" hint-placeholder-val="{{ false }}">
+<div style="display: grid; grid-template-columns: repeat(auto-fit, minmax(300px, 1fr)); gap: 20px">
+<fieldset style="border: 1px solid #DDE3EA; border-radius: 12px; padding: 18px; margin: 0; display: flex; flex-direction: column; gap: 6px">
+<legend class="gs-label" style="padding: 0 6px; margin: 0">¿Para qué edificios?</legend>
+<label style="display: flex; align-items: center; gap: 10px; min-height: 40px; font-weight: 700"><input type="checkbox" checked="{{edTodos}}" onChange="{{toggleEdTodos}}" style="width: 20px; height: 20px">Todos los edificios y oficina central</label>
+<sc-if value="{{edElegir}}" hint-placeholder-val="{{ false }}">
+<div style="display: grid; grid-template-columns: repeat(2, minmax(0, 1fr)); gap: 0 12px; padding-left: 4px">
+<sc-for list="{{edOpciones}}" as="o" hint-placeholder-count="12">
+<label style="display: flex; align-items: center; gap: 8px; min-height: 36px; font-size: 15px"><input type="checkbox" checked="{{o.on}}" onChange="{{o.toggle}}" style="width: 18px; height: 18px">{{o.l}}</label>
+</sc-for>
+</div>
+</sc-if>
+</fieldset>
+<fieldset style="border: 1px solid #DDE3EA; border-radius: 12px; padding: 18px; margin: 0; display: flex; flex-direction: column; gap: 6px">
+<legend class="gs-label" style="padding: 0 6px; margin: 0">¿Para qué cargos?</legend>
+<label style="display: flex; align-items: center; gap: 10px; min-height: 40px; font-weight: 700"><input type="checkbox" checked="{{cgTodos}}" onChange="{{toggleCgTodos}}" style="width: 20px; height: 20px">Todos los cargos</label>
+<sc-if value="{{cgElegir}}" hint-placeholder-val="{{ false }}">
+<div style="display: flex; flex-direction: column; padding-left: 4px">
+<sc-for list="{{cgOpciones}}" as="o" hint-placeholder-count="6">
+<label style="display: flex; align-items: center; gap: 8px; min-height: 36px; font-size: 15px"><input type="checkbox" checked="{{o.on}}" onChange="{{o.toggle}}" style="width: 18px; height: 18px">{{o.l}}</label>
+</sc-for>
+</div>
+</sc-if>
+</fieldset>
+</div>
+<div style="background: #F5EBDC; border-radius: 12px; padding: 14px 18px; font-size: 15px">Dirigida a: <strong>{{alcance}}</strong></div>
+</sc-if>
+<div style="display: grid; grid-template-columns: repeat(auto-fit, minmax(220px, 1fr)); gap: 16px">
+<div><label class="gs-label" for="pp-r">Relator sugerido (opcional)</label><input id="pp-r" class="gs-input" placeholder="Persona, empresa o área"></div>
+<div><label class="gs-label" for="pp-f">Fecha tentativa (opcional)</label><input id="pp-f" class="gs-input" type="month"></div>
+<div><label class="gs-label" for="pp-c">Costo estimado (opcional)</label><input id="pp-c" class="gs-input" placeholder="$"></div>
+</div>
+<button class="gs-btn" onClick="{{presEnviar}}" style="align-self: flex-start">Enviar propuesta a Josefina</button>
+<div style="border-top: 1px solid #DDE3EA; padding-top: 16px; display: flex; flex-direction: column; gap: 10px">
+<h3 class="gs-h3">Mis propuestas presenciales</h3>
+<sc-for list="{{presPropuestas}}" as="x" hint-placeholder-count="2">
+<div style="display: flex; flex-wrap: wrap; justify-content: space-between; align-items: center; gap: 8px; padding: 12px 14px; border: 1px solid #DDE3EA; border-radius: 12px">
+<div><strong style="font: 700 15px 'Helvetica Neue', Arial, sans-serif">{{x.t}}</strong><div class="gs-muted" style="font-size: 13px">{{x.nota}}</div></div>
+<span class="gs-chip" style="background: {{x.bg}}; color: {{x.fg}}">{{x.e}}</span>
+</div>
+</sc-for>
+</div>
+</div>
+</sc-if>
+<sc-if value="{{pres.conv}}" hint-placeholder-val="{{ true }}">
+<div style="flex: 999 1 420px; min-width: 0; display: flex; flex-direction: column; gap: 14px">
+<h2 class="gs-h2">Convocatorias</h2>
+<sc-for list="{{convocatorias}}" as="c" hint-placeholder-count="2">
+<div class="gs-card" style="padding: 20px; display: flex; flex-direction: column; gap: 8px">
+<div style="display: flex; justify-content: space-between; align-items: center; gap: 8px; flex-wrap: wrap">
+<strong style="font: 700 17px 'Helvetica Neue', Arial, sans-serif">{{c.t}}</strong>
+<span class="gs-chip" style="background: {{c.bg}}; color: {{c.fg}}">{{c.estado}}</span>
+</div>
+<span class="gs-muted" style="font-size: 14px">{{c.f}} · {{c.lugar}}</span>
+<span class="gs-muted" style="font-size: 14px">Relator: {{c.rel}} · {{c.conv}}</span>
+<sc-if value="{{c.pend}}" hint-placeholder-val="{{ false }}">
+<button class="gs-btn2" onClick="{{toggleMarcar}}" style="align-self: flex-start; margin-top: 4px">{{marcarLabel}}</button>
+</sc-if>
+</div>
+</sc-for>
+<sc-if value="{{marcar}}" hint-placeholder-val="{{ false }}">
+<div class="gs-card" style="padding: 22px; display: flex; flex-direction: column; gap: 8px; border: 2px solid #0077D4">
+<h3 class="gs-h3">Asistencia · Uso de extintores</h3>
+<sc-for list="{{equipo}}" as="r" hint-placeholder-count="5">
+<label style="display: flex; align-items: center; gap: 10px; min-height: 36px"><input type="checkbox" style="width: 20px; height: 20px">{{r.n}}</label>
+</sc-for>
+<button class="gs-btn" style="align-self: flex-start; margin-top: 6px">Guardar asistencia</button>
+</div>
+</sc-if>
+</div>
+</sc-if>
+</div>
+</div>
+</sc-if>
+</section>
+</sc-if>
+
+<sc-if value="{{isAdmin}}" hint-placeholder-val="{{ false }}">
+<section style="display: flex; flex-direction: column; gap: 22px">
+<div>
+<h1 style="margin: 0 0 6px; font: 700 32px 'Helvetica Neue', Arial, sans-serif">Administración</h1>
+<p class="gs-muted" style="margin: 0; font-size: 17px">Acceso total a cursos, personas y estructura de Greystar Chile.</p>
+<div style="margin-top: 10px; display: inline-flex; flex-wrap: wrap; align-items: center; gap: 8px; font: 13px 'Helvetica Neue', Arial, sans-serif"><span class="gs-chip" style="background: #007B0C; color: #FFFFFF">Respaldo automático al día</span><span class="gs-muted">Último: hoy, 03:00 · se guardan los últimos 30 días</span><a href="#" style="font-weight: 700">Ver respaldos</a></div>
+</div>
+<nav aria-label="Herramientas de administración" style="display: flex; flex-wrap: wrap; gap: 6px; border-bottom: 1px solid #DDE3EA">
+<sc-for list="{{adminTabs}}" as="t" hint-placeholder-count="5">
+<button onClick="{{t.go}}" aria-current="{{t.current}}" style="background: none; border: none; border-bottom: 3px solid {{t.border}}; padding: 12px 14px; margin-bottom: -1px; font: {{t.weight}} 15px 'Helvetica Neue', Arial, sans-serif; color: #0A2245; cursor: pointer">{{t.label}}</button>
+</sc-for>
+</nav>
+
+<sc-if value="{{aBandeja}}" hint-placeholder-val="{{ true }}">
+<div style="display: flex; flex-direction: column; gap: 14px">
+<p style="margin: 0; font: 700 16px 'Helvetica Neue', Arial, sans-serif">{{pendientes}} pendientes de tu respuesta</p>
+<sc-for list="{{bandeja}}" as="b" hint-placeholder-count="3">
+<div class="gs-card" style="padding: 20px; display: flex; flex-wrap: wrap; align-items: center; justify-content: space-between; gap: 14px">
+<div style="display: flex; flex-direction: column; gap: 6px; flex: 1 1 320px">
+<span class="gs-chip" style="align-self: flex-start; background: {{b.tbg}}; color: #0A2245">{{b.tipo}}</span>
+<strong style="font: 700 17px 'Helvetica Neue', Arial, sans-serif">{{b.t}}</strong>
+<span class="gs-muted" style="font-size: 14px">{{b.de}} · {{b.f}}</span>
+</div>
+<sc-if value="{{b.pendiente}}" hint-placeholder-val="{{ true }}">
+<div style="display: flex; flex-wrap: wrap; gap: 8px">
+<button class="gs-btn" onClick="{{b.go1}}">{{b.a1}}</button>
+<button class="gs-btn2" onClick="{{b.go2}}">{{b.a2}}</button>
+</div>
+</sc-if>
+<sc-if value="{{b.hecho}}" hint-placeholder-val="{{ false }}">
+<span class="gs-chip" style="background: #0A2245; color: #FFFFFF; min-height: 34px; padding: 0 14px">{{b.resultado}}</span>
+</sc-if>
+</div>
+</sc-for>
+</div>
+</sc-if>
+
+<sc-if value="{{aCursos}}" hint-placeholder-val="{{ false }}">
+<div style="display: flex; flex-direction: column; gap: 16px">
+<div style="display: flex; flex-wrap: wrap; gap: 10px; align-items: center">
+<div style="flex: 1 1 300px"><label for="ac-b" style="position: absolute; left: -9999px">Buscar curso</label><input id="ac-b" class="gs-input" type="search" placeholder="Buscar curso"></div>
+<button class="gs-btn" onClick="{{toggleCrearAdmin}}">{{crearAdminLabel}}</button>
+</div>
+<p class="gs-muted" style="margin: 0; font-size: 14px">Los cursos que creas tú se publican directo, sin revisión.</p>
+<sc-if value="{{crearAdmin}}" hint-placeholder-val="{{ false }}">
+<div class="gs-card" style="padding: 28px; display: flex; flex-direction: column; gap: 22px; border: 2px solid #0077D4">
+<h2 class="gs-h2">Nuevo curso</h2>
+<div style="display: grid; grid-template-columns: repeat(auto-fit, minmax(260px, 1fr)); gap: 16px">
+<div><label class="gs-label" for="nc-t">Título</label><input id="nc-t" class="gs-input"></div>
+<div><label class="gs-label" for="nc-cat">Categoría</label><select id="nc-cat" class="gs-input"><option>Atención al residente</option><option>Seguridad</option><option>Cultura</option><option>Herramientas</option></select></div>
+</div>
+<div><label class="gs-label" for="nc-d">Descripción corta</label><textarea id="nc-d" class="gs-input" rows="2"></textarea></div>
+<div style="display: grid; grid-template-columns: repeat(auto-fit, minmax(320px, 1fr)); gap: 20px">
+<fieldset style="border: 1px solid #DDE3EA; border-radius: 12px; padding: 18px; margin: 0; display: flex; flex-direction: column; gap: 6px">
+<legend class="gs-label" style="padding: 0 6px; margin: 0">¿Para qué edificios?</legend>
+<label style="display: flex; align-items: center; gap: 10px; min-height: 40px; font-weight: 700"><input type="checkbox" checked="{{edTodos}}" onChange="{{toggleEdTodos}}" style="width: 20px; height: 20px">Todos los edificios y oficina central</label>
+<sc-if value="{{edElegir}}" hint-placeholder-val="{{ false }}">
+<div style="display: grid; grid-template-columns: repeat(2, minmax(0, 1fr)); gap: 0 12px; padding-left: 4px">
+<sc-for list="{{edOpciones}}" as="o" hint-placeholder-count="12">
+<label style="display: flex; align-items: center; gap: 8px; min-height: 36px; font-size: 15px"><input type="checkbox" checked="{{o.on}}" onChange="{{o.toggle}}" style="width: 18px; height: 18px">{{o.l}}</label>
+</sc-for>
+</div>
+</sc-if>
+</fieldset>
+<fieldset style="border: 1px solid #DDE3EA; border-radius: 12px; padding: 18px; margin: 0; display: flex; flex-direction: column; gap: 6px">
+<legend class="gs-label" style="padding: 0 6px; margin: 0">¿Para qué cargos?</legend>
+<label style="display: flex; align-items: center; gap: 10px; min-height: 40px; font-weight: 700"><input type="checkbox" checked="{{cgTodos}}" onChange="{{toggleCgTodos}}" style="width: 20px; height: 20px">Todos los cargos</label>
+<sc-if value="{{cgElegir}}" hint-placeholder-val="{{ false }}">
+<div style="display: flex; flex-direction: column; padding-left: 4px">
+<sc-for list="{{cgOpciones}}" as="o" hint-placeholder-count="6">
+<label style="display: flex; align-items: center; gap: 8px; min-height: 36px; font-size: 15px"><input type="checkbox" checked="{{o.on}}" onChange="{{o.toggle}}" style="width: 18px; height: 18px">{{o.l}}</label>
+</sc-for>
+</div>
+</sc-if>
+</fieldset>
+</div>
+<div style="background: #F5EBDC; border-radius: 12px; padding: 14px 18px; font-size: 15px">Lo verán en el explorador: <strong>{{alcance}}</strong></div>
+<div style="display: flex; flex-wrap: wrap; gap: 10px">
+<a class="gs-btn2" href="CrearCurso.dc.html" style="background: #0A2245; color: #FFFFFF; border-color: #0A2245">Continuar con los módulos</a>
+<button class="gs-btn2">Guardar borrador</button>
+</div>
+</div>
+</sc-if>
+<div class="gs-card" style="overflow-x: auto">
+<table>
+<thead><tr><th>Curso</th><th>Creado por</th><th>Edificios</th><th>Cargos</th><th>Estado</th><th>Inscritos</th><th>Valoración</th><th><span style="position: absolute; left: -9999px">Acciones</span></th></tr></thead>
+<tbody>
+<tr data-for="{{cursosAdmin}}" data-as="c">
+<td style="font-weight: 700">{{c.t}}</td><td>{{c.autor}}</td><td>{{c.ed}}</td><td>{{c.v}}</td>
+<td><span class="gs-chip" style="background: {{c.bg}}; color: {{c.fg}}">{{c.e}}</span></td>
+<td>{{c.n}}</td>
+<td style="white-space: nowrap">{{c.val}}</td>
+<td style="white-space: nowrap; text-align: right"><button class="gs-btn2" style="min-height: 38px; font-size: 14px">Editar</button> <button class="gs-btn2" style="min-height: 38px; font-size: 14px">Archivar</button></td>
+</tr>
+</tbody>
+</table>
+</div>
+</div>
+</sc-if>
+
+<sc-if value="{{aRutas}}" hint-placeholder-val="{{ false }}">
+<div style="display: flex; flex-direction: column; gap: 16px">
+<p class="gs-muted" style="margin: 0; font-size: 15px">Las rutas de cargo se ofrecen automáticamente al crear a alguien con ese cargo o al cambiarlo de cargo. Las complementarias se agregan a mano.</p>
+<div style="display: flex; flex-wrap: wrap; gap: 24px; align-items: flex-start">
+<div style="flex: 1 1 320px; display: flex; flex-direction: column; gap: 10px">
+<button class="gs-btn" style="align-self: flex-start">Nueva ruta</button>
+<sc-for list="{{rutasLista}}" as="r" hint-placeholder-count="7">
+<button onClick="{{r.go}}" aria-pressed="{{r.on}}" style="text-align: left; padding: 14px 16px; border-radius: 12px; background: #FFFFFF; border: 2px solid {{r.bd}}; cursor: pointer; color: #0A2245; display: flex; flex-direction: column; gap: 6px">
+<span class="gs-chip" style="align-self: flex-start; background: {{r.tbg}}; color: #0A2245">{{r.tipo}}</span>
+<span style="font: 700 16px 'Helvetica Neue', Arial, sans-serif">{{r.n}}</span>
+<span class="gs-muted" style="font-size: 13px">{{r.meta}}</span>
+</button>
+</sc-for>
+</div>
+<div class="gs-card" style="flex: 999 1 460px; min-width: 0; padding: 24px; display: flex; flex-direction: column; gap: 14px">
+<div style="display: grid; grid-template-columns: repeat(auto-fit, minmax(220px, 1fr)); gap: 14px">
+<div><label class="gs-label" for="rt-n">Nombre de la ruta</label><input id="rt-n" class="gs-input" value="{{rutaSel.n}}" readOnly="{{ true }}"></div>
+<div><label class="gs-label" for="rt-t">Tipo</label><select id="rt-t" class="gs-input"><option>{{rutaSel.tipo}}</option><option>Ruta complementaria</option></select></div>
+</div>
+<span class="gs-label" style="margin: 0">Cursos de la ruta, en el orden sugerido</span>
+<sc-for list="{{rutaSel.cursos}}" as="c" hint-placeholder-count="5">
+<div style="display: flex; align-items: center; gap: 12px; padding: 12px 14px; border: 1px solid #DDE3EA; border-radius: 12px">
+<span style="font: 700 13px 'Helvetica Neue', Arial, sans-serif; color: #4A5A70; width: 18px">{{c.n}}</span>
+<span style="flex: 1; font-size: 15px">{{c.t}}</span>
+<span class="gs-muted" style="font-size: 13px">{{c.d}}</span>
+<button class="gs-btn2" style="min-height: 34px; padding: 0 12px; font-size: 13px" aria-label="Quitar de la ruta">Quitar</button>
+</div>
+</sc-for>
+<div style="display: flex; flex-wrap: wrap; gap: 10px; align-items: end">
+<div style="flex: 1 1 260px"><label class="gs-label" for="rt-add">Agregar curso</label><select id="rt-add" class="gs-input"><option>Elegir del catálogo</option><option>Cultura Greystar</option><option>Comunicación por escrito</option><option>Excel básico para operaciones</option></select></div>
+<button class="gs-btn2">Agregar</button>
+</div>
+<div style="background: #F5EBDC; border-radius: 12px; padding: 12px 16px; font-size: 15px">{{rutaSel.nota}}</div>
+</div>
+</div>
+</div>
+</sc-if>
+
+<sc-if value="{{aPersonas}}" hint-placeholder-val="{{ false }}">
+<div style="display: flex; flex-direction: column; gap: 16px">
+<div style="display: flex; flex-wrap: wrap; gap: 10px; align-items: center">
+<div style="flex: 1 1 300px"><label for="ap-b" style="position: absolute; left: -9999px">Buscar persona</label><input id="ap-b" class="gs-input" type="search" placeholder="Buscar por nombre o RUT"></div>
+<button class="gs-btn" onClick="{{toggleAddAdmin}}">{{addAdminLbl}}</button>
+<button class="gs-btn2">Carga masiva desde Excel</button>
+</div>
+<sc-if value="{{showAddAdmin}}" hint-placeholder-val="{{ false }}">
+<div class="gs-card" style="padding: 24px; display: grid; grid-template-columns: repeat(auto-fit, minmax(220px, 1fr)); gap: 16px; align-items: end; border: 2px solid #0077D4">
+<h2 class="gs-h2" style="grid-column: 1 / -1">Nueva persona</h2>
+<div><label class="gs-label" for="a-n">Nombre completo</label><input id="a-n" class="gs-input"></div>
+<div><label class="gs-label" for="a-rut">RUT</label><input id="a-rut" class="gs-input" placeholder="12.345.678-9"></div>
+<div><label class="gs-label" for="a-u">Unidad</label><select id="a-u" class="gs-input"><option>Edificio Nativo</option><option>Edificio Brooklyn</option><option>Edificio IMU</option><option>Oficina central</option></select></div>
+<div><label class="gs-label" for="a-c">Cargo</label><select id="a-c" class="gs-input" value="{{np.cargo}}" onChange="{{np.setCargo}}"><option>Guest Service</option><option>Aseo</option><option>Mantención</option><option>Building Manager Assistant</option><option>Building Manager</option></select></div>
+<div><label class="gs-label" for="a-r">Rol en la plataforma</label><select id="a-r" class="gs-input"><option>Trabajador</option><option>Jefatura</option><option>Gerente</option><option>Visualizador</option><option>Administrador</option></select></div>
+<div><label class="gs-label" for="a-pw">Contraseña temporal</label><input id="a-pw" class="gs-input"></div>
+<div style="grid-column: 1 / -1; border-top: 1px solid #DDE3EA; padding-top: 18px; display: flex; flex-direction: column; gap: 14px">
+<h3 class="gs-h3">Rutas de capacitación</h3>
+<label style="display: flex; align-items: center; gap: 10px; min-height: 40px; font: 700 15px 'Helvetica Neue', Arial, sans-serif"><input type="checkbox" checked="{{np.rutaCargo}}" onChange="{{np.toggleRutaCargo}}" style="width: 20px; height: 20px">Asignar la ruta de su cargo: {{np.rutaCargoNombre}}</label>
+<sc-if value="{{np.rutaCargo}}" hint-placeholder-val="{{ true }}">
+<div style="border: 1px solid #DDE3EA; border-radius: 12px; padding: 14px 16px; background: #FAFBFC; display: flex; flex-direction: column; gap: 4px">
+<div style="display: flex; flex-wrap: wrap; justify-content: space-between; align-items: center; gap: 8px; margin-bottom: 4px"><span class="gs-muted" style="font: 700 13px 'Helvetica Neue', Arial, sans-serif">{{np.cargoTxt}}</span><button onClick="{{np.todosCargo}}" style="background: none; border: none; color: #0077D4; font: 700 13px 'Helvetica Neue', Arial, sans-serif; cursor: pointer; min-height: 32px">{{np.todosCargoLbl}}</button></div>
+<sc-for list="{{np.cursosCargo}}" as="c" hint-placeholder-count="5">
+<label style="display: flex; align-items: center; gap: 10px; min-height: 36px; font-size: 15px"><input type="checkbox" checked="{{c.on}}" onChange="{{c.toggle}}" style="width: 18px; height: 18px">{{c.t}}<span class="gs-muted" style="font-size: 13px">· {{c.d}}</span></label>
+</sc-for>
+</div>
+</sc-if>
+<div style="max-width: 420px"><label class="gs-label" for="a-otra">Agregar otra ruta (opcional)</label>
+<select id="a-otra" class="gs-input" value="{{np.otra}}" onChange="{{np.elegirOtra}}"><option value="">Ninguna</option><option data-for="{{np.otras}}" data-as="o" value="{{o.id}}">{{o.n}}</option></select></div>
+<sc-if value="{{np.hayOtra}}" hint-placeholder-val="{{ false }}">
+<div style="border: 1px solid #DDE3EA; border-radius: 12px; padding: 14px 16px; background: #FAFBFC; display: flex; flex-direction: column; gap: 4px">
+<div style="display: flex; flex-wrap: wrap; justify-content: space-between; align-items: center; gap: 8px; margin-bottom: 4px"><span class="gs-muted" style="font: 700 13px 'Helvetica Neue', Arial, sans-serif">{{np.otraTxt}}</span><button onClick="{{np.todosOtra}}" style="background: none; border: none; color: #0077D4; font: 700 13px 'Helvetica Neue', Arial, sans-serif; cursor: pointer; min-height: 32px">{{np.todosOtraLbl}}</button></div>
+<sc-for list="{{np.cursosOtra}}" as="c" hint-placeholder-count="3">
+<label style="display: flex; align-items: center; gap: 10px; min-height: 36px; font-size: 15px"><input type="checkbox" checked="{{c.on}}" onChange="{{c.toggle}}" style="width: 18px; height: 18px">{{c.t}}<span class="gs-muted" style="font-size: 13px">· {{c.d}}</span></label>
+</sc-for>
+</div>
+</sc-if>
+<div style="max-width: 260px"><label class="gs-label" for="a-plazo">Fecha límite (opcional)</label><input id="a-plazo" class="gs-input" type="date"></div>
+<div style="background: #F5EBDC; border-radius: 12px; padding: 12px 16px; font-size: 15px">Se le asignarán <strong>{{np.total}}</strong> y los verá en "Mis cursos" desde su primer ingreso.</div>
+</div>
+<button class="gs-btn" style="justify-self: start">Crear persona</button>
+</div>
+</sc-if>
+<sc-if value="{{editando}}" hint-placeholder-val="{{ false }}">
+<div class="gs-card" style="padding: 24px; display: flex; flex-direction: column; gap: 16px; border: 2px solid #0077D4">
+<h2 class="gs-h2">Editar · {{ed.n}}</h2>
+<div style="display: grid; grid-template-columns: repeat(auto-fit, minmax(220px, 1fr)); gap: 16px">
+<div><label class="gs-label" for="e-u">Unidad</label><select id="e-u" class="gs-input" value="{{ed.unidad}}" onChange="{{ed.setUnidad}}"><option>Edificio Nativo</option><option>Edificio Brooklyn</option><option>Edificio IMU</option><option>Oficina central</option><option>Gerencia de Operaciones</option></select></div>
+<div><label class="gs-label" for="e-c">Cargo</label><select id="e-c" class="gs-input" value="{{ed.cargo}}" onChange="{{ed.setCargo}}"><option>Guest Service</option><option>Aseo</option><option>Mantención</option><option>Building Manager Assistant</option><option>Building Manager</option><option>Gerente de Operaciones</option><option>People Partner</option></select></div>
+</div>
+<sc-if value="{{ed.sinCambios}}" hint-placeholder-val="{{ true }}">
+<p class="gs-muted" style="margin: 0; font-size: 15px">Cambia la unidad o el cargo para ver qué pasa con sus cursos.</p>
+</sc-if>
+<sc-if value="{{ed.cambiaUnidad}}" hint-placeholder-val="{{ false }}">
+<div style="background: #F5EBDC; border-radius: 12px; padding: 14px 18px; font-size: 15px">Cambio de unidad: conserva todos sus cursos, avances y certificados. Pasa a la jefatura de {{ed.unidad}}, que desde ahora verá su avance.</div>
+</sc-if>
+<sc-if value="{{ed.cambiaCargo}}" hint-placeholder-val="{{ false }}">
+<div style="border: 1px solid #DDE3EA; border-radius: 12px; padding: 16px 18px; display: flex; flex-direction: column; gap: 8px">
+<strong style="font: 700 16px 'Helvetica Neue', Arial, sans-serif">Cambio de cargo: conserva sus {{ed.nActuales}} cursos y se le asigna la {{ed.rutaNueva}}</strong>
+<sc-for list="{{ed.cursos}}" as="c" hint-placeholder-count="5">
+<div style="display: flex; flex-wrap: wrap; justify-content: space-between; align-items: center; gap: 8px; padding: 8px 0; border-top: 1px solid #EEF1F5">
+<span style="font-size: 15px">{{c.t}}</span>
+<span class="gs-chip" style="background: {{c.bg}}; color: {{c.fg}}">{{c.estado}}</span>
+</div>
+</sc-for>
+<div style="max-width: 260px; margin-top: 6px"><label class="gs-label" for="e-plazo">Fecha límite para los nuevos (opcional)</label><input id="e-plazo" class="gs-input" type="date"></div>
+</div>
+</sc-if>
+<div style="display: flex; flex-wrap: wrap; gap: 10px"><button class="gs-btn">Guardar cambios</button><button class="gs-btn2" onClick="{{cerrarEditar}}">Cancelar</button></div>
+</div>
+</sc-if>
+<div class="gs-card" style="overflow-x: auto">
+<table>
+<thead><tr><th>Persona</th><th>RUT</th><th>Unidad</th><th>Cargo</th><th>Rol</th><th><span style="position: absolute; left: -9999px">Acciones</span></th></tr></thead>
+<tbody>
+<tr data-for="{{personasAdmin}}" data-as="x">
+<td style="font-weight: 700">{{x.n}}</td><td>{{x.rut}}</td><td>{{x.unidad}}</td><td>{{x.cargo}}</td>
+<td><span class="gs-chip" style="background: #E3E8EF; color: #0A2245">{{x.r}}</span></td>
+<td style="white-space: nowrap; text-align: right"><button class="gs-btn2" onClick="{{x.verComo}}" style="min-height: 38px; font-size: 14px">Ver como</button> <button class="gs-btn2" style="min-height: 38px; font-size: 14px">Nueva contraseña</button> <button class="gs-btn2" onClick="{{x.editar}}" style="min-height: 38px; font-size: 14px">Editar</button></td>
+</tr>
+</tbody>
+</table>
+</div>
+<p class="gs-muted" style="margin: 0; font-size: 14px">En "Editar" se cambia rol, unidad y cargo. Para visualizadores se eligen las unidades que puede seguir; para administradores no hay límite de cantidad.</p>
+</div>
+</sc-if>
+
+<sc-if value="{{aEstructura}}" hint-placeholder-val="{{ false }}">
+<div style="display: flex; flex-direction: column; gap: 16px">
+<div style="display: flex; flex-wrap: wrap; gap: 10px">
+<button class="gs-btn">Nueva unidad</button>
+</div>
+<div class="gs-card" style="padding: 20px 22px; display: flex; flex-direction: column; gap: 4px">
+<strong style="font: 700 18px 'Helvetica Neue', Arial, sans-serif">Greystar Chile</strong>
+<sc-for list="{{estructura}}" as="g" hint-placeholder-count="4">
+<div style="margin-left: 18px; padding: 14px 0 6px 18px; border-left: 2px solid #DDE3EA; display: flex; flex-direction: column; gap: 8px">
+<div style="display: flex; flex-wrap: wrap; align-items: center; gap: 10px">
+<strong style="font: 700 16px 'Helvetica Neue', Arial, sans-serif">{{g.n}}</strong>
+<span class="gs-muted" style="font-size: 14px">Jefatura: {{g.j}}</span>
+<button class="gs-btn2" style="min-height: 34px; font-size: 13px; padding: 0 12px">Editar</button>
+</div>
+<div style="display: grid; grid-template-columns: repeat(auto-fill, minmax(240px, 1fr)); gap: 8px">
+<sc-for list="{{g.hijos}}" as="h" hint-placeholder-count="3">
+<div style="border: 1px solid #DDE3EA; border-radius: 12px; padding: 10px 14px; background: #FFFFFF">
+<div style="font: 700 14px 'Helvetica Neue', Arial, sans-serif">{{h.n}}</div>
+<div class="gs-muted" style="font-size: 13px">{{h.j}}</div>
+</div>
+</sc-for>
+</div>
+</div>
+</sc-for>
+</div>
+</div>
+</sc-if>
+
+<sc-if value="{{aReportes}}" hint-placeholder-val="{{ false }}">
+<div style="display: flex; flex-direction: column; gap: 18px">
+<div style="display: grid; grid-template-columns: repeat(auto-fit, minmax(180px, 1fr)); gap: 12px; align-items: end">
+<div><label class="gs-label" for="r-u">Unidad</label><select id="r-u" class="gs-input"><option>Todas</option><option>Gerencia de Operaciones</option><option>Edificio Nativo</option><option>Edificio Brooklyn</option></select></div>
+<div><label class="gs-label" for="r-c">Cargo</label><select id="r-c" class="gs-input"><option>Todos</option><option>Guest Service</option><option>Aseo</option><option>Mantención</option></select></div>
+<div><label class="gs-label" for="r-k">Curso</label><select id="r-k" class="gs-input"><option>Todos</option><option>Inducción Greystar</option><option>Prevención de riesgos: ODI</option></select></div>
+<div><label class="gs-label" for="r-o">Ordenar por</label><select id="r-o" class="gs-input"><option>Menor avance primero</option><option>Más cursos vencidos</option><option>Nombre</option></select></div>
+<button class="gs-btn2">Exportar a Excel</button>
+</div>
+<div style="display: flex; flex-wrap: wrap; gap: 8px">
+<sc-for list="{{repVistas}}" as="v" hint-placeholder-count="2">
+<button onClick="{{v.go}}" aria-pressed="{{v.on}}" style="min-height: 40px; padding: 0 16px; border-radius: 12px; border: 1px solid {{v.bd}}; background: {{v.bg}}; color: {{v.fg}}; font: 700 14px 'Helvetica Neue', Arial, sans-serif; cursor: pointer">{{v.l}}</button>
+</sc-for>
+</div>
+
+<sc-if value="{{repPersona}}" hint-placeholder-val="{{ true }}">
+<div class="gs-card" style="overflow-x: auto">
+<div style="min-width: 880px">
+<div style="display: grid; grid-template-columns: minmax(170px, 2fr) minmax(170px, 1.7fr) 90px minmax(180px, 2fr) 90px 40px; gap: 12px; padding: 12px 18px; border-bottom: 1px solid #DDE3EA; font: 700 13px 'Helvetica Neue', Arial, sans-serif; color: #4A5A70">
+<span>Persona</span><span>Unidad y cargo</span><span>Cursos</span><span>Avance general</span><span>Vencidos</span><span></span>
+</div>
+<sc-for list="{{repPersonas}}" as="r" hint-placeholder-count="6">
+<div style="border-bottom: 1px solid #EEF1F5; background: {{r.rowBg}}">
+<button onClick="{{r.toggle}}" aria-expanded="{{r.exp}}" style="width: 100%; display: grid; grid-template-columns: minmax(170px, 2fr) minmax(170px, 1.7fr) 90px minmax(180px, 2fr) 90px 40px; gap: 12px; align-items: center; padding: 14px 18px; background: none; border: none; text-align: left; cursor: pointer; color: #0A2245; font: 15px Georgia, serif">
+<span style="font: 700 15px 'Helvetica Neue', Arial, sans-serif">{{r.n}}</span>
+<span style="display: flex; flex-direction: column"><span>{{r.unidad}}</span><span class="gs-muted" style="font-size: 13px">{{r.cargo}}</span></span>
+<span>{{r.total}}</span>
+<span style="display: flex; align-items: center; gap: 10px"><span style="flex: 1; height: 10px; background: #E3E8EF; border-radius: 12px; overflow: hidden"><span style="display: block; height: 100%; width: {{r.pw}}; background: #0077D4"></span></span><span style="font: 700 14px 'Helvetica Neue', Arial, sans-serif; width: 42px; text-align: right">{{r.pw}}</span></span>
+<span><span class="gs-chip" style="background: {{r.vbg}}; color: {{r.vfg}}">{{r.venc}}</span></span>
+<span style="font: 700 18px 'Helvetica Neue', Arial, sans-serif; text-align: center" aria-hidden="true">{{r.flecha}}</span>
+</button>
+<sc-if value="{{r.abierto}}" hint-placeholder-val="{{ false }}">
+<div style="padding: 4px 18px 18px 18px">
+<div style="border: 1px solid #DDE3EA; border-radius: 12px; background: #FFFFFF; overflow: hidden">
+<div style="display: grid; grid-template-columns: minmax(200px, 2.4fr) 110px minmax(130px, 1.2fr) minmax(160px, 1.6fr) 130px; gap: 12px; padding: 10px 16px; background: #F4F6F9; font: 700 12px 'Helvetica Neue', Arial, sans-serif; color: #4A5A70">
+<span>Curso</span><span>Origen</span><span>Plazo</span><span>Avance</span><span>Estado</span>
+</div>
+<sc-for list="{{r.cursos}}" as="c" hint-placeholder-count="4">
+<div style="display: grid; grid-template-columns: minmax(200px, 2.4fr) 110px minmax(130px, 1.2fr) minmax(160px, 1.6fr) 130px; gap: 12px; padding: 12px 16px; border-top: 1px solid #EEF1F5; align-items: center; font-size: 14px">
+<span style="font-weight: 700">{{c.t}}</span>
+<span class="gs-muted">{{c.origen}}</span>
+<span class="gs-muted">{{c.plazo}}</span>
+<span style="display: flex; align-items: center; gap: 8px"><span style="flex: 1; height: 8px; background: #E3E8EF; border-radius: 12px; overflow: hidden"><span style="display: block; height: 100%; width: {{c.pw}}; background: #0077D4"></span></span><span style="font: 700 13px 'Helvetica Neue', Arial, sans-serif; width: 38px; text-align: right">{{c.pw}}</span></span>
+<span><span class="gs-chip" style="background: {{c.sem.bg}}; color: {{c.sem.fg}}">{{c.sem.l}}</span></span>
+</div>
+</sc-for>
+</div>
+</div>
+</sc-if>
+</div>
+</sc-for>
+</div>
+</div>
+<p class="gs-muted" style="margin: 0; font-size: 14px">Avance general = promedio del avance de todos los cursos de la persona, asignados e inscritos.</p>
+</sc-if>
+
+<sc-if value="{{repUnidad}}" hint-placeholder-val="{{ false }}">
+<div class="gs-card" style="overflow-x: auto">
+<table>
+<thead><tr><th>Unidad</th><th>Personas activas</th><th>Avance promedio</th><th>Cursos vencidos</th></tr></thead>
+<tbody>
+<tr data-for="{{reporte}}" data-as="r"><td style="font-weight: 700">{{r.u}}</td><td>{{r.n}}</td><td>{{r.a}}</td><td>{{r.v}}</td></tr>
+</tbody>
+</table>
+</div>
+</sc-if>
+</div>
+</sc-if>
+</section>
+</sc-if>
+
+<sc-if value="{{isPerfil}}" hint-placeholder-val="{{ false }}">
+<section style="display: flex; flex-direction: column; gap: 24px">
+<h1 style="margin: 0; font: 700 32px 'Helvetica Neue', Arial, sans-serif">Mi perfil</h1>
+<div style="display: flex; flex-wrap: wrap; gap: 24px; align-items: flex-start">
+<div class="gs-card" style="flex: 1 1 320px; padding: 26px; display: flex; flex-direction: column; gap: 16px">
+<div style="display: flex; align-items: center; gap: 14px">
+<span style="width: 60px; height: 60px; border-radius: 12px; background: #0A2245; color: #FFFFFF; display: flex; align-items: center; justify-content: center; font: 700 20px 'Helvetica Neue', Arial, sans-serif">{{p.ini}}</span>
+<div><div style="font: 700 20px 'Helvetica Neue', Arial, sans-serif">{{p.nombre}}</div><div class="gs-muted" style="font-size: 15px">{{p.cargo}}</div></div>
+</div>
+<dl style="margin: 0; display: grid; grid-template-columns: max-content 1fr; gap: 10px 16px; font-size: 15px">
+<dt class="gs-muted">RUT</dt><dd style="margin: 0">12.345.678-9</dd>
+<dt class="gs-muted">Unidad</dt><dd style="margin: 0">{{p.unidad}}</dd>
+<dt class="gs-muted">Jefatura</dt><dd style="margin: 0">{{p.jefe}}</dd>
+</dl>
+<div style="display: flex; flex-wrap: wrap; gap: 10px; margin-top: 6px">
+<button class="gs-btn2">Cambiar contraseña</button>
+<a class="gs-btn2" href="Login.dc.html">Cerrar sesión</a>
+</div>
+</div>
+<div style="flex: 999 1 460px; min-width: 0; display: flex; flex-direction: column; gap: 20px">
+<div style="display: flex; flex-direction: column; gap: 12px">
+<h2 class="gs-h2">Cursos realizados</h2>
+<sc-for list="{{realizados}}" as="x" hint-placeholder-count="2">
+<div class="gs-card" style="padding: 18px 20px; display: flex; flex-wrap: wrap; justify-content: space-between; align-items: center; gap: 12px">
+<div><div style="font: 700 16px 'Helvetica Neue', Arial, sans-serif">{{x.t}}</div><div class="gs-muted" style="font-size: 14px">Completado el {{x.f}}</div></div>
+<button class="gs-btn2" style="min-height: 40px; font-size: 14px">Descargar certificado</button>
+</div>
+</sc-for>
+</div>
+<div style="display: flex; flex-direction: column; gap: 12px">
+<h2 class="gs-h2">Capacitaciones presenciales</h2>
+<sc-for list="{{presenciales}}" as="x" hint-placeholder-count="1">
+<div class="gs-card" style="padding: 18px 20px; display: flex; flex-wrap: wrap; justify-content: space-between; align-items: center; gap: 12px">
+<div><div style="font: 700 16px 'Helvetica Neue', Arial, sans-serif">{{x.t}}</div><div class="gs-muted" style="font-size: 14px">{{x.f}}</div></div>
+<span class="gs-chip" style="background: #0A2245; color: #FFFFFF">Asististe</span>
+</div>
+</sc-for>
+</div>
+</div>
+</div>
+</section>
+</sc-if>
+
+</main>
+</div>
+</template>
+<template id="tpl-CrearCurso">
+
+<div style="min-height: 100%; display: flex; flex-direction: column">
+<div style="background: #F5EBDC; border-bottom: 1px solid #E2D6C4">
+<div style="max-width: 1200px; margin: 0 auto; padding: 8px 24px; display: flex; flex-wrap: wrap; align-items: center; gap: 8px">
+<span style="font: 700 13px 'Helvetica Neue', Arial, sans-serif; margin-right: 6px">Ver el mockup como:</span>
+<sc-for list="{{demo}}" as="r" hint-placeholder-count="4">
+<button onClick="{{r.go}}" aria-pressed="{{r.on}}" style="min-height: 36px; padding: 0 14px; border-radius: 12px; border: 1px solid {{r.bd}}; background: {{r.bg}}; color: {{r.fg}}; font: 700 13px 'Helvetica Neue', Arial, sans-serif; cursor: pointer">{{r.l}}</button>
+</sc-for>
+</div>
+</div>
+
+<header style="background: #0A2245">
+<div style="max-width: 1200px; margin: 0 auto; padding: 0 24px; display: flex; flex-wrap: wrap; align-items: center; justify-content: space-between; gap: 12px; min-height: 68px">
+<div style="display: flex; align-items: baseline; gap: 10px">
+<span style="font-family: Georgia, serif; font-size: 24px; color: #FFFFFF">Grey Skills</span>
+<span style="font: 700 11px 'Helvetica Neue', Arial, sans-serif; color: #92C9EB; letter-spacing: 1.5px; text-transform: uppercase">Greystar Chile</span>
+</div>
+<div style="display: flex; align-items: center; gap: 16px">
+<span style="font: 13px 'Helvetica Neue', Arial, sans-serif; color: #C9D3E0">Borrador guardado automáticamente</span>
+<a href="Main.dc.html" style="color: #FFFFFF; font: 700 14px 'Helvetica Neue', Arial, sans-serif">Salir</a>
+</div>
+</div>
+</header>
+
+<main style="flex: 1; width: 100%; max-width: 1200px; margin: 0 auto; padding: 32px 24px 72px; box-sizing: border-box; display: flex; flex-direction: column; gap: 26px">
+
+<div style="display: flex; flex-wrap: wrap; justify-content: space-between; align-items: flex-end; gap: 12px">
+<div>
+<p class="gs-muted" style="margin: 0 0 4px; font: 700 13px 'Helvetica Neue', Arial, sans-serif; letter-spacing: 1px; text-transform: uppercase">{{rolTexto}}</p>
+<h1 style="margin: 0; font: 700 32px 'Helvetica Neue', Arial, sans-serif">{{tituloPagina}}</h1>
+</div>
+</div>
+
+<nav aria-label="Pasos" style="display: grid; grid-template-columns: repeat(auto-fit, minmax(200px, 1fr)); gap: 10px">
+<sc-for list="{{pasos}}" as="p" hint-placeholder-count="4">
+<button onClick="{{p.go}}" aria-current="{{p.current}}" style="display: flex; align-items: center; gap: 12px; padding: 12px 14px; border-radius: 12px; border: 2px solid {{p.bd}}; background: #FFFFFF; cursor: pointer; text-align: left; color: #0A2245">
+<span style="width: 32px; height: 32px; flex: none; border-radius: 12px; background: {{p.bg}}; color: {{p.fg}}; display: flex; align-items: center; justify-content: center; font: 700 14px 'Helvetica Neue', Arial, sans-serif">{{p.n}}</span>
+<span style="font: {{p.w}} 15px 'Helvetica Neue', Arial, sans-serif">{{p.l}}</span>
+</button>
+</sc-for>
+</nav>
+
+<sc-if value="{{p1}}" hint-placeholder-val="{{ true }}">
+<div class="gs-card" style="padding: 28px; display: flex; flex-direction: column; gap: 22px">
+<h2 class="gs-h2">Datos del curso</h2>
+<div style="display: grid; grid-template-columns: repeat(auto-fit, minmax(260px, 1fr)); gap: 16px">
+<div><label class="gs-label" for="c-t">Título</label><input id="c-t" class="gs-input" value="{{titulo}}" onChange="{{setTitulo}}"></div>
+<div><label class="gs-label" for="c-cat">Categoría</label><select id="c-cat" class="gs-input"><option>Seguridad</option><option>Atención al residente</option><option>Cultura</option><option>Herramientas</option></select></div>
+</div>
+<div><label class="gs-label" for="c-d">Descripción corta (la ven en el explorador)</label><textarea id="c-d" class="gs-input" rows="2" placeholder="Qué aprenderá la persona y para qué le sirve"></textarea></div>
+<fieldset style="border: none; padding: 0; margin: 0">
+<legend class="gs-label">Color de portada</legend>
+<div style="display: flex; flex-wrap: wrap; gap: 10px">
+<sc-for list="{{portadas}}" as="c" hint-placeholder-count="4">
+<button onClick="{{c.go}}" aria-label="{{c.l}}" aria-pressed="{{c.on}}" style="width: 72px; height: 48px; border-radius: 12px; background: {{c.hex}}; border: 3px solid {{c.bd}}; cursor: pointer"></button>
+</sc-for>
+</div>
+</fieldset>
+
+<h2 class="gs-h2" style="margin-top: 6px">¿Quién lo verá?</h2>
+<div style="display: grid; grid-template-columns: repeat(auto-fit, minmax(320px, 1fr)); gap: 20px">
+<fieldset style="border: 1px solid #DDE3EA; border-radius: 12px; padding: 18px; margin: 0; display: flex; flex-direction: column; gap: 6px">
+<legend class="gs-label" style="padding: 0 6px; margin: 0">¿Para qué edificios?</legend>
+<label style="display: flex; align-items: center; gap: 10px; min-height: 40px; font-weight: 700"><input type="checkbox" checked="{{edTodos}}" onChange="{{toggleEdTodos}}" style="width: 20px; height: 20px">Todos los edificios y oficina central</label>
+<sc-if value="{{edElegir}}" hint-placeholder-val="{{ false }}">
+<div style="display: grid; grid-template-columns: repeat(2, minmax(0, 1fr)); gap: 0 12px">
+<sc-for list="{{edOpciones}}" as="o" hint-placeholder-count="12">
+<label style="display: flex; align-items: center; gap: 8px; min-height: 36px; font-size: 15px"><input type="checkbox" checked="{{o.on}}" onChange="{{o.toggle}}" style="width: 18px; height: 18px">{{o.l}}</label>
+</sc-for>
+</div>
+</sc-if>
+</fieldset>
+<fieldset style="border: 1px solid #DDE3EA; border-radius: 12px; padding: 18px; margin: 0; display: flex; flex-direction: column; gap: 6px">
+<legend class="gs-label" style="padding: 0 6px; margin: 0">¿Para qué cargos?</legend>
+<label style="display: flex; align-items: center; gap: 10px; min-height: 40px; font-weight: 700"><input type="checkbox" checked="{{cgTodos}}" onChange="{{toggleCgTodos}}" style="width: 20px; height: 20px">Todos los cargos</label>
+<sc-if value="{{cgElegir}}" hint-placeholder-val="{{ false }}">
+<div style="display: flex; flex-direction: column">
+<sc-for list="{{cgOpciones}}" as="o" hint-placeholder-count="6">
+<label style="display: flex; align-items: center; gap: 8px; min-height: 36px; font-size: 15px"><input type="checkbox" checked="{{o.on}}" onChange="{{o.toggle}}" style="width: 18px; height: 18px">{{o.l}}</label>
+</sc-for>
+</div>
+</sc-if>
+</fieldset>
+</div>
+<div style="background: #F5EBDC; border-radius: 12px; padding: 14px 18px; font-size: 15px">Lo verán en el explorador: <strong>{{alcance}}</strong></div>
+</div>
+</sc-if>
+
+<sc-if value="{{p2}}" hint-placeholder-val="{{ false }}">
+<div style="display: flex; flex-wrap: wrap; gap: 24px; align-items: flex-start">
+<div style="flex: 1 1 340px; display: flex; flex-direction: column; gap: 12px">
+<h2 class="gs-h2">Módulos ({{nMods}})</h2>
+<sc-for list="{{mods}}" as="m" hint-placeholder-count="3">
+<div style="background: #FFFFFF; border: 2px solid {{m.bd}}; border-radius: 12px; padding: 12px; display: flex; align-items: center; gap: 10px">
+<button onClick="{{m.select}}" style="flex: 1; min-width: 0; text-align: left; background: none; border: none; padding: 4px; cursor: pointer; color: #0A2245; display: flex; flex-direction: column; gap: 6px">
+<span style="display: flex; align-items: center; gap: 8px"><span style="font: 700 13px 'Helvetica Neue', Arial, sans-serif; color: #4A5A70">{{m.n}}.</span><span class="gs-chip" style="background: {{m.tbg}}; color: #0A2245">{{m.tl}}</span><span class="gs-muted" style="font: 12px 'Helvetica Neue', Arial, sans-serif">{{m.quizL}}</span></span>
+<span style="font: 700 15px 'Helvetica Neue', Arial, sans-serif">{{m.t}}</span>
+</button>
+<div style="display: flex; gap: 4px">
+<button class="gs-icon" onClick="{{m.up}}" disabled="{{m.noUp}}" aria-label="Subir módulo">↑</button>
+<button class="gs-icon" onClick="{{m.down}}" disabled="{{m.noDown}}" aria-label="Bajar módulo">↓</button>
+<button class="gs-icon" onClick="{{m.del}}" aria-label="Eliminar módulo">×</button>
+</div>
+</div>
+</sc-for>
+<div class="gs-card" style="padding: 14px; display: flex; flex-direction: column; gap: 10px">
+<span class="gs-label" style="margin: 0">Agregar módulo</span>
+<div style="display: grid; grid-template-columns: repeat(2, minmax(0, 1fr)); gap: 8px">
+<button class="gs-btn2" onClick="{{addVideo}}">+ Video</button>
+<button class="gs-btn2" onClick="{{addDoc}}">+ Documento</button>
+<button class="gs-btn2" onClick="{{addCheck}}">+ Checklist</button>
+<button class="gs-btn2" onClick="{{addPol}}">+ Política</button>
+</div>
+</div>
+</div>
+
+<div style="flex: 999 1 480px; min-width: 0">
+<sc-if value="{{noSel}}" hint-placeholder-val="{{ false }}">
+<div class="gs-card" style="padding: 40px; text-align: center" ><p class="gs-muted" style="margin: 0; font-size: 16px">Agrega un módulo para empezar a editarlo.</p></div>
+</sc-if>
+<sc-if value="{{hasSel}}" hint-placeholder-val="{{ true }}">
+<div class="gs-card" style="padding: 26px; display: flex; flex-direction: column; gap: 18px">
+<div style="display: flex; align-items: center; gap: 10px"><span class="gs-chip" style="background: {{sel.tbg}}; color: #0A2245">{{sel.tl}}</span><span class="gs-muted" style="font: 13px 'Helvetica Neue', Arial, sans-serif">Módulo {{sel.n}} de {{nMods}}</span></div>
+<div><label class="gs-label" for="m-t">Título del módulo</label><input id="m-t" class="gs-input" value="{{sel.t}}" onChange="{{sel.setT}}"></div>
+
+<sc-if value="{{sel.isVideo}}" hint-placeholder-val="{{ true }}">
+<div style="display: flex; flex-direction: column; gap: 14px">
+<div><label class="gs-label" for="v-url">Enlace del video (YouTube o Google Drive)</label><input id="v-url" class="gs-input" placeholder="https://"></div>
+<div style="height: 200px; border-radius: 12px; background: #0A2245; display: flex; align-items: center; justify-content: center; color: #C9D3E0; font: 14px 'Helvetica Neue', Arial, sans-serif">Vista previa del video</div>
+<label style="display: flex; align-items: center; gap: 10px; min-height: 36px"><input type="checkbox" checked="{{ true }}" style="width: 20px; height: 20px">Exigir ver el video completo para avanzar</label>
+</div>
+</sc-if>
+
+<sc-if value="{{sel.isDoc}}" hint-placeholder-val="{{ false }}">
+<div style="display: flex; flex-direction: column; gap: 14px">
+<div><label class="gs-label" for="d-f">Archivo (PDF)</label><input id="d-f" class="gs-input" type="file"></div>
+<div><label class="gs-label" for="d-i">Indicaciones para quien lo lee (opcional)</label><textarea id="d-i" class="gs-input" rows="3"></textarea></div>
+<label style="display: flex; align-items: center; gap: 10px; min-height: 36px"><input type="checkbox" checked="{{ true }}" style="width: 20px; height: 20px">Pedir que marque "Lo leí" al terminar</label>
+</div>
+</sc-if>
+
+<sc-if value="{{sel.isCheck}}" hint-placeholder-val="{{ false }}">
+<div style="display: flex; flex-direction: column; gap: 10px">
+<span class="gs-label" style="margin: 0">Ítems que la persona debe ir marcando</span>
+<sc-for list="{{sel.items}}" as="it" hint-placeholder-count="3">
+<div style="display: flex; gap: 8px; align-items: center">
+<span style="width: 22px; height: 22px; flex: none; border: 2px solid #9AA6B5; border-radius: 6px"></span>
+<label style="position: absolute; left: -9999px" for="{{it.id}}">Ítem {{it.n}}</label>
+<input id="{{it.id}}" class="gs-input" value="{{it.v}}" onChange="{{it.set}}">
+<button class="gs-icon" onClick="{{it.del}}" aria-label="Eliminar ítem">×</button>
+</div>
+</sc-for>
+<button class="gs-btn2" onClick="{{sel.addItem}}" style="align-self: flex-start; min-height: 40px; font-size: 14px">+ Agregar ítem</button>
+</div>
+</sc-if>
+
+<sc-if value="{{sel.isPol}}" hint-placeholder-val="{{ false }}">
+<div style="display: flex; flex-direction: column; gap: 14px">
+<div><label class="gs-label" for="p-txt">Texto de la política</label><textarea id="p-txt" class="gs-input" rows="6" placeholder="Pega aquí el texto o un resumen, y adjunta el documento completo abajo"></textarea></div>
+<div><label class="gs-label" for="p-f">Documento completo (opcional)</label><input id="p-f" class="gs-input" type="file"></div>
+<label style="display: flex; align-items: center; gap: 10px; min-height: 36px"><input type="checkbox" checked="{{ true }}" style="width: 20px; height: 20px">Pedir aceptación con nombre, RUT y fecha</label>
+</div>
+</sc-if>
+
+<div style="border-top: 1px solid #DDE3EA; padding-top: 18px; display: flex; flex-direction: column; gap: 14px">
+<label style="display: flex; align-items: center; gap: 10px; min-height: 40px; font: 700 15px 'Helvetica Neue', Arial, sans-serif"><input type="checkbox" checked="{{sel.quiz}}" onChange="{{sel.toggleQuiz}}" style="width: 20px; height: 20px">Agregar quiz al final de este módulo</label>
+<sc-if value="{{sel.quiz}}" hint-placeholder-val="{{ false }}">
+<div style="display: flex; flex-direction: column; gap: 14px">
+<sc-for list="{{sel.preguntas}}" as="q" hint-placeholder-count="1">
+<div style="border: 1px solid #DDE3EA; border-radius: 12px; padding: 16px; display: flex; flex-direction: column; gap: 10px; background: #FAFBFC">
+<div style="display: flex; justify-content: space-between; align-items: center; gap: 8px">
+<label class="gs-label" style="margin: 0" for="{{q.id}}">Pregunta {{q.n}}</label>
+<button class="gs-icon" onClick="{{q.del}}" aria-label="Eliminar pregunta">×</button>
+</div>
+<input id="{{q.id}}" class="gs-input" value="{{q.q}}" onChange="{{q.setQ}}" placeholder="Escribe la pregunta">
+<span class="gs-muted" style="font: 13px 'Helvetica Neue', Arial, sans-serif">Escribe las alternativas y marca la correcta</span>
+<sc-for list="{{q.alts}}" as="a" hint-placeholder-count="4">
+<div style="display: flex; align-items: center; gap: 10px">
+<input type="radio" name="{{a.name}}" checked="{{a.isOk}}" onChange="{{a.mark}}" aria-label="Marcar alternativa {{a.letra}} como correcta" style="width: 20px; height: 20px; flex: none">
+<span style="font: 700 14px 'Helvetica Neue', Arial, sans-serif; width: 16px">{{a.letra}}</span>
+<input class="gs-input" value="{{a.a}}" onChange="{{a.set}}" aria-label="Alternativa {{a.letra}}" placeholder="Alternativa">
+</div>
+</sc-for>
+</div>
+</sc-for>
+<button class="gs-btn2" onClick="{{sel.addPregunta}}" style="align-self: flex-start; min-height: 40px; font-size: 14px">+ Agregar pregunta</button>
+</div>
+</sc-if>
+</div>
+</div>
+</sc-if>
+</div>
+</div>
+</sc-if>
+
+<sc-if value="{{p3}}" hint-placeholder-val="{{ false }}">
+<div class="gs-card" style="padding: 28px; display: grid; grid-template-columns: repeat(auto-fit, minmax(300px, 1fr)); gap: 28px">
+<fieldset style="border: none; padding: 0; margin: 0; display: flex; flex-direction: column; gap: 6px">
+<legend class="gs-label">Orden de los módulos</legend>
+<label style="display: flex; align-items: flex-start; gap: 10px; min-height: 40px"><input type="radio" name="orden" checked="{{ordenSec}}" onChange="{{setSec}}" style="width: 20px; height: 20px; margin-top: 2px"><span><strong style="font-family: 'Helvetica Neue', Arial, sans-serif">Uno tras otro</strong><br><span class="gs-muted" style="font-size: 14px">Se desbloquea el siguiente al terminar el anterior</span></span></label>
+<label style="display: flex; align-items: flex-start; gap: 10px; min-height: 40px"><input type="radio" name="orden" checked="{{ordenLibre}}" onChange="{{setLibre}}" style="width: 20px; height: 20px; margin-top: 2px"><span><strong style="font-family: 'Helvetica Neue', Arial, sans-serif">Libre</strong><br><span class="gs-muted" style="font-size: 14px">La persona elige por dónde partir</span></span></label>
+</fieldset>
+<div style="display: flex; flex-direction: column; gap: 16px">
+<div><label class="gs-label" for="cf-n">Nota mínima para aprobar los quiz</label><select id="cf-n" class="gs-input"><option>60 %</option><option selected="{{ true }}">70 %</option><option>80 %</option><option>100 %</option></select></div>
+<div><label class="gs-label" for="cf-i">Intentos por quiz</label><select id="cf-i" class="gs-input"><option>Ilimitados</option><option>3 intentos</option><option>1 intento</option></select></div>
+</div>
+<div style="display: flex; flex-direction: column; gap: 16px">
+<div><label class="gs-label" for="cf-d">Duración estimada</label><input id="cf-d" class="gs-input" placeholder="Ej: 40 min"></div>
+<label style="display: flex; align-items: center; gap: 10px; min-height: 40px"><input type="checkbox" checked="{{cert}}" onChange="{{toggleCert}}" style="width: 20px; height: 20px">Entregar certificado al terminar</label>
+</div>
+</div>
+</sc-if>
+
+<sc-if value="{{p4}}" hint-placeholder-val="{{ false }}">
+<div style="display: flex; flex-direction: column; gap: 20px">
+<sc-if value="{{enviado}}" hint-placeholder-val="{{ false }}">
+<div style="background: #007B0C; color: #FFFFFF; border-radius: 12px; padding: 18px 20px; font-size: 16px">{{exito}}</div>
+</sc-if>
+<div style="display: flex; flex-wrap: wrap; gap: 24px; align-items: flex-start">
+<div style="flex: 1 1 320px; display: flex; flex-direction: column; gap: 10px">
+<h2 class="gs-h2">Así se verá en el explorador</h2>
+<article class="gs-card" style="overflow: hidden">
+<div style="height: 96px; background: {{portada}}"></div>
+<div style="padding: 20px; display: flex; flex-direction: column; gap: 10px">
+<span class="gs-chip" style="align-self: flex-start; background: #92C9EB; color: #0A2245">{{chipPublico}}</span>
+<h3 class="gs-h3">{{titulo}}</h3>
+<p class="gs-muted" style="margin: 0; font-size: 14px">{{nMods}} módulos · {{nQuiz}} con quiz</p>
+<span class="gs-btn" style="display: inline-flex; align-items: center; align-self: flex-start">Inscribirme</span>
+</div>
+</article>
+</div>
+<div class="gs-card" style="flex: 999 1 440px; min-width: 0; padding: 24px; display: flex; flex-direction: column; gap: 4px">
+<h2 class="gs-h2" style="margin-bottom: 10px">Revisión final</h2>
+<sc-for list="{{resumen}}" as="r" hint-placeholder-count="6">
+<div style="display: flex; flex-wrap: wrap; gap: 4px 16px; padding: 10px 0; border-bottom: 1px solid #EEF1F5">
+<span class="gs-muted" style="flex: 0 0 170px; font: 700 14px 'Helvetica Neue', Arial, sans-serif">{{r.k}}</span>
+<span style="flex: 1 1 220px; font-size: 15px">{{r.v}}</span>
+</div>
+</sc-for>
+<sc-if value="{{sinModulos}}" hint-placeholder-val="{{ false }}">
+<div style="background: #FFD972; border-radius: 12px; padding: 12px 16px; margin-top: 10px; font-size: 15px">El curso no tiene módulos. Vuelve al paso 2 antes de continuar.</div>
+</sc-if>
+<sc-if value="{{editando}}" hint-placeholder-val="{{ false }}">
+<div style="background: #92C9EB; border-radius: 12px; padding: 14px 16px; margin-top: 14px; font-size: 15px; display: flex; flex-direction: column; gap: 4px"><strong style="font-family: 'Helvetica Neue', Arial, sans-serif">12 personas van a mitad de este curso</strong><span>Al publicar, cada una verá un aviso para elegir si sigue con la versión que empezó o pasa a la nueva. Quienes no lo han empezado reciben directamente la nueva, y quienes ya lo terminaron conservan su certificado.</span></div>
+</sc-if>
+<p class="gs-muted" style="margin: 14px 0 0; font-size: 14px">{{notaRol}}</p>
+</div>
+</div>
+</div>
+</sc-if>
+
+<div style="display: flex; flex-wrap: wrap; justify-content: space-between; gap: 10px; border-top: 1px solid #DDE3EA; padding-top: 20px">
+<button class="gs-btn2" onClick="{{prev}}" disabled="{{noPrev}}">Anterior</button>
+<div style="display: flex; flex-wrap: wrap; gap: 10px">
+<button class="gs-btn2">Guardar borrador</button>
+<sc-if value="{{noUltimo}}" hint-placeholder-val="{{ true }}">
+<button class="gs-btn" onClick="{{next}}">Siguiente</button>
+</sc-if>
+<sc-if value="{{p4}}" hint-placeholder-val="{{ false }}">
+<button class="gs-btn" onClick="{{enviar}}" disabled="{{sinModulos}}">{{accionFinal}}</button>
+</sc-if>
+</div>
+</div>
+
+</main>
+</div>
+</template>
+<template id="tpl-Curso">
+
+<div style="min-height: 100%; display: flex; flex-direction: column">
+
+<header style="background: #0A2245; color: #FFFFFF">
+<div style="max-width: 1200px; margin: 0 auto; padding: 18px 24px 22px; display: flex; flex-direction: column; gap: 14px">
+<div style="display: flex; flex-wrap: wrap; justify-content: space-between; align-items: center; gap: 10px">
+<a href="Main.dc.html" style="color: #92C9EB; font: 700 14px 'Helvetica Neue', Arial, sans-serif; text-decoration: none">← Volver a Mis cursos</a>
+<span style="font-family: Georgia, serif; font-size: 18px">Grey Skills</span>
+</div>
+<div style="display: flex; flex-wrap: wrap; justify-content: space-between; align-items: flex-end; gap: 16px">
+<div>
+<h1 style="margin: 0 0 4px; font: 700 30px 'Helvetica Neue', Arial, sans-serif">Protocolo de emergencias</h1>
+<span style="font-size: 15px; color: #C9D3E0">Asignado por Andrés Soto · Vence el 30 de octubre</span>
+</div>
+<div style="flex: 0 1 320px; min-width: 220px; display: flex; flex-direction: column; gap: 6px">
+<span style="font: 700 13px 'Helvetica Neue', Arial, sans-serif; color: #C9D3E0">{{avanceTxt}}</span>
+<div style="height: 10px; background: rgba(255,255,255,0.18); border-radius: 12px; overflow: hidden"><div style="height: 100%; width: {{avancePct}}; background: #92C9EB"></div></div>
+</div>
+</div>
+</div>
+</header>
+
+<main style="flex: 1; width: 100%; max-width: 1200px; margin: 0 auto; padding: 28px 24px 72px; box-sizing: border-box; display: flex; flex-wrap: wrap; gap: 24px; align-items: flex-start">
+
+<sc-if value="{{verPendiente}}" hint-placeholder-val="{{ true }}">
+<div style="flex: 1 1 100%; background: #92C9EB; border-radius: 12px; padding: 18px 20px; display: flex; flex-wrap: wrap; align-items: center; justify-content: space-between; gap: 14px">
+<div style="flex: 1 1 420px; display: flex; flex-direction: column; gap: 4px">
+<strong style="font: 700 17px 'Helvetica Neue', Arial, sans-serif">Este curso se actualizó el 6 de octubre</strong>
+<span style="font-size: 15px">Cambió el módulo 2 (Plano de evacuación). Puedes seguir con la versión que empezaste o pasar a la nueva. Lo que ya completaste en módulos que no cambiaron se mantiene.</span>
+</div>
+<div style="display: flex; flex-wrap: wrap; gap: 8px">
+<button class="gs-btn" onClick="{{verNueva}}">Pasar a la nueva</button>
+<button class="gs-btn2" onClick="{{verAnterior}}">Seguir con la que empecé</button>
+</div>
+</div>
+</sc-if>
+<sc-if value="{{verElegida}}" hint-placeholder-val="{{ false }}">
+<div style="flex: 1 1 100%; background: #FFFFFF; border: 1px solid #DDE3EA; border-radius: 12px; padding: 12px 18px; font: 14px 'Helvetica Neue', Arial, sans-serif">{{verTxt}}</div>
+</sc-if>
+<nav aria-label="Módulos del curso" style="flex: 1 1 280px; display: flex; flex-direction: column; gap: 8px">
+<sc-for list="{{lista}}" as="m" hint-placeholder-count="4">
+<button onClick="{{m.go}}" disabled="{{m.bloq}}" aria-current="{{m.current}}" style="text-align: left; padding: 14px; border-radius: 12px; border: 2px solid {{m.bd}}; background: {{m.bg}}; cursor: {{m.cursor}}; display: flex; gap: 12px; align-items: flex-start; color: #0A2245">
+<span style="width: 30px; height: 30px; flex: none; border-radius: 12px; background: {{m.nbg}}; color: {{m.nfg}}; display: flex; align-items: center; justify-content: center; font: 700 13px 'Helvetica Neue', Arial, sans-serif">{{m.icono}}</span>
+<span style="display: flex; flex-direction: column; gap: 4px; min-width: 0">
+<span style="font: 700 15px/1.3 'Helvetica Neue', Arial, sans-serif; color: {{m.ink}}">{{m.t}}</span>
+<span class="gs-muted" style="font: 12px 'Helvetica Neue', Arial, sans-serif">{{m.sub}}</span>
+</span>
+</button>
+</sc-for>
+</nav>
+
+<section style="flex: 999 1 560px; min-width: 0">
+
+<sc-if value="{{vEnc}}" hint-placeholder-val="{{ false }}">
+<div class="gs-card" style="padding: 28px; display: flex; flex-direction: column; gap: 24px">
+<div style="display: flex; flex-direction: column; gap: 6px">
+<span class="gs-muted" style="font: 700 13px 'Helvetica Neue', Arial, sans-serif">Último paso antes de tu certificado</span>
+<h2 class="gs-h2">¿Cómo te fue con este curso?</h2>
+<span class="gs-muted" style="font-size: 15px">Tus respuestas ayudan a mejorar los cursos. Las ve solo el equipo de RRHH.</span>
+</div>
+<sc-for list="{{escalas}}" as="q" hint-placeholder-count="2">
+<fieldset style="border: none; padding: 0; margin: 0; display: flex; flex-direction: column; gap: 10px">
+<legend style="font: 700 17px 'Helvetica Neue', Arial, sans-serif; margin-bottom: 10px">{{q.q}}</legend>
+<div style="display: flex; flex-wrap: wrap; gap: 8px">
+<sc-for list="{{q.ops}}" as="o" hint-placeholder-count="5">
+<button onClick="{{o.go}}" aria-pressed="{{o.on}}" aria-label="{{o.aria}}" style="width: 56px; height: 52px; border-radius: 12px; border: 2px solid {{o.bd}}; background: {{o.bg}}; color: {{o.fg}}; font: 700 18px 'Helvetica Neue', Arial, sans-serif; cursor: pointer">{{o.n}}</button>
+</sc-for>
+</div>
+<div class="gs-muted" style="display: flex; justify-content: space-between; max-width: 312px; font: 12px 'Helvetica Neue', Arial, sans-serif"><span>{{q.min}}</span><span>{{q.max}}</span></div>
+</fieldset>
+</sc-for>
+<fieldset style="border: none; padding: 0; margin: 0; display: flex; flex-direction: column; gap: 10px">
+<legend style="font: 700 17px 'Helvetica Neue', Arial, sans-serif; margin-bottom: 10px">¿Se lo recomendarías a un compañero?</legend>
+<div style="display: flex; flex-wrap: wrap; gap: 8px">
+<sc-for list="{{recomienda}}" as="o" hint-placeholder-count="3">
+<button onClick="{{o.go}}" aria-pressed="{{o.on}}" style="min-height: 48px; padding: 0 20px; border-radius: 12px; border: 2px solid {{o.bd}}; background: {{o.bg}}; color: {{o.fg}}; font: 700 15px 'Helvetica Neue', Arial, sans-serif; cursor: pointer">{{o.l}}</button>
+</sc-for>
+</div>
+</fieldset>
+<div><label class="gs-label" for="enc-c">¿Qué mejorarías? (opcional)</label><textarea id="enc-c" class="gs-input" rows="3"></textarea></div>
+<div style="display: flex; justify-content: flex-end; border-top: 1px solid #DDE3EA; padding-top: 18px">
+<button class="gs-btn" onClick="{{enviarEnc}}" disabled="{{encIncompleta}}">Enviar y ver mi certificado</button>
+</div>
+</div>
+</sc-if>
+
+<sc-if value="{{vCert}}" hint-placeholder-val="{{ false }}">
+<div style="display: flex; flex-direction: column; gap: 18px; align-items: center">
+<div style="width: 100%; max-width: 720px; aspect-ratio: 3 / 2; background: #FFFFFF; border: 10px solid #0A2245; border-radius: 12px; box-sizing: border-box; padding: 40px; display: flex; flex-direction: column; align-items: center; justify-content: center; gap: 14px; text-align: center">
+<span style="font: 700 12px 'Helvetica Neue', Arial, sans-serif; letter-spacing: 3px; text-transform: uppercase; color: #0077D4">Certificado de aprobación</span>
+<span class="gs-muted" style="font-size: 16px">Se certifica que</span>
+<span style="font: 36px Georgia, serif">Camila Rojas</span>
+<span class="gs-muted" style="font-size: 16px">completó el curso</span>
+<span style="font: 700 24px 'Helvetica Neue', Arial, sans-serif">Protocolo de emergencias</span>
+<div style="height: 3px; width: 80px; background: #92C9EB; border-radius: 12px"></div>
+<span class="gs-muted" style="font-size: 14px">7 de octubre de 2026 · Greystar Chile</span>
+<span class="gs-muted" style="font-size: 12px">[Logo Greystar]</span>
+</div>
+<div style="display: flex; flex-wrap: wrap; gap: 10px; justify-content: center">
+<button class="gs-btn">Descargar certificado</button>
+<a class="gs-btn2" href="Main.dc.html">Volver a Mis cursos</a>
+</div>
+</div>
+</sc-if>
+
+<sc-if value="{{vContenido}}" hint-placeholder-val="{{ true }}">
+<div class="gs-card" style="padding: 28px; display: flex; flex-direction: column; gap: 20px">
+<div style="display: flex; flex-direction: column; gap: 6px">
+<span class="gs-muted" style="font: 700 13px 'Helvetica Neue', Arial, sans-serif">Módulo {{curN}} de 4 · {{cur.tipoL}}</span>
+<h2 class="gs-h2">{{cur.t}}</h2>
+</div>
+
+<sc-if value="{{cur.isVideo}}" hint-placeholder-val="{{ true }}">
+<div style="display: flex; flex-direction: column; gap: 14px">
+<div style="aspect-ratio: 16 / 9; background: #0A2245; border-radius: 12px; display: flex; flex-direction: column; align-items: center; justify-content: center; gap: 12px; color: #C9D3E0">
+<svg width="64" height="64" viewBox="0 0 24 24" fill="none" stroke="#FFFFFF" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><circle cx="12" cy="12" r="10"></circle><path d="M10 8l6 4-6 4z"></path></svg>
+<span style="font: 13px 'Helvetica Neue', Arial, sans-serif">Video · 3:42</span>
+</div>
+<p class="gs-muted" style="margin: 0; font-size: 16px; line-height: 1.55">Mira el video completo. Al terminar se habilita el quiz de este módulo.</p>
+<sc-if value="{{noVisto}}" hint-placeholder-val="{{ true }}">
+<button class="gs-btn2" onClick="{{marcarVisto}}" style="align-self: flex-start">Simular fin del video</button>
+</sc-if>
+</div>
+</sc-if>
+
+<sc-if value="{{cur.isDoc}}" hint-placeholder-val="{{ false }}">
+<div style="display: flex; flex-direction: column; gap: 14px">
+<div style="background: #E3E8EF; border-radius: 12px; padding: 24px; display: flex; justify-content: center">
+<div style="width: 100%; max-width: 440px; background: #FFFFFF; border-radius: 12px; padding: 28px; box-sizing: border-box; display: flex; flex-direction: column; gap: 12px">
+<span style="font: 700 16px 'Helvetica Neue', Arial, sans-serif">[Plano de evacuación · Edificio Nativo]</span>
+<div style="height: 140px; border: 2px dashed #9AA6B5; border-radius: 12px; display: flex; align-items: center; justify-content: center"><span class="gs-muted" style="font: 13px 'Helvetica Neue', Arial, sans-serif">Vista del PDF</span></div>
+<div style="height: 8px; background: #E3E8EF; border-radius: 12px"></div>
+<div style="height: 8px; width: 80%; background: #E3E8EF; border-radius: 12px"></div>
+<div style="height: 8px; width: 60%; background: #E3E8EF; border-radius: 12px"></div>
+</div>
+</div>
+<a href="#" style="font: 700 14px 'Helvetica Neue', Arial, sans-serif">Abrir en pantalla completa</a>
+<label style="display: flex; align-items: center; gap: 12px; min-height: 44px; font-size: 16px"><input type="checkbox" checked="{{leido}}" onChange="{{toggleLeido}}" style="width: 22px; height: 22px">Lo leí y entiendo por dónde evacuar</label>
+</div>
+</sc-if>
+
+<sc-if value="{{cur.isCheck}}" hint-placeholder-val="{{ false }}">
+<div style="display: flex; flex-direction: column; gap: 10px">
+<p class="gs-muted" style="margin: 0; font-size: 16px">Recorre tu edificio y marca cada punto cuando lo hayas revisado.</p>
+<sc-for list="{{checks}}" as="c" hint-placeholder-count="3">
+<label style="display: flex; align-items: center; gap: 14px; min-height: 56px; padding: 0 16px; border: 1px solid #DDE3EA; border-radius: 12px; background: {{c.bg}}; font-size: 16px"><input type="checkbox" checked="{{c.on}}" onChange="{{c.toggle}}" style="width: 22px; height: 22px">{{c.t}}</label>
+</sc-for>
+<span style="font: 700 14px 'Helvetica Neue', Arial, sans-serif">{{checkTxt}}</span>
+</div>
+</sc-if>
+
+<sc-if value="{{cur.isPol}}" hint-placeholder-val="{{ false }}">
+<div style="display: flex; flex-direction: column; gap: 14px">
+<div style="max-height: 220px; overflow-y: auto; border: 1px solid #DDE3EA; border-radius: 12px; padding: 20px; font-size: 15px; line-height: 1.6; background: #FAFBFC">
+<p style="margin: 0 0 12px">[Texto del reglamento de seguridad del edificio. Aquí va el contenido que la administración cargue al crear el módulo.]</p>
+<p style="margin: 0 0 12px">[Sección 1 · Responsabilidades del personal ante una emergencia.]</p>
+<p style="margin: 0 0 12px">[Sección 2 · Comunicación con residentes y servicios de emergencia.]</p>
+<p style="margin: 0">[Sección 3 · Registro posterior del incidente.]</p>
+</div>
+<label style="display: flex; align-items: flex-start; gap: 12px; min-height: 44px; font-size: 16px"><input type="checkbox" checked="{{acepta}}" onChange="{{toggleAcepta}}" style="width: 22px; height: 22px; margin-top: 2px">Leí el reglamento y me comprometo a cumplirlo</label>
+<div style="display: grid; grid-template-columns: repeat(auto-fit, minmax(180px, 1fr)); gap: 12px">
+<div><span class="gs-label">Nombre</span><div class="gs-input" style="background: #F4F6F9">Camila Rojas</div></div>
+<div><span class="gs-label">RUT</span><div class="gs-input" style="background: #F4F6F9">12.345.678-9</div></div>
+<div><span class="gs-label">Fecha</span><div class="gs-input" style="background: #F4F6F9">7 de octubre de 2026</div></div>
+</div>
+</div>
+</sc-if>
+
+<sc-if value="{{yaHecho}}" hint-placeholder-val="{{ false }}">
+<div style="background: #F5EBDC; border-radius: 12px; padding: 14px 18px; font-size: 15px">Ya completaste este módulo. Puedes repasarlo cuando quieras.</div>
+</sc-if>
+
+<div style="display: flex; flex-wrap: wrap; justify-content: flex-end; gap: 10px; border-top: 1px solid #DDE3EA; padding-top: 18px">
+<button class="gs-btn" onClick="{{avanzar}}" disabled="{{noPuede}}">{{avanzarTxt}}</button>
+</div>
+</div>
+</sc-if>
+
+<sc-if value="{{vQuiz}}" hint-placeholder-val="{{ false }}">
+<div class="gs-card" style="padding: 28px; display: flex; flex-direction: column; gap: 22px">
+<div style="display: flex; flex-direction: column; gap: 6px">
+<span class="gs-muted" style="font: 700 13px 'Helvetica Neue', Arial, sans-serif">Quiz · Módulo 1 · Necesitas 70 % para aprobar · Intento {{intentoN}}</span>
+<h2 class="gs-h2">¿Qué aprendiste?</h2>
+</div>
+<sc-for list="{{preguntas}}" as="q" hint-placeholder-count="4">
+<fieldset style="border: none; padding: 0; margin: 0; display: flex; flex-direction: column; gap: 8px">
+<legend style="font: 700 17px/1.35 'Helvetica Neue', Arial, sans-serif; margin-bottom: 10px">{{q.n}}. {{q.q}}</legend>
+<sc-for list="{{q.ops}}" as="o" hint-placeholder-count="4">
+<label style="display: flex; align-items: center; gap: 12px; min-height: 50px; padding: 0 14px; border-radius: 12px; border: 2px solid {{o.bd}}; background: {{o.bg}}; font-size: 16px; cursor: pointer">
+<input type="radio" name="{{q.name}}" checked="{{o.on}}" onChange="{{o.pick}}" disabled="{{bloqQuiz}}" style="width: 20px; height: 20px; flex: none">
+<span style="flex: 1">{{o.t}}</span>
+<span style="font: 700 12px 'Helvetica Neue', Arial, sans-serif; color: {{o.tagC}}">{{o.tag}}</span>
+</label>
+</sc-for>
+</fieldset>
+</sc-for>
+
+<sc-if value="{{quizEnviado}}" hint-placeholder-val="{{ false }}">
+<div style="border-radius: 12px; padding: 18px 20px; background: {{res.bg}}; color: {{res.fg}}; display: flex; flex-direction: column; gap: 4px">
+<strong style="font: 700 18px 'Helvetica Neue', Arial, sans-serif">{{res.titulo}}</strong>
+<span style="font-size: 15px">{{res.txt}}</span>
+</div>
+</sc-if>
+
+<div style="display: flex; flex-wrap: wrap; justify-content: flex-end; gap: 10px; border-top: 1px solid #DDE3EA; padding-top: 18px">
+<sc-if value="{{quizPendiente}}" hint-placeholder-val="{{ true }}">
+<button class="gs-btn2" onClick="{{volverVideo}}">Volver al video</button>
+<button class="gs-btn" onClick="{{enviarQuiz}}" disabled="{{faltan}}">Enviar respuestas</button>
+</sc-if>
+<sc-if value="{{reprobado}}" hint-placeholder-val="{{ false }}">
+<button class="gs-btn2" onClick="{{volverVideo}}">Repasar el video</button>
+<button class="gs-btn" onClick="{{reintentar}}">Intentar de nuevo</button>
+</sc-if>
+<sc-if value="{{aprobado}}" hint-placeholder-val="{{ false }}">
+<button class="gs-btn" onClick="{{cerrarQuiz}}">Siguiente módulo</button>
+</sc-if>
+</div>
+</div>
+</sc-if>
+
+</section>
+</main>
+</div>
+</template>
+<script>(function(global,factory){typeof exports==="object"&&typeof module!=="undefined"?module.exports=factory():typeof define==="function"&&define.amd?define(factory):(global=global||self,global.morphdom=factory())})(this,function(){"use strict";var DOCUMENT_FRAGMENT_NODE=11;function morphAttrs(fromNode,toNode){var toNodeAttrs=toNode.attributes;var attr;var attrName;var attrNamespaceURI;var attrValue;var fromValue;if(toNode.nodeType===DOCUMENT_FRAGMENT_NODE||fromNode.nodeType===DOCUMENT_FRAGMENT_NODE){return}for(var i=toNodeAttrs.length-1;i>=0;i--){attr=toNodeAttrs[i];attrName=attr.name;attrNamespaceURI=attr.namespaceURI;attrValue=attr.value;if(attrNamespaceURI){attrName=attr.localName||attrName;fromValue=fromNode.getAttributeNS(attrNamespaceURI,attrName);if(fromValue!==attrValue){if(attr.prefix==="xmlns"){attrName=attr.name}fromNode.setAttributeNS(attrNamespaceURI,attrName,attrValue)}}else{fromValue=fromNode.getAttribute(attrName);if(fromValue!==attrValue){fromNode.setAttribute(attrName,attrValue)}}}var fromNodeAttrs=fromNode.attributes;for(var d=fromNodeAttrs.length-1;d>=0;d--){attr=fromNodeAttrs[d];attrName=attr.name;attrNamespaceURI=attr.namespaceURI;if(attrNamespaceURI){attrName=attr.localName||attrName;if(!toNode.hasAttributeNS(attrNamespaceURI,attrName)){fromNode.removeAttributeNS(attrNamespaceURI,attrName)}}else{if(!toNode.hasAttribute(attrName)){fromNode.removeAttribute(attrName)}}}}var range;var NS_XHTML="http://www.w3.org/1999/xhtml";var doc=typeof document==="undefined"?undefined:document;var HAS_TEMPLATE_SUPPORT=!!doc&&"content"in doc.createElement("template");var HAS_RANGE_SUPPORT=!!doc&&doc.createRange&&"createContextualFragment"in doc.createRange();function createFragmentFromTemplate(str){var template=doc.createElement("template");template.innerHTML=str;return template.content.childNodes[0]}function createFragmentFromRange(str){if(!range){range=doc.createRange();range.selectNode(doc.body)}var fragment=range.createContextualFragment(str);return fragment.childNodes[0]}function createFragmentFromWrap(str){var fragment=doc.createElement("body");fragment.innerHTML=str;return fragment.childNodes[0]}function toElement(str){str=str.trim();if(HAS_TEMPLATE_SUPPORT){return createFragmentFromTemplate(str)}else if(HAS_RANGE_SUPPORT){return createFragmentFromRange(str)}return createFragmentFromWrap(str)}function compareNodeNames(fromEl,toEl){var fromNodeName=fromEl.nodeName;var toNodeName=toEl.nodeName;var fromCodeStart,toCodeStart;if(fromNodeName===toNodeName){return true}fromCodeStart=fromNodeName.charCodeAt(0);toCodeStart=toNodeName.charCodeAt(0);if(fromCodeStart<=90&&toCodeStart>=97){return fromNodeName===toNodeName.toUpperCase()}else if(toCodeStart<=90&&fromCodeStart>=97){return toNodeName===fromNodeName.toUpperCase()}else{return false}}function createElementNS(name,namespaceURI){return!namespaceURI||namespaceURI===NS_XHTML?doc.createElement(name):doc.createElementNS(namespaceURI,name)}function moveChildren(fromEl,toEl){var curChild=fromEl.firstChild;while(curChild){var nextChild=curChild.nextSibling;toEl.appendChild(curChild);curChild=nextChild}return toEl}function syncBooleanAttrProp(fromEl,toEl,name){if(fromEl[name]!==toEl[name]){fromEl[name]=toEl[name];if(fromEl[name]){fromEl.setAttribute(name,"")}else{fromEl.removeAttribute(name)}}}var specialElHandlers={OPTION:function(fromEl,toEl){var parentNode=fromEl.parentNode;if(parentNode){var parentName=parentNode.nodeName.toUpperCase();if(parentName==="OPTGROUP"){parentNode=parentNode.parentNode;parentName=parentNode&&parentNode.nodeName.toUpperCase()}if(parentName==="SELECT"&&!parentNode.hasAttribute("multiple")){if(fromEl.hasAttribute("selected")&&!toEl.selected){fromEl.setAttribute("selected","selected");fromEl.removeAttribute("selected")}parentNode.selectedIndex=-1}}syncBooleanAttrProp(fromEl,toEl,"selected")},INPUT:function(fromEl,toEl){syncBooleanAttrProp(fromEl,toEl,"checked");syncBooleanAttrProp(fromEl,toEl,"disabled");if(fromEl.value!==toEl.value){fromEl.value=toEl.value}if(!toEl.hasAttribute("value")){fromEl.removeAttribute("value")}},TEXTAREA:function(fromEl,toEl){var newValue=toEl.value;if(fromEl.value!==newValue){fromEl.value=newValue}var firstChild=fromEl.firstChild;if(firstChild){var oldValue=firstChild.nodeValue;if(oldValue==newValue||!newValue&&oldValue==fromEl.placeholder){return}firstChild.nodeValue=newValue}},SELECT:function(fromEl,toEl){if(!toEl.hasAttribute("multiple")){var selectedIndex=-1;var i=0;var curChild=fromEl.firstChild;var optgroup;var nodeName;while(curChild){nodeName=curChild.nodeName&&curChild.nodeName.toUpperCase();if(nodeName==="OPTGROUP"){optgroup=curChild;curChild=optgroup.firstChild}else{if(nodeName==="OPTION"){if(curChild.hasAttribute("selected")){selectedIndex=i;break}i++}curChild=curChild.nextSibling;if(!curChild&&optgroup){curChild=optgroup.nextSibling;optgroup=null}}}fromEl.selectedIndex=selectedIndex}}};var ELEMENT_NODE=1;var DOCUMENT_FRAGMENT_NODE$1=11;var TEXT_NODE=3;var COMMENT_NODE=8;function noop(){}function defaultGetNodeKey(node){if(node){return node.getAttribute&&node.getAttribute("id")||node.id}}function morphdomFactory(morphAttrs){return function morphdom(fromNode,toNode,options){if(!options){options={}}if(typeof toNode==="string"){if(fromNode.nodeName==="#document"||fromNode.nodeName==="HTML"||fromNode.nodeName==="BODY"){var toNodeHtml=toNode;toNode=doc.createElement("html");toNode.innerHTML=toNodeHtml}else{toNode=toElement(toNode)}}else if(toNode.nodeType===DOCUMENT_FRAGMENT_NODE$1){toNode=toNode.firstElementChild}var getNodeKey=options.getNodeKey||defaultGetNodeKey;var onBeforeNodeAdded=options.onBeforeNodeAdded||noop;var onNodeAdded=options.onNodeAdded||noop;var onBeforeElUpdated=options.onBeforeElUpdated||noop;var onElUpdated=options.onElUpdated||noop;var onBeforeNodeDiscarded=options.onBeforeNodeDiscarded||noop;var onNodeDiscarded=options.onNodeDiscarded||noop;var onBeforeElChildrenUpdated=options.onBeforeElChildrenUpdated||noop;var skipFromChildren=options.skipFromChildren||noop;var addChild=options.addChild||function(parent,child){return parent.appendChild(child)};var childrenOnly=options.childrenOnly===true;var fromNodesLookup=Object.create(null);var keyedRemovalList=[];function addKeyedRemoval(key){keyedRemovalList.push(key)}function walkDiscardedChildNodes(node,skipKeyedNodes){if(node.nodeType===ELEMENT_NODE){var curChild=node.firstChild;while(curChild){var key=undefined;if(skipKeyedNodes&&(key=getNodeKey(curChild))){addKeyedRemoval(key)}else{onNodeDiscarded(curChild);if(curChild.firstChild){walkDiscardedChildNodes(curChild,skipKeyedNodes)}}curChild=curChild.nextSibling}}}function removeNode(node,parentNode,skipKeyedNodes){if(onBeforeNodeDiscarded(node)===false){return}if(parentNode){parentNode.removeChild(node)}onNodeDiscarded(node);walkDiscardedChildNodes(node,skipKeyedNodes)}function indexTree(node){if(node.nodeType===ELEMENT_NODE||node.nodeType===DOCUMENT_FRAGMENT_NODE$1){var curChild=node.firstChild;while(curChild){var key=getNodeKey(curChild);if(key){fromNodesLookup[key]=curChild}indexTree(curChild);curChild=curChild.nextSibling}}}indexTree(fromNode);function handleNodeAdded(el){onNodeAdded(el);var curChild=el.firstChild;while(curChild){var nextSibling=curChild.nextSibling;var key=getNodeKey(curChild);if(key){var unmatchedFromEl=fromNodesLookup[key];if(unmatchedFromEl&&compareNodeNames(curChild,unmatchedFromEl)){curChild.parentNode.replaceChild(unmatchedFromEl,curChild);morphEl(unmatchedFromEl,curChild)}else{handleNodeAdded(curChild)}}else{handleNodeAdded(curChild)}curChild=nextSibling}}function cleanupFromEl(fromEl,curFromNodeChild,curFromNodeKey){while(curFromNodeChild){var fromNextSibling=curFromNodeChild.nextSibling;if(curFromNodeKey=getNodeKey(curFromNodeChild)){addKeyedRemoval(curFromNodeKey)}else{removeNode(curFromNodeChild,fromEl,true)}curFromNodeChild=fromNextSibling}}function morphEl(fromEl,toEl,childrenOnly){var toElKey=getNodeKey(toEl);if(toElKey){delete fromNodesLookup[toElKey]}if(!childrenOnly){var beforeUpdateResult=onBeforeElUpdated(fromEl,toEl);if(beforeUpdateResult===false){return}else if(beforeUpdateResult instanceof HTMLElement){fromEl=beforeUpdateResult;indexTree(fromEl)}morphAttrs(fromEl,toEl);onElUpdated(fromEl);if(onBeforeElChildrenUpdated(fromEl,toEl)===false){return}}if(fromEl.nodeName!=="TEXTAREA"){morphChildren(fromEl,toEl)}else{specialElHandlers.TEXTAREA(fromEl,toEl)}}function morphChildren(fromEl,toEl){var skipFrom=skipFromChildren(fromEl,toEl);var curToNodeChild=toEl.firstChild;var curFromNodeChild=fromEl.firstChild;var curToNodeKey;var curFromNodeKey;var fromNextSibling;var toNextSibling;var matchingFromEl;outer:while(curToNodeChild){toNextSibling=curToNodeChild.nextSibling;curToNodeKey=getNodeKey(curToNodeChild);while(!skipFrom&&curFromNodeChild){fromNextSibling=curFromNodeChild.nextSibling;if(curToNodeChild.isSameNode&&curToNodeChild.isSameNode(curFromNodeChild)){curToNodeChild=toNextSibling;curFromNodeChild=fromNextSibling;continue outer}curFromNodeKey=getNodeKey(curFromNodeChild);var curFromNodeType=curFromNodeChild.nodeType;var isCompatible=undefined;if(curFromNodeType===curToNodeChild.nodeType){if(curFromNodeType===ELEMENT_NODE){if(curToNodeKey){if(curToNodeKey!==curFromNodeKey){if(matchingFromEl=fromNodesLookup[curToNodeKey]){if(fromNextSibling===matchingFromEl){isCompatible=false}else{fromEl.insertBefore(matchingFromEl,curFromNodeChild);if(curFromNodeKey){addKeyedRemoval(curFromNodeKey)}else{removeNode(curFromNodeChild,fromEl,true)}curFromNodeChild=matchingFromEl;curFromNodeKey=getNodeKey(curFromNodeChild)}}else{isCompatible=false}}}else if(curFromNodeKey){isCompatible=false}isCompatible=isCompatible!==false&&compareNodeNames(curFromNodeChild,curToNodeChild);if(isCompatible){morphEl(curFromNodeChild,curToNodeChild)}}else if(curFromNodeType===TEXT_NODE||curFromNodeType==COMMENT_NODE){isCompatible=true;if(curFromNodeChild.nodeValue!==curToNodeChild.nodeValue){curFromNodeChild.nodeValue=curToNodeChild.nodeValue}}}if(isCompatible){curToNodeChild=toNextSibling;curFromNodeChild=fromNextSibling;continue outer}if(curFromNodeKey){addKeyedRemoval(curFromNodeKey)}else{removeNode(curFromNodeChild,fromEl,true)}curFromNodeChild=fromNextSibling}if(curToNodeKey&&(matchingFromEl=fromNodesLookup[curToNodeKey])&&compareNodeNames(matchingFromEl,curToNodeChild)){if(!skipFrom){addChild(fromEl,matchingFromEl)}morphEl(matchingFromEl,curToNodeChild)}else{var onBeforeNodeAddedResult=onBeforeNodeAdded(curToNodeChild);if(onBeforeNodeAddedResult!==false){if(onBeforeNodeAddedResult){curToNodeChild=onBeforeNodeAddedResult}if(curToNodeChild.actualize){curToNodeChild=curToNodeChild.actualize(fromEl.ownerDocument||doc)}addChild(fromEl,curToNodeChild);handleNodeAdded(curToNodeChild)}}curToNodeChild=toNextSibling;curFromNodeChild=fromNextSibling}cleanupFromEl(fromEl,curFromNodeChild,curFromNodeKey);var specialElHandler=specialElHandlers[fromEl.nodeName];if(specialElHandler){specialElHandler(fromEl,toEl)}}var morphedNode=fromNode;var morphedNodeType=morphedNode.nodeType;var toNodeType=toNode.nodeType;if(!childrenOnly){if(morphedNodeType===ELEMENT_NODE){if(toNodeType===ELEMENT_NODE){if(!compareNodeNames(fromNode,toNode)){onNodeDiscarded(fromNode);morphedNode=moveChildren(fromNode,createElementNS(toNode.nodeName,toNode.namespaceURI))}}else{morphedNode=toNode}}else if(morphedNodeType===TEXT_NODE||morphedNodeType===COMMENT_NODE){if(toNodeType===morphedNodeType){if(morphedNode.nodeValue!==toNode.nodeValue){morphedNode.nodeValue=toNode.nodeValue}return morphedNode}else{morphedNode=toNode}}}if(morphedNode===toNode){onNodeDiscarded(fromNode)}else{if(toNode.isSameNode&&toNode.isSameNode(morphedNode)){return}morphEl(morphedNode,toNode,childrenOnly);if(keyedRemovalList){for(var i=0,len=keyedRemovalList.length;i<len;i++){var elToRemove=fromNodesLookup[keyedRemovalList[i]];if(elToRemove){removeNode(elToRemove,elToRemove.parentNode,false)}}}}if(!childrenOnly&&morphedNode!==fromNode&&fromNode.parentNode){if(morphedNode.actualize){morphedNode=morphedNode.actualize(fromNode.ownerDocument||doc)}fromNode.parentNode.replaceChild(morphedNode,fromNode)}return morphedNode}}var morphdom=morphdomFactory(morphAttrs);return morphdom});</script>
+<script>
+var SCREENS={};
+var PROPS={"Login": {}, "Main": {"rol": "jefatura"}, "CrearCurso": {"autor": "admin", "modo": "crear"}, "Curso": {}};
+class DCLogic{constructor(props){this.props=props||{};this.state={};}setState(o){if(typeof o==="function")o=o(this.state);Object.assign(this.state,o||{});scheduleRender();}}
+</script>
+<script>
+SCREENS["Login"]=(function(){
+class Component extends DCLogic {
+  renderVals() {
+    return {};
+  }
+}
+
+return Component;})();
+SCREENS["Main"]=(function(){
+class Component extends DCLogic {
+  constructor(props) {
+    super(props);
+    this.state = { tab: 'cursos', sub: 'avances', asub: 'bandeja', unidad: 'directo', cat: 'todos', insc: { excel: true }, propEnviada: false, asignado: false, conPlazo: true, showAdd: false, inactivos: { u6: true }, modo: '', vis: 'todos', marcar: false, viewAs: null, resueltos: {} };
+  }
+  renderVals() {
+    const s = this.state;
+    const baseRol = s.rolDemo || (this.props.rol ?? 'jefatura');
+    const rolesDemo = [['trabajador', 'Trabajador'], ['jefatura', 'Jefatura'], ['gerente', 'Gerente'], ['visualizador', 'Visualizador'], ['admin', 'Administradora']].map(([k, l]) => {
+      const on = !s.viewAs && baseRol === k;
+      return { l: l, on: on ? 'true' : 'false', bg: on ? '#0A2245' : '#FFFFFF', fg: on ? '#FFFFFF' : '#0A2245', bd: on ? '#0A2245' : '#9AA6B5', go: () => this.setState({ rolDemo: k, viewAs: null, tab: k === 'admin' ? 'admin' : 'cursos', unidad: 'directo' }) };
+    });
+    const rol = s.viewAs ? s.viewAs.rol : baseRol;
+    const set = (o) => () => this.setState(o);
+    const personas = {
+      trabajador: { nombre: 'Camila Rojas', first: 'Camila', ini: 'CR', cargo: 'Guest Service', unidad: 'Edificio Nativo', jefe: 'Andrés Soto, Building Manager' },
+      jefatura: { nombre: 'Andrés Soto', first: 'Andrés', ini: 'AS', cargo: 'Building Manager', unidad: 'Edificio Nativo', jefe: 'Marcela Vidal, Gerente de Operaciones' },
+      gerente: { nombre: 'Marcela Vidal', first: 'Marcela', ini: 'MV', cargo: 'Gerente de Operaciones', unidad: 'Gerencia de Operaciones', jefe: 'Gerencia General' },
+      visualizador: { nombre: 'Paula Herrera', first: 'Paula', ini: 'PH', cargo: 'People Partner', unidad: 'Gerencia de RRHH', jefe: 'Gerencia de RRHH' },
+      admin: { nombre: 'Josefina', first: 'Josefina', ini: 'JO', cargo: 'HR Business Partner · Administradora', unidad: 'Gerencia de RRHH', jefe: 'Gerencia General' }
+    };
+    const p0 = personas[rol] || personas.jefatura;
+    const p = s.viewAs ? Object.assign({}, p0, { nombre: s.viewAs.n, first: s.viewAs.n.split(' ')[0], ini: s.viewAs.n.split(' ').map((w) => w[0]).join('').slice(0, 2) }) : p0;
+    const rolNombre = { trabajador: 'trabajador', jefatura: 'jefatura', gerente: 'gerente', visualizador: 'visualizador', admin: 'administrador' };
+
+    const keys = [['cursos', 'Mis cursos'], ['explorar', 'Explorador de cursos']];
+    if (rol !== 'admin') keys.push(['proponer', 'Proponer cursos']);
+    if (rol === 'jefatura' || rol === 'gerente') keys.push(['equipo', 'Mi equipo']);
+    if (rol === 'visualizador') keys.push(['equipo', 'Seguimiento']);
+    if (rol === 'admin') keys.push(['admin', 'Administración']);
+    keys.push(['perfil', 'Mi perfil']);
+    let tab = s.tab;
+    if (!keys.some((k) => k[0] === tab)) tab = 'cursos';
+    const tabs = keys.map(([k, l]) => ({ label: l, go: set({ tab: k }), border: tab === k ? '#92C9EB' : 'transparent', color: tab === k ? '#FFFFFF' : '#C9D3E0', weight: tab === k ? '700' : '400', current: tab === k ? 'page' : 'false' }));
+
+    const SEM = {
+      ok: { l: 'Al día', bg: '#007B0C', fg: '#FFFFFF' },
+      warn: { l: 'Por vencer', bg: '#FFD972', fg: '#0A2245' },
+      late: { l: 'Vencido', bg: '#9E3B2E', fg: '#FFFFFF' },
+      done: { l: 'Completado', bg: '#0A2245', fg: '#FFFFFF' },
+      none: { l: 'Sin fecha límite', bg: '#F5EBDC', fg: '#0A2245' }
+    };
+    const prep = (c) => Object.assign({}, c, { sem: SEM[c.k], pw: c.p + '%', cta: c.p > 0 ? 'Continuar' : 'Comenzar' });
+    const asignados = [
+      { t: 'Inducción Greystar', meta: '5 módulos · 50 min', p: 80, plazo: 'Vence el 10 de octubre', k: 'warn', thumb: '#0A2245', ink: '#92C9EB' },
+      { t: 'Prevención de riesgos: ODI', meta: '4 módulos · 40 min', p: 40, plazo: 'Venció el 5 de octubre', k: 'late', thumb: '#0077D4', ink: '#FFFFFF' },
+      { t: 'Atención al residente', meta: '4 módulos · 45 min', p: 20, plazo: 'Vence el 30 de octubre', k: 'ok', thumb: '#92C9EB', ink: '#0A2245' }
+    ].map(prep);
+    const inscritos = [
+      { t: 'Excel básico para operaciones', meta: '6 módulos · 60 min · Sin fecha límite', p: 50, k: 'none', thumb: '#F5EBDC', ink: '#0A2245' }
+    ].map(prep);
+    const completadosAsig = [{ p: 100 }];
+    const todosAsig = asignados.concat(completadosAsig);
+    const asigPct = Math.round(todosAsig.reduce((a, c) => a + c.p, 0) / todosAsig.length);
+    const asig = { pw: asigPct + '%', txt: 'Promedio de los ' + todosAsig.length + ' cursos que te asignaron: ' + completadosAsig.length + ' completado y ' + asignados.length + ' en curso. Los cursos que tomas por tu cuenta no cuentan aquí.' };
+    const res = { curso: asignados.length + inscritos.length, vencer: asignados.filter((c) => c.k === 'warn').length, vencidos: asignados.filter((c) => c.k === 'late').length };
+
+    const catDefs = [['todos', 'Todos'], ['residente', 'Atención al residente'], ['seguridad', 'Seguridad'], ['cultura', 'Cultura'], ['herramientas', 'Herramientas']];
+    const cats = catDefs.map(([k, l]) => ({ l: l, go: set({ cat: k }), on: s.cat === k ? 'true' : 'false', bg: s.cat === k ? '#0A2245' : '#FFFFFF', fg: s.cat === k ? '#FFFFFF' : '#0A2245', bd: s.cat === k ? '#0A2245' : '#9AA6B5' }));
+    const cat = [
+      { id: 'atencion', t: 'Atención al residente', cat: 'residente', d: 'Cómo recibir, escuchar y resolver lo que necesita cada residente.', meta: '4 módulos · 45 min', v: 'todos' },
+      { id: 'reclamos', t: 'Manejo de reclamos difíciles', cat: 'residente', d: 'Herramientas para conversaciones tensas sin perder la calma.', meta: '3 módulos · 30 min', v: 'todos' },
+      { id: 'emergencias', t: 'Protocolo de emergencias', cat: 'seguridad', d: 'Qué hacer ante incendio, sismo o cortes de agua y luz.', meta: '5 módulos · 40 min', v: 'todos' },
+      { id: 'cultura', t: 'Cultura Greystar', cat: 'cultura', d: 'Quiénes somos, cómo trabajamos y qué esperamos unos de otros.', meta: '3 módulos · 25 min', v: 'todos' },
+      { id: 'excel', t: 'Excel básico para operaciones', cat: 'herramientas', d: 'Planillas de turnos, inventarios y registros sin enredos.', meta: '6 módulos · 60 min', v: 'cargo' },
+      { id: 'escrita', t: 'Comunicación por escrito', cat: 'herramientas', d: 'Correos y avisos claros para residentes y equipo.', meta: '2 módulos · 20 min', v: 'todos' }
+    ];
+    const catalogo = cat.filter((c) => s.cat === 'todos' || c.cat === s.cat).map((c) => {
+      const on = !!s.insc[c.id];
+      return Object.assign({}, c, {
+        vl: c.v === 'todos' ? 'Para todos' : 'Para tu cargo', vbg: c.v === 'todos' ? '#92C9EB' : '#F5EBDC',
+        bl: on ? 'Inscrito' : 'Inscribirme', bbg: on ? '#FFFFFF' : '#0A2245', bfg: on ? '#007B0C' : '#FFFFFF', bbd: on ? '#007B0C' : '#0A2245',
+        toggle: () => { const n = Object.assign({}, this.state.insc); n[c.id] = !n[c.id]; this.setState({ insc: n }); }
+      });
+    });
+
+    const propuestas = [
+      { t: 'Primeros auxilios básicos', e: 'En revisión', bg: '#92C9EB', fg: '#0A2245', nota: 'Enviada el 1 de octubre' },
+      { t: 'Inglés para atención de residentes', e: 'Aceptada', bg: '#007B0C', fg: '#FFFFFF', nota: 'Josefina lo está preparando' },
+      { t: 'Coctelería', e: 'No aprobada', bg: '#B2B3B5', fg: '#0A2245', nota: 'No calza con el plan de capacitación de este año' }
+    ];
+
+    const isGerente = rol === 'gerente';
+    const isVisual = rol === 'visualizador';
+    const showUnits = isGerente || isVisual;
+    const uDefs = isVisual ? [['nativo', 'Edificio Nativo'], ['brooklyn', 'Edificio Brooklyn']] : [['directo', 'Mi equipo directo'], ['nativo', 'Edificio Nativo'], ['brooklyn', 'Edificio Brooklyn'], ['imu', 'Edificio IMU']];
+    const unidadSel = uDefs.some((u) => u[0] === s.unidad) ? s.unidad : uDefs[0][0];
+    const unidades = uDefs.map(([k, l]) => ({ l: l, go: set({ unidad: k, sub: 'avances' }), on: unidadSel === k ? 'true' : 'false', bg: unidadSel === k ? '#0A2245' : '#FFFFFF', fg: unidadSel === k ? '#FFFFFF' : '#0A2245', bd: unidadSel === k ? '#0A2245' : '#9AA6B5' }));
+    const readOnly = isVisual || (isGerente && unidadSel !== 'directo');
+    const uSel = uDefs.find((u) => u[0] === unidadSel);
+    const unidadLabel = isVisual ? uSel[1] + ' · unidad asignada a tu seguimiento' : isGerente ? (readOnly ? uSel[1] + ' · equipo de un Building Manager' : 'Gerencia de Operaciones · tu equipo directo') : 'Edificio Nativo · 6 personas';
+    const readOnlyMsg = isVisual ? 'Tienes acceso de visualizador a las unidades que te asignó la administración. Puedes revisar avances, sin editar.' : 'Estás viendo este equipo como gerente. Puedes revisar avances; las asignaciones y cambios los hace su jefatura directa.';
+    const equipoTitulo = isVisual ? 'Seguimiento' : 'Mi equipo';
+
+    const aDefs = [['bandeja', 'Bandeja'], ['cursos', 'Cursos'], ['rutas', 'Rutas'], ['personas', 'Personas'], ['estructura', 'Estructura'], ['reportes', 'Reportes']];
+    const adminTabs = aDefs.map(([k, l]) => ({ label: l, go: set({ asub: k }), border: s.asub === k ? '#0077D4' : 'transparent', weight: s.asub === k ? '700' : '400', current: s.asub === k ? 'page' : 'false' }));
+    const RES = {
+      rev: ['Aprobar y publicar', 'Publicado', 'Devolver con comentario', 'Devuelto'],
+      ayuda: ['Tomar solicitud', 'En preparación', 'Pedir más información', 'Esperando información'],
+      prop: ['Aceptar', 'Aceptada', 'No aprobar', 'No aprobada'],
+      pres: ['Aprobar y agregar al catálogo', 'Aprobada', 'Devolver con comentario', 'Devuelta']
+    };
+    const bandejaBase = [
+      { id: 'b1', k: 'rev', tipo: 'Curso en revisión', tbg: '#92C9EB', t: 'Apertura y cierre de turno', de: 'Andrés Soto · Edificio Nativo', f: 'Recibido el 6 de octubre' },
+      { id: 'b2', k: 'ayuda', tipo: 'Solicitud de ayuda', tbg: '#F5EBDC', t: 'Uso de piscina y quinchos', de: '[BM] · Edificio Brooklyn', f: 'Recibido el 5 de octubre' },
+      { id: 'b4', k: 'pres', tipo: 'Propuesta presencial', tbg: '#B2B3B5', t: 'Comunicación efectiva para Building Managers', de: 'Andrés Soto · Edificio Nativo · para todos los BM', f: 'Recibido el 4 de octubre' },
+      { id: 'b3', k: 'prop', tipo: 'Propuesta', tbg: '#E3E8EF', t: 'Primeros auxilios básicos', de: 'Camila Rojas · Guest Service', f: 'Recibido el 1 de octubre' }
+    ];
+    const bandeja = bandejaBase.map((b) => {
+      const r = RES[b.k];
+      const done = s.resueltos[b.id];
+      const mark = (v) => () => { const n = Object.assign({}, this.state.resueltos); n[b.id] = v; this.setState({ resueltos: n }); };
+      return Object.assign({}, b, { pendiente: !done, hecho: !!done, resultado: done || '', a1: r[0], a2: r[2], go1: mark(r[1]), go2: mark(r[3]) });
+    });
+    const pendientes = bandeja.filter((b) => b.pendiente).length;
+    const ST = { Publicado: ['#007B0C', '#FFFFFF'], 'En revisión': ['#92C9EB', '#0A2245'], Borrador: ['#B2B3B5', '#0A2245'], Archivado: ['#E3E8EF', '#0A2245'] };
+    const cursosAdmin = [
+      { t: 'Inducción Greystar', autor: 'Josefina', ed: 'Todos', v: 'Todos', e: 'Publicado', n: '48 personas', val: '4,6 / 5 · 31 respuestas' },
+      { t: 'Prevención de riesgos: ODI', autor: 'Josefina', ed: 'Todos', v: 'Todos', e: 'Publicado', n: '52 personas', val: '4,2 / 5 · 40 respuestas' },
+      { t: 'Excel básico para operaciones', autor: 'Josefina', ed: 'Todos', v: 'Guest Service, BMA', e: 'Publicado', n: '14 personas', val: '4,8 / 5 · 9 respuestas' },
+      { t: 'Uso de piscina y quinchos', autor: 'Josefina', ed: 'Brooklyn, Park, Soho', v: 'Guest Service, Aseo', e: 'Publicado', n: '9 personas', val: 'Sin respuestas aún' },
+      { t: 'Apertura y cierre de turno', autor: 'Andrés Soto', ed: 'Nativo', v: 'Guest Service', e: 'En revisión', n: '—', val: '—' },
+      { t: 'Protocolo de emergencias (versión anterior)', autor: 'Josefina', ed: 'Todos', v: 'Todos', e: 'Archivado', n: '31 personas', val: '3,9 / 5 · 25 respuestas' }
+    ].map((c) => Object.assign({}, c, { bg: ST[c.e][0], fg: ST[c.e][1] }));
+    const personasAdmin = [
+      { n: 'Camila Rojas', rut: '12.345.678-9', unidad: 'Edificio Nativo', cargo: 'Guest Service', r: 'Trabajador', vr: 'trabajador' },
+      { n: 'Andrés Soto', rut: '11.222.333-4', unidad: 'Edificio Nativo', cargo: 'Building Manager', r: 'Jefatura', vr: 'jefatura' },
+      { n: 'Marcela Vidal', rut: '10.111.222-3', unidad: 'Gerencia de Operaciones', cargo: 'Gerente de Operaciones', r: 'Gerente', vr: 'gerente' },
+      { n: 'Paula Herrera', rut: '15.444.555-6', unidad: 'Sigue: Nativo, Brooklyn', cargo: 'People Partner', r: 'Visualizador', vr: 'visualizador' },
+      { n: 'Valentina Pérez', rut: '14.567.890-1', unidad: 'Edificio Nativo', cargo: 'Aseo', r: 'Trabajador', vr: 'trabajador' }
+    ].map((x) => Object.assign({}, x, { editar: () => this.setState({ editP: x.n, edCargo: x.cargo, edUnidad: x.unidad }), verComo: () => this.setState({ viewAs: { rol: x.vr, n: x.n }, tab: 'cursos', unidad: 'directo' }) }));
+    const edificios = ['Nativo', 'Brooklyn', 'IMU', 'Bellet', 'Holley', 'Spot NK', 'Spot R', 'Boldo', 'Central', 'Park', 'Soho'];
+    const estructura = [
+      { n: 'Gerencia de Operaciones', j: 'Marcela Vidal', hijos: edificios.map((e) => ({ n: 'Edificio ' + e, j: e === 'Nativo' ? 'Andrés Soto (BM) · Francisca Araya (BMA)' : '[BM] · [BMA]' })) },
+      { n: 'Gerencia Comercial', j: '[Gerente]', hijos: [{ n: 'Equipo de ventas', j: '[Jefe de ventas]' }] },
+      { n: 'Gerencia de Finanzas', j: '[Gerente]', hijos: [] },
+      { n: 'Gerencia de RRHH', j: '[Gerente]', hijos: [] }
+    ];
+    const pick = (key, id) => () => { const n = Object.assign({}, this.state[key]); n[id] = !n[id]; const o = {}; o[key] = n; this.setState(o); };
+    const edLista = edificios.map((e) => 'Edificio ' + e).concat(['Oficina central']);
+    const edSel = s.edSel || {};
+    const cgLista = ['Guest Service', 'Aseo', 'Mantención', 'Building Manager Assistant', 'Building Manager', 'Cargos de oficina central'];
+    const cgSel = s.cgSel || {};
+    const edTodos = s.edTodos !== false;
+    const cgTodos = s.cgTodos !== false;
+    const edOpciones = edLista.map((l) => ({ l: l, on: !!edSel[l], toggle: pick('edSel', l) }));
+    const cgOpciones = cgLista.map((l) => ({ l: l, on: !!cgSel[l], toggle: pick('cgSel', l) }));
+    const edElegidos = edLista.filter((l) => edSel[l]);
+    const cgElegidos = cgLista.filter((l) => cgSel[l]);
+    const txtEd = edTodos ? 'todos los edificios y la oficina central' : (edElegidos.length ? edElegidos.join(', ') : 'ningún edificio elegido aún');
+    const txtCg = cgTodos ? 'todos los cargos' : (cgElegidos.length ? cgElegidos.join(', ') : 'ningún cargo elegido aún');
+    const alcance = txtCg + ' de ' + txtEd;
+    const repVistaSel = s.repVista || 'persona';
+    const repVistas = [['persona', 'Por persona'], ['unidad', 'Por unidad']].map(([k, l]) => ({ l: l, go: set({ repVista: k }), on: repVistaSel === k ? 'true' : 'false', bg: repVistaSel === k ? '#0A2245' : '#FFFFFF', fg: repVistaSel === k ? '#FFFFFF' : '#0A2245', bd: repVistaSel === k ? '#0A2245' : '#9AA6B5' }));
+    const C = (t, origen, plazo, p, k) => ({ t: t, origen: origen, plazo: plazo, p: p, k: k });
+    const repBase = [
+      { id: 'r1', n: 'Camila Rojas', unidad: 'Edificio Nativo', cargo: 'Guest Service', cursos: [C('Inducción Greystar', 'Asignado', 'Vence el 10 oct', 80, 'warn'), C('Prevención de riesgos: ODI', 'Asignado', 'Venció el 5 oct', 40, 'late'), C('Atención al residente', 'Asignado', 'Vence el 30 oct', 20, 'ok'), C('Excel básico para operaciones', 'Inscrito', 'Sin fecha', 50, 'none'), C('Prevención del acoso laboral (Ley Karin)', 'Asignado', 'Terminado el 20 sep', 100, 'done')] },
+      { id: 'r2', n: 'Valentina Pérez', unidad: 'Edificio Nativo', cargo: 'Aseo', cursos: [C('Prevención de riesgos: ODI', 'Asignado', 'Venció el 5 oct', 30, 'late'), C('Inducción Greystar', 'Asignado', 'Terminado el 18 sep', 100, 'done'), C('Protocolo de emergencias', 'Asignado', 'Vence el 30 oct', 0, 'ok')] },
+      { id: 'r3', n: 'Jorge Fuentes', unidad: 'Edificio Brooklyn', cargo: 'Mantención', cursos: [C('Protocolo de emergencias', 'Asignado', 'Vence el 30 oct', 60, 'ok'), C('Prevención de riesgos: ODI', 'Asignado', 'Terminado el 22 sep', 100, 'done'), C('Excel básico para operaciones', 'Inscrito', 'Sin fecha', 10, 'none'), C('Inducción Greystar', 'Asignado', 'Vence el 10 oct', 90, 'warn')] },
+      { id: 'r4', n: 'Francisca Araya', unidad: 'Edificio Nativo', cargo: 'Building Manager Assistant', cursos: [C('Atención al residente', 'Asignado', 'Sin fecha', 0, 'none'), C('Comunicación por escrito', 'Inscrito', 'Terminado el 2 oct', 100, 'done')] },
+      { id: 'r5', n: 'Diego Muñoz', unidad: 'Edificio Nativo', cargo: 'Guest Service', cursos: [C('Inducción Greystar', 'Asignado', 'Terminado el 12 sep', 100, 'done'), C('Prevención de riesgos: ODI', 'Asignado', 'Terminado el 25 sep', 100, 'done'), C('Atención al residente', 'Asignado', 'Vence el 30 oct', 60, 'ok')] },
+      { id: 'r6', n: 'Andrés Soto', unidad: 'Edificio Nativo', cargo: 'Building Manager', cursos: [C('Inducción Greystar', 'Asignado', 'Terminado el 10 sep', 100, 'done'), C('Prevención de riesgos: ODI', 'Asignado', 'Terminado el 15 sep', 100, 'done'), C('Cultura Greystar', 'Inscrito', 'Sin fecha', 50, 'none')] }
+    ];
+    const abiertos = s.abiertos || {};
+    const repPersonas = repBase.map((r) => {
+      const avg = Math.round(r.cursos.reduce((a, c) => a + c.p, 0) / r.cursos.length);
+      const venc = r.cursos.filter((c) => c.k === 'late').length;
+      const ab = !!abiertos[r.id];
+      return {
+        n: r.n, unidad: r.unidad, cargo: r.cargo, total: String(r.cursos.length), avg: avg, pw: avg + '%',
+        venc: String(venc), vbg: venc ? '#9E3B2E' : '#E3E8EF', vfg: venc ? '#FFFFFF' : '#0A2245',
+        abierto: ab, exp: ab ? 'true' : 'false', flecha: ab ? '−' : '+', rowBg: ab ? '#FAFBFC' : '#FFFFFF',
+        toggle: () => { const n = Object.assign({}, this.state.abiertos || {}); n[r.id] = !n[r.id]; this.setState({ abiertos: n }); },
+        cursos: r.cursos.map((c) => Object.assign({}, c, { pw: c.p + '%', sem: SEM[c.k] }))
+      };
+    }).sort((a, b) => a.avg - b.avg);
+    const extra = [
+      { id: 'r7', n: 'Tomás Reyes', unidad: 'Edificio Brooklyn', cargo: 'Building Manager', cursos: [C('Inducción Greystar', 'Asignado', 'Terminado el 9 sep', 100, 'done'), C('Prevención de riesgos: ODI', 'Asignado', 'Vence el 10 oct', 70, 'warn'), C('Manejo de reclamos difíciles', 'Asignado', 'Vence el 30 oct', 30, 'ok')] },
+      { id: 'r8', n: 'Rocío Silva', unidad: 'Edificio IMU', cargo: 'Aseo', cursos: [C('Inducción Greystar', 'Asignado', 'Venció el 1 oct', 50, 'late'), C('Prevención de riesgos: ODI', 'Asignado', 'Vence el 10 oct', 20, 'warn')] }
+    ];
+    const todasPersonas = repBase.concat(extra);
+    const filtroEq = (r) => {
+      if (rol === 'jefatura') return r.unidad === 'Edificio Nativo' && r.cargo !== 'Building Manager';
+      if (unidadSel === 'directo') return r.cargo === 'Building Manager';
+      const nom = { nativo: 'Edificio Nativo', brooklyn: 'Edificio Brooklyn', imu: 'Edificio IMU' }[unidadSel];
+      return r.unidad === nom && r.cargo !== 'Building Manager';
+    };
+    const eqPersonas = todasPersonas.filter(filtroEq).map((r) => {
+      const avg = Math.round(r.cursos.reduce((a, c) => a + c.p, 0) / r.cursos.length);
+      const venc = r.cursos.filter((c) => c.k === 'late').length;
+      const ab = !!abiertos['eq-' + r.id];
+      return {
+        n: r.n, unidad: r.unidad, cargo: r.cargo, total: String(r.cursos.length), avg: avg, pw: avg + '%',
+        venc: String(venc), vbg: venc ? '#9E3B2E' : '#E3E8EF', vfg: venc ? '#FFFFFF' : '#0A2245',
+        abierto: ab, exp: ab ? 'true' : 'false', flecha: ab ? '−' : '+', rowBg: ab ? '#FAFBFC' : '#FFFFFF',
+        toggle: () => { const n = Object.assign({}, this.state.abiertos || {}); n['eq-' + r.id] = !n['eq-' + r.id]; this.setState({ abiertos: n }); },
+        cursos: r.cursos.map((c) => Object.assign({}, c, { pw: c.p + '%', sem: SEM[c.k] }))
+      };
+    }).sort((a, b) => a.avg - b.avg);
+    const eqKpi = {
+      avance: eqPersonas.length ? Math.round(eqPersonas.reduce((a, r) => a + r.avg, 0) / eqPersonas.length) + '%' : '—',
+      personas: String(eqPersonas.length),
+      vencidos: String(eqPersonas.filter((r) => r.venc !== '0').length)
+    };
+    const catPresBase = [
+      { t: 'Rescate de personas atrapadas en ascensores', rel: '[Empresa de mantención de ascensores]', dur: '3 horas', para: 'Guest Service y Mantención' },
+      { t: 'Uso de extintores', rel: 'Prevencionista de riesgos', dur: '1,5 horas', para: 'Todos los cargos' },
+      { t: 'Primeros auxilios básicos', rel: '[Organismo administrador de la ley]', dur: '4 horas', para: 'Todos los cargos' },
+      { t: 'Manejo seguro de productos de aseo', rel: 'Prevencionista de riesgos', dur: '1 hora', para: 'Aseo' }
+    ];
+    const catPres = catPresBase.map((k, i) => ({ t: k.t, i: String(i) }));
+    const presSel = catPresBase[s.presIdx || 0];
+    const presModo = s.presModo || 'conv';
+    const presPara = s.presPara || 'equipo';
+    const pres = {
+      conv: presModo === 'conv', prop: presModo === 'prop',
+      convOn: presModo === 'conv' ? 'true' : 'false', propOn: presModo === 'prop' ? 'true' : 'false',
+      convBd: presModo === 'conv' ? '#0077D4' : '#DDE3EA', propBd: presModo === 'prop' ? '#0077D4' : '#DDE3EA',
+      miEquipo: presPara === 'equipo', otro: presPara === 'otro', enviada: !!s.presEnviada,
+      elegir: (e) => this.setState({ presIdx: Number(e.target.value) })
+    };
+    const presPropuestas = (s.presEnviada ? [{ t: 'Nueva propuesta', e: 'En revisión', bg: '#92C9EB', fg: '#0A2245', nota: 'Enviada hoy' }] : []).concat([
+      { t: 'Comunicación efectiva para Building Managers', e: 'Aprobada', bg: '#007B0C', fg: '#FFFFFF', nota: 'Josefina la agregó al catálogo · primera sesión en noviembre' },
+      { t: 'Atención a residentes con discapacidad', e: 'En revisión', bg: '#92C9EB', fg: '#0A2245', nota: 'Enviada el 3 de octubre' }
+    ]);
+    const CUR = { ind: ['Inducción Greystar', '50 min'], odi: ['Prevención de riesgos: ODI', '40 min'], ate: ['Atención al residente', '45 min'], eme: ['Protocolo de emergencias', '40 min'], rec: ['Manejo de reclamos difíciles', '30 min'], kar: ['Prevención del acoso laboral (Ley Karin)', '35 min'], aseo: ['Uso seguro de productos de aseo', '25 min'], mant: ['Mantención preventiva básica', '60 min'], lid: ['Liderazgo de equipos operativos', '90 min'], pres: ['Presupuesto del edificio', '60 min'], esc: ['Comunicación por escrito', '20 min'], xls: ['Excel básico para operaciones', '60 min'], cul: ['Cultura Greystar', '25 min'] };
+    const RUTAS = [
+      { id: 'gs', n: 'Ruta Guest Service', cargo: 'Guest Service', c: ['ind', 'odi', 'kar', 'ate', 'eme', 'rec'], personas: 18 },
+      { id: 'aseo', n: 'Ruta Aseo', cargo: 'Aseo', c: ['ind', 'odi', 'kar', 'aseo', 'eme'], personas: 14 },
+      { id: 'mant', n: 'Ruta Mantención', cargo: 'Mantención', c: ['ind', 'odi', 'kar', 'mant', 'eme'], personas: 9 },
+      { id: 'bma', n: 'Ruta Building Manager Assistant', cargo: 'Building Manager Assistant', c: ['ind', 'odi', 'kar', 'ate', 'rec', 'xls'], personas: 11 },
+      { id: 'bm', n: 'Ruta Building Manager', cargo: 'Building Manager', c: ['ind', 'odi', 'kar', 'lid', 'pres', 'rec'], personas: 11 },
+      { id: 'lid', n: 'Ruta de liderazgo', cargo: '', c: ['lid', 'esc', 'rec'], personas: 6 },
+      { id: 'dig', n: 'Ruta de herramientas digitales', cargo: '', c: ['xls', 'esc'], personas: 4 }
+    ];
+    const rutaDeCargo = (cargo) => RUTAS.find((r) => r.cargo === cargo);
+    const rutaSelId = s.rutaSel || 'gs';
+    const rutasLista = RUTAS.map((r) => ({ n: r.n, tipo: r.cargo ? 'Ruta de cargo' : 'Ruta complementaria', tbg: r.cargo ? '#92C9EB' : '#F5EBDC', meta: r.c.length + ' cursos · ' + r.personas + ' personas la tienen', on: r.id === rutaSelId ? 'true' : 'false', bd: r.id === rutaSelId ? '#0077D4' : '#DDE3EA', go: set({ rutaSel: r.id }) }));
+    const rs = RUTAS.find((r) => r.id === rutaSelId);
+    const rutaSel = { n: rs.n, tipo: rs.cargo ? 'Ruta de cargo: ' + rs.cargo : 'Ruta complementaria', cursos: rs.c.map((k, i) => ({ n: i + 1, t: CUR[k][0], d: CUR[k][1] })), nota: rs.cargo ? 'Si agregas un curso a esta ruta, la plataforma te preguntará si también se lo asigna a las ' + rs.personas + ' personas que ya la tienen.' : 'Esta ruta se ofrece como opción adicional al crear o editar a una persona.' };
+
+    const npCargo = s.npCargo || 'Guest Service';
+    const rc = rutaDeCargo(npCargo);
+    const npOff = s.npOff || {};
+    const npOtra = s.npOtra || '';
+    const npOtraOff = s.npOtraOff || {};
+    const ro = RUTAS.find((r) => r.id === npOtra);
+    const npRutaCargo = s.npRutaCargo !== false && !!rc;
+    const toggleIn = (key, k) => () => { const n = Object.assign({}, this.state[key] || {}); n[k] = !n[k]; const o = {}; o[key] = n; this.setState(o); };
+    const cursosCargo = rc ? rc.c.map((k) => ({ t: CUR[k][0], d: CUR[k][1], on: !npOff[k], toggle: toggleIn('npOff', k) })) : [];
+    const cursosOtra = ro ? ro.c.filter((k) => !(npRutaCargo && rc && rc.c.includes(k))).map((k) => ({ t: CUR[k][0], d: CUR[k][1], on: !npOtraOff[k], toggle: toggleIn('npOtraOff', k) })) : [];
+    const nC = npRutaCargo ? cursosCargo.filter((c) => c.on).length : 0;
+    const nO = cursosOtra.filter((c) => c.on).length;
+    const allOn = (arr) => arr.every((c) => c.on);
+    const np = {
+      cargo: npCargo, setCargo: (e) => this.setState({ npCargo: e.target.value, npOff: {} }),
+      rutaCargo: npRutaCargo, rutaCargoNombre: rc ? rc.n : 'este cargo no tiene ruta',
+      toggleRutaCargo: () => this.setState({ npRutaCargo: this.state.npRutaCargo === false }),
+      cursosCargo, cargoTxt: nC + ' de ' + cursosCargo.length + ' cursos elegidos',
+      todosCargoLbl: allOn(cursosCargo) ? 'Quitar todos' : 'Elegir todos',
+      todosCargo: () => { const n = {}; if (allOn(cursosCargo)) rc.c.forEach((k) => { n[k] = true; }); this.setState({ npOff: n }); },
+      otras: RUTAS.filter((r) => !rc || r.id !== rc.id).map((r) => ({ id: r.id, n: r.n })),
+      otra: npOtra, elegirOtra: (e) => this.setState({ npOtra: e.target.value, npOtraOff: {} }),
+      hayOtra: !!ro, cursosOtra, otraTxt: ro ? ro.n + ' · ' + nO + ' de ' + cursosOtra.length + ' cursos elegidos (no repite los de su cargo)' : '',
+      todosOtraLbl: allOn(cursosOtra) ? 'Quitar todos' : 'Elegir todos',
+      todosOtra: () => { const n = {}; if (allOn(cursosOtra) && ro) ro.c.forEach((k) => { n[k] = true; }); this.setState({ npOtraOff: n }); },
+      total: (nC + nO) + (nC + nO === 1 ? ' curso' : ' cursos')
+    };
+
+    const edBase = s.editP ? personasAdmin.find((x) => x.n === s.editP) : null;
+    let ed = {};
+    if (edBase) {
+      const hist = (todasPersonas.find((r) => r.n === edBase.n) || { cursos: [] }).cursos;
+      const cargoNuevo = s.edCargo || edBase.cargo;
+      const unidadNueva = s.edUnidad || edBase.unidad;
+      const rn = rutaDeCargo(cargoNuevo);
+      const cambiaCargo = cargoNuevo !== edBase.cargo;
+      const cursosNuevos = rn ? rn.c.map((k) => {
+        const h = hist.find((c) => c.t === CUR[k][0]);
+        if (h && h.p === 100) return { t: CUR[k][0], estado: 'Ya lo hizo · no se repite', bg: '#0A2245', fg: '#FFFFFF' };
+        if (h) return { t: CUR[k][0], estado: 'Ya lo tiene · sigue su avance', bg: '#92C9EB', fg: '#0A2245' };
+        return { t: CUR[k][0], estado: 'Se le asigna', bg: '#007B0C', fg: '#FFFFFF' };
+      }) : [];
+      ed = {
+        n: edBase.n, unidad: unidadNueva, cargo: cargoNuevo,
+        setUnidad: (e) => this.setState({ edUnidad: e.target.value }), setCargo: (e) => this.setState({ edCargo: e.target.value }),
+        cambiaUnidad: unidadNueva !== edBase.unidad, cambiaCargo: cambiaCargo && !!rn,
+        sinCambios: unidadNueva === edBase.unidad && !cambiaCargo,
+        nActuales: hist.length, rutaNueva: rn ? rn.n : '', cursos: cursosNuevos
+      };
+    }
+    const reporte = [
+      { u: 'Edificio Nativo', n: '6', a: '54%', v: '1' },
+      { u: 'Edificio Brooklyn', n: '7', a: '61%', v: '0' },
+      { u: 'Edificio IMU', n: '5', a: '38%', v: '2' },
+      { u: 'Oficina central', n: '12', a: '72%', v: '0' }
+    ];
+    const sub = readOnly ? 'avances' : s.sub;
+    const subDefs = [['avances', 'Avances'], ['asignar', 'Asignar cursos'], ['usuarios', 'Usuarios'], ['crear', 'Crear curso'], ['presencial', 'Capacitación presencial']];
+    const subtabs = subDefs.map(([k, l]) => ({ label: l, go: set({ sub: k }), border: sub === k ? '#0077D4' : 'transparent', weight: sub === k ? '700' : '400', current: sub === k ? 'page' : 'false' }));
+
+    const equipo = [
+      { n: 'Camila Rojas', cargo: 'Guest Service', curso: 'Inducción Greystar', p: 80, k: 'warn' },
+      { n: 'Diego Muñoz', cargo: 'Guest Service', curso: 'Prevención de riesgos: ODI', p: 100, k: 'done' },
+      { n: 'Valentina Pérez', cargo: 'Aseo', curso: 'Prevención de riesgos: ODI', p: 30, k: 'late' },
+      { n: 'Jorge Fuentes', cargo: 'Mantención', curso: 'Protocolo de emergencias', p: 60, k: 'ok' },
+      { n: 'Francisca Araya', cargo: 'Building Manager Assistant', curso: 'Atención al residente', p: 0, k: 'none' }
+    ].map((r) => Object.assign({}, r, { sem: SEM[r.k], pw: r.p + '%' }));
+    const kpi = {
+      activos: equipo.filter((r) => r.k !== 'done').length,
+      vencidos: equipo.filter((r) => r.k === 'late').length,
+      promedio: Math.round(equipo.reduce((a, r) => a + r.p, 0) / equipo.length) + '%'
+    };
+
+    const uBase = [
+      { id: 'u1', n: 'Camila Rojas', rut: '12.345.678-9', cargo: 'Guest Service' },
+      { id: 'u2', n: 'Diego Muñoz', rut: '13.456.789-0', cargo: 'Guest Service' },
+      { id: 'u3', n: 'Valentina Pérez', rut: '14.567.890-1', cargo: 'Aseo' },
+      { id: 'u4', n: 'Jorge Fuentes', rut: '15.678.901-2', cargo: 'Mantención' },
+      { id: 'u5', n: 'Francisca Araya', rut: '16.789.012-3', cargo: 'Building Manager Assistant' },
+      { id: 'u6', n: 'Matías Contreras', rut: '17.890.123-4', cargo: 'Aseo' }
+    ];
+    const usuarios = uBase.map((u) => {
+      const off = !!s.inactivos[u.id];
+      return Object.assign({}, u, {
+        e: off ? 'Desactivado' : 'Activo', ebg: off ? '#B2B3B5' : '#007B0C', efg: off ? '#0A2245' : '#FFFFFF',
+        ink: off ? '#5E6B7D' : '#0A2245', accion: off ? 'Reactivar' : 'Desactivar',
+        toggle: () => { const n = Object.assign({}, this.state.inactivos); n[u.id] = !n[u.id]; this.setState({ inactivos: n }); }
+      });
+    });
+
+    const modo = {
+      ayuda: s.modo === 'ayuda', solo: s.modo === 'solo',
+      ayudaOn: s.modo === 'ayuda' ? 'true' : 'false', soloOn: s.modo === 'solo' ? 'true' : 'false',
+      ayudaBd: s.modo === 'ayuda' ? '#0077D4' : '#DDE3EA', soloBd: s.modo === 'solo' ? '#0077D4' : '#DDE3EA'
+    };
+    const creados = [
+      { t: 'Bienvenida al Edificio Nativo', e: 'Publicado', bg: '#007B0C', fg: '#FFFFFF', nota: '—' },
+      { t: 'Apertura y cierre de turno', e: 'En revisión', bg: '#92C9EB', fg: '#0A2245', nota: 'Esperando revisión de Josefina' },
+      { t: 'Uso del sistema de encomiendas', e: 'Devuelto', bg: '#FFD972', fg: '#0A2245', nota: 'Agregar un quiz al final del módulo 2' },
+      { t: 'Checklist de áreas comunes', e: 'Borrador', bg: '#B2B3B5', fg: '#0A2245', nota: '—' }
+    ];
+    const convocatorias = [
+      { t: 'Uso de extintores', f: '15 de octubre · 10:00', lugar: 'Sala de reuniones, Edificio Nativo', rel: 'Prevencionista de riesgos', conv: '5 convocados', estado: 'Pendiente de asistencia', bg: '#FFD972', fg: '#0A2245', pend: true },
+      { t: 'Charla de bienvenida Greystar', f: '22 de septiembre · 9:00', lugar: 'Oficina central', rel: 'Equipo de RRHH', conv: '5 convocados', estado: 'Asistencia: 4 de 5', bg: '#0A2245', fg: '#FFFFFF', pend: false }
+    ];
+
+    return {
+      p, tabs, res, asignados, inscritos, cats, catalogo, propuestas, unidades, unidadLabel, subtabs, equipo, kpi, usuarios, modo, creados, convocatorias,
+      realizados: [{ t: 'Prevención del acoso laboral (Ley Karin)', f: '20 de septiembre de 2026' }, { t: 'Inducción a Grey Skills', f: '15 de septiembre de 2026' }],
+      presenciales: [{ t: 'Charla de bienvenida Greystar', f: '22 de septiembre de 2026 · Oficina central' }],
+      isCursos: tab === 'cursos', isExplorar: tab === 'explorar', isProponer: tab === 'proponer', isEquipo: tab === 'equipo', isPerfil: tab === 'perfil',
+      isGerente, showUnits, readOnly, readOnlyMsg, equipoTitulo, showSubtabs: !readOnly,
+      isAdmin: tab === 'admin', adminTabs, bandeja, pendientes, cursosAdmin, personasAdmin, estructura, reporte,
+      aBandeja: s.asub === 'bandeja', aCursos: s.asub === 'cursos', aPersonas: s.asub === 'personas', aEstructura: s.asub === 'estructura', aReportes: s.asub === 'reportes',
+      viendoComo: !!s.viewAs, viewAsName: s.viewAs ? s.viewAs.n : '', viewAsRol: s.viewAs ? rolNombre[s.viewAs.rol] : '',
+      rutasLista, rutaSel, np, ed, editando: !!edBase, aRutas: s.asub === 'rutas',
+      cerrarEditar: () => this.setState({ editP: null }),
+      showAddAdmin: !!s.showAddAdmin, addAdminLbl: s.showAddAdmin ? 'Cerrar formulario' : 'Agregar persona',
+      toggleAddAdmin: () => this.setState({ showAddAdmin: !this.state.showAddAdmin, editP: null }),
+      catPres, presSel, pres, presPropuestas,
+      presConvocar: () => this.setState({ presModo: 'conv' }), presProponer: () => this.setState({ presModo: 'prop' }),
+      presMiEquipo: () => this.setState({ presPara: 'equipo' }), presOtro: () => this.setState({ presPara: 'otro' }),
+      presEnviar: () => this.setState({ presEnviada: true }),
+      eqPersonas, eqKpi, eqVacio: eqPersonas.length === 0, eqHay: eqPersonas.length > 0, rolesDemo, asig, repVistas, repPersonas, repPersona: repVistaSel === 'persona', repUnidad: repVistaSel === 'unidad',
+      salirVerComo: set({ viewAs: null, tab: 'admin', asub: 'personas' }),
+      crearAdmin: !!s.crearAdmin, crearAdminLabel: s.crearAdmin ? 'Cerrar formulario' : 'Crear curso',
+      toggleCrearAdmin: () => this.setState({ crearAdmin: !this.state.crearAdmin }),
+      edTodos, cgTodos, edElegir: !edTodos, cgElegir: !cgTodos, edOpciones, cgOpciones, alcance,
+      toggleEdTodos: () => this.setState({ edTodos: this.state.edTodos === false }),
+      toggleCgTodos: () => this.setState({ cgTodos: this.state.cgTodos === false }),
+      subAvances: sub === 'avances', subAsignar: sub === 'asignar', subUsuarios: sub === 'usuarios', subCrear: sub === 'crear', subPresencial: sub === 'presencial',
+      propEnviada: s.propEnviada, asignado: s.asignado, conPlazo: s.conPlazo, showAdd: s.showAdd, marcar: s.marcar,
+      vis: { todos: s.vis === 'todos', cargos: s.vis === 'cargos' },
+      addLabel: s.showAdd ? 'Cerrar formulario' : 'Agregar persona',
+      marcarLabel: s.marcar ? 'Ocultar asistencia' : 'Marcar asistencia',
+      goExplorar: set({ tab: 'explorar' }),
+      enviarProp: set({ propEnviada: true }),
+      asignar: set({ asignado: true }),
+      togglePlazo: () => this.setState({ conPlazo: !this.state.conPlazo }),
+      toggleAdd: () => this.setState({ showAdd: !this.state.showAdd }),
+      toggleMarcar: () => this.setState({ marcar: !this.state.marcar }),
+      modoAyuda: set({ modo: 'ayuda' }), modoSolo: set({ modo: 'solo' }),
+      visTodos: set({ vis: 'todos' }), visCargos: set({ vis: 'cargos' })
+    };
+  }
+}
+
+return Component;})();
+SCREENS["CrearCurso"]=(function(){
+class Component extends DCLogic {
+  constructor(props) {
+    super(props);
+    this.state = {
+      paso: 1, sel: 'm1', nid: 4, titulo: 'Protocolo de emergencias', portada: '#0A2245',
+      edTodos: true, cgTodos: true, edSel: {}, cgSel: {}, orden: 'sec', cert: true, enviado: false,
+      mods: [
+        { id: 'm1', tipo: 'video', t: 'Qué hacer ante un sismo', quiz: true, preguntas: [{ q: 'Durante un sismo, ¿qué es lo primero que debes hacer?', alts: ['Salir corriendo del edificio', 'Ubicarte en una zona de seguridad, lejos de ventanas', 'Usar el ascensor para bajar', 'Llamar a la administración'], ok: 1 }], items: [] },
+        { id: 'm2', tipo: 'documento', t: 'Plano de evacuación del edificio', quiz: false, preguntas: [], items: [] },
+        { id: 'm3', tipo: 'checklist', t: 'Revisión de extintores y red húmeda', quiz: false, preguntas: [], items: ['Extintores con carga vigente', 'Señalética de evacuación visible', 'Gabinete de red húmeda sin obstrucciones'] }
+      ]
+    };
+  }
+  upd(id, fn) {
+    const mods = this.state.mods.map((m) => m.id === id ? fn(JSON.parse(JSON.stringify(m))) : m);
+    this.setState({ mods: mods });
+  }
+  renderVals() {
+    const s = this.state;
+    const autor = s.autorDemo || (this.props.autor ?? 'admin');
+    const modo = s.modoDemo || (this.props.modo ?? 'crear');
+    const esAdmin = autor === 'admin';
+    const editando = modo === 'editar';
+    const btn = (l, on, go) => ({ l: l, on: on ? 'true' : 'false', bg: on ? '#0A2245' : '#FFFFFF', fg: on ? '#FFFFFF' : '#0A2245', bd: on ? '#0A2245' : '#9AA6B5', go: go });
+    const demo = [btn('Administradora', esAdmin, () => this.setState({ autorDemo: 'admin', enviado: false })), btn('Jefatura', !esAdmin, () => this.setState({ autorDemo: 'jefatura', enviado: false })), btn('Crear curso nuevo', !editando, () => this.setState({ modoDemo: 'crear', enviado: false })), btn('Editar curso publicado', editando, () => this.setState({ modoDemo: 'editar', enviado: false, paso: 4 }))];
+    const set = (o) => () => this.setState(o);
+    const TIPO = { video: ['Video', '#92C9EB'], documento: ['Documento', '#F5EBDC'], checklist: ['Checklist', '#E3E8EF'], politica: ['Política', '#B2B3B5'] };
+
+    const pDefs = ['Datos y público', 'Módulos', 'Configuración', 'Revisar y publicar'];
+    const pasos = pDefs.map((l, i) => {
+      const n = i + 1, cur = s.paso === n, done = n < s.paso;
+      return { n: n, l: l, go: set({ paso: n }), current: cur ? 'step' : 'false', bd: cur ? '#0077D4' : '#DDE3EA', bg: cur ? '#0077D4' : done ? '#0A2245' : '#E3E8EF', fg: cur || done ? '#FFFFFF' : '#0A2245', w: cur ? '700' : '400' };
+    });
+
+    const portadas = [['#0A2245', 'Navy'], ['#0077D4', 'Ocean'], ['#92C9EB', 'Sky'], ['#F5EBDC', 'Stucco']].map(([hex, l]) => ({ hex: hex, l: 'Portada ' + l, on: s.portada === hex ? 'true' : 'false', bd: s.portada === hex ? (hex === '#0077D4' ? '#0A2245' : '#0077D4') : 'transparent', go: set({ portada: hex }) }));
+
+    const pick = (key, id) => () => { const n = Object.assign({}, this.state[key]); n[id] = !n[id]; const o = {}; o[key] = n; this.setState(o); };
+    const edLista = ['Nativo', 'Brooklyn', 'IMU', 'Bellet', 'Holley', 'Spot NK', 'Spot R', 'Boldo', 'Central', 'Park', 'Soho'].map((e) => 'Edificio ' + e).concat(['Oficina central']);
+    const cgLista = ['Guest Service', 'Aseo', 'Mantención', 'Building Manager Assistant', 'Building Manager', 'Cargos de oficina central'];
+    const edOpciones = edLista.map((l) => ({ l: l, on: !!s.edSel[l], toggle: pick('edSel', l) }));
+    const cgOpciones = cgLista.map((l) => ({ l: l, on: !!s.cgSel[l], toggle: pick('cgSel', l) }));
+    const edEl = edLista.filter((l) => s.edSel[l]);
+    const cgEl = cgLista.filter((l) => s.cgSel[l]);
+    const txtEd = s.edTodos ? 'todos los edificios y la oficina central' : (edEl.length ? edEl.join(', ') : 'ningún edificio elegido aún');
+    const txtCg = s.cgTodos ? 'todos los cargos' : (cgEl.length ? cgEl.join(', ') : 'ningún cargo elegido aún');
+    const alcance = txtCg + ' de ' + txtEd;
+    const chipPublico = s.edTodos && s.cgTodos ? 'Para todos' : 'Para tu cargo';
+
+    const total = s.mods.length;
+    const move = (i, d) => () => { const a = this.state.mods.slice(); const j = i + d; const tmp = a[i]; a[i] = a[j]; a[j] = tmp; this.setState({ mods: a }); };
+    const mods = s.mods.map((m, i) => ({
+      n: i + 1, t: m.t, tl: TIPO[m.tipo][0], tbg: TIPO[m.tipo][1], quizL: m.quiz ? 'Con quiz' : 'Sin quiz',
+      bd: m.id === s.sel ? '#0077D4' : '#DDE3EA', select: set({ sel: m.id }),
+      noUp: i === 0, noDown: i === total - 1, up: move(i, -1), down: move(i, 1),
+      del: () => { const a = this.state.mods.filter((x) => x.id !== m.id); this.setState({ mods: a, sel: a.length ? a[0].id : '' }); }
+    }));
+    const add = (tipo, t) => () => { const id = 'm' + this.state.nid; const nuevo = { id: id, tipo: tipo, t: t, quiz: false, preguntas: [], items: tipo === 'checklist' ? [''] : [] }; this.setState({ mods: this.state.mods.concat([nuevo]), sel: id, nid: this.state.nid + 1 }); };
+
+    const mi = s.mods.findIndex((m) => m.id === s.sel);
+    const m = mi >= 0 ? s.mods[mi] : null;
+    let sel = {};
+    if (m) {
+      sel = {
+        n: mi + 1, t: m.t, tl: TIPO[m.tipo][0], tbg: TIPO[m.tipo][1], quiz: m.quiz,
+        isVideo: m.tipo === 'video', isDoc: m.tipo === 'documento', isCheck: m.tipo === 'checklist', isPol: m.tipo === 'politica',
+        setT: (e) => { const v = e.target.value; this.upd(m.id, (x) => { x.t = v; return x; }); },
+        toggleQuiz: () => this.upd(m.id, (x) => { x.quiz = !x.quiz; if (x.quiz && !x.preguntas.length) x.preguntas.push({ q: '', alts: ['', '', '', ''], ok: 0 }); return x; }),
+        addPregunta: () => this.upd(m.id, (x) => { x.preguntas.push({ q: '', alts: ['', '', '', ''], ok: 0 }); return x; }),
+        addItem: () => this.upd(m.id, (x) => { x.items.push(''); return x; }),
+        items: m.items.map((v, i) => ({
+          v: v, n: i + 1, id: m.id + '-it-' + i,
+          set: (e) => { const val = e.target.value; this.upd(m.id, (x) => { x.items[i] = val; return x; }); },
+          del: () => this.upd(m.id, (x) => { x.items.splice(i, 1); return x; })
+        })),
+        preguntas: m.preguntas.map((q, i) => ({
+          q: q.q, n: i + 1, id: m.id + '-q-' + i,
+          setQ: (e) => { const val = e.target.value; this.upd(m.id, (x) => { x.preguntas[i].q = val; return x; }); },
+          del: () => this.upd(m.id, (x) => { x.preguntas.splice(i, 1); if (!x.preguntas.length) x.quiz = false; return x; }),
+          alts: q.alts.map((a, j) => ({
+            a: a, letra: 'ABCD'[j], isOk: q.ok === j, name: m.id + '-ok-' + i,
+            set: (e) => { const val = e.target.value; this.upd(m.id, (x) => { x.preguntas[i].alts[j] = val; return x; }); },
+            mark: () => this.upd(m.id, (x) => { x.preguntas[i].ok = j; return x; })
+          }))
+        }))
+      };
+    }
+
+    const nQuiz = s.mods.filter((x) => x.quiz).length;
+    const nPreg = s.mods.reduce((a, x) => a + (x.quiz ? x.preguntas.length : 0), 0);
+    const resumen = [
+      { k: 'Título', v: s.titulo || 'Sin título' },
+      { k: 'Quién lo verá', v: alcance.charAt(0).toUpperCase() + alcance.slice(1) },
+      { k: 'Módulos', v: total + ' (' + s.mods.map((x) => TIPO[x.tipo][0].toLowerCase()).join(', ') + ')' },
+      { k: 'Quiz', v: nQuiz + ' módulos con quiz, ' + nPreg + ' preguntas en total' },
+      { k: 'Orden', v: s.orden === 'sec' ? 'Uno tras otro' : 'Libre' },
+      { k: 'Certificado', v: s.cert ? 'Sí, al terminar' : 'No' }
+    ];
+
+    return {
+      rolTexto: esAdmin ? 'Como administradora' : 'Como jefatura · Edificio Nativo',
+      pasos, portadas, titulo: s.titulo, portada: s.portada,
+      setTitulo: (e) => this.setState({ titulo: e.target.value }),
+      p1: s.paso === 1, p2: s.paso === 2, p3: s.paso === 3, p4: s.paso === 4,
+      edTodos: s.edTodos, cgTodos: s.cgTodos, edElegir: !s.edTodos, cgElegir: !s.cgTodos, edOpciones, cgOpciones, alcance, chipPublico,
+      toggleEdTodos: () => this.setState({ edTodos: !this.state.edTodos }),
+      toggleCgTodos: () => this.setState({ cgTodos: !this.state.cgTodos }),
+      mods, nMods: total, sel, hasSel: !!m, noSel: !m,
+      addVideo: add('video', 'Nuevo video'), addDoc: add('documento', 'Nuevo documento'), addCheck: add('checklist', 'Nuevo checklist'), addPol: add('politica', 'Nueva política'),
+      ordenSec: s.orden === 'sec', ordenLibre: s.orden === 'libre', setSec: set({ orden: 'sec' }), setLibre: set({ orden: 'libre' }),
+      cert: s.cert, toggleCert: () => this.setState({ cert: !this.state.cert }),
+      nQuiz, resumen, sinModulos: total === 0, enviado: s.enviado,
+      demo, tituloPagina: editando ? 'Editar curso' : 'Crear curso', editando,
+      accionFinal: editando ? (esAdmin ? 'Publicar nueva versión' : 'Enviar nueva versión a revisión') : (esAdmin ? 'Publicar curso' : 'Enviar a revisión de Josefina'),
+      notaRol: esAdmin ? 'Como administradora, el curso se publica de inmediato.' : 'Josefina revisará el curso antes de que aparezca en el explorador. Si tiene observaciones, te llegará devuelto con comentarios.',
+      exito: esAdmin ? 'Publicado. Ya aparece en el explorador para ' + alcance + '.' : 'Enviado a revisión. Lo verás como "En revisión" en Mi equipo, Crear curso, hasta que Josefina responda.',
+      enviar: set({ enviado: true }),
+      prev: () => this.setState({ paso: Math.max(1, this.state.paso - 1) }), noPrev: s.paso === 1,
+      next: () => this.setState({ paso: Math.min(4, this.state.paso + 1) }), noUltimo: s.paso < 4
+    };
+  }
+}
+
+return Component;})();
+SCREENS["Curso"]=(function(){
+class Component extends DCLogic {
+  constructor(props) {
+    super(props);
+    this.state = { cur: 0, done: {}, view: 'contenido', visto: false, leido: false, checks: {}, acepta: false, resp: {}, quizEnviado: false, intentos: 1 };
+  }
+  renderVals() {
+    const s = this.state;
+    const MODS = [
+      { t: 'Qué hacer ante un sismo', tipo: 'video', tipoL: 'Video', quiz: true },
+      { t: 'Plano de evacuación del edificio', tipo: 'documento', tipoL: 'Documento', quiz: false },
+      { t: 'Revisión de extintores y red húmeda', tipo: 'checklist', tipoL: 'Checklist', quiz: false },
+      { t: 'Reglamento de seguridad del edificio', tipo: 'politica', tipoL: 'Política', quiz: false }
+    ];
+    const ITEMS = ['Extintores con carga vigente', 'Señalética de evacuación visible', 'Gabinete de red húmeda sin obstrucciones'];
+    const QUIZ = [
+      { q: 'Durante un sismo, ¿qué es lo primero que debes hacer?', ops: ['Salir corriendo del edificio', 'Ubicarte en una zona de seguridad, lejos de ventanas', 'Usar el ascensor para bajar', 'Llamar a la administración'], ok: 1 },
+      { q: '¿Se puede usar el ascensor durante una evacuación?', ops: ['Sí, si funciona', 'Solo con residentes mayores', 'No, nunca', 'Solo el personal'], ok: 2 },
+      { q: 'Un residente entra en pánico en el hall. ¿Qué haces?', ops: ['Le pides que se calme y sigues con lo tuyo', 'Le hablas con calma y lo guías a la zona de seguridad', 'Lo dejas solo para no empeorar la situación', 'Llamas a su familia'], ok: 1 },
+      { q: 'Después del sismo, ¿cuándo se evacua el edificio?', ops: ['Siempre, de inmediato', 'Cuando lo indique el encargado de emergencias según el protocolo', 'Nunca', 'Cuando los residentes lo pidan'], ok: 1 }
+    ];
+    const unlocked = (i) => i === 0 || !!s.done[i - 1];
+    const nDone = Object.keys(s.done).length;
+    const terminado = nDone === MODS.length;
+
+    const lista = MODS.map((m, i) => {
+      const hecho = !!s.done[i], actual = i === s.cur && s.view !== 'cert', bloq = !unlocked(i);
+      return {
+        t: m.t, sub: m.tipoL + (m.quiz ? ' + quiz' : '') + ' · ' + (hecho ? 'Completado' : bloq ? 'Bloqueado' : actual ? 'En curso' : 'Disponible'),
+        icono: hecho ? '✓' : String(i + 1), bloq: bloq, current: actual ? 'step' : 'false', cursor: bloq ? 'default' : 'pointer',
+        bd: actual ? '#0077D4' : '#DDE3EA', bg: bloq ? '#F4F6F9' : '#FFFFFF', ink: bloq ? '#5E6B7D' : '#0A2245',
+        nbg: hecho ? '#007B0C' : actual ? '#0077D4' : bloq ? '#E3E8EF' : '#0A2245', nfg: hecho || actual || !bloq ? '#FFFFFF' : '#5E6B7D',
+        go: () => this.setState({ cur: i, view: 'contenido', visto: !!this.state.done[i], leido: !!this.state.done[i], acepta: !!this.state.done[i] })
+      };
+    });
+
+    const m = MODS[s.cur];
+    const yaHecho = !!s.done[s.cur];
+    const nChecks = ITEMS.filter((x, i) => s.checks[i]).length;
+    let puede = false;
+    if (m.tipo === 'video') puede = s.visto;
+    if (m.tipo === 'documento') puede = s.leido;
+    if (m.tipo === 'checklist') puede = nChecks === ITEMS.length;
+    if (m.tipo === 'politica') puede = s.acepta;
+    if (yaHecho) puede = true;
+    const esUltimo = s.cur === MODS.length - 1;
+    let avanzarTxt = 'Completar y seguir';
+    if (m.quiz && !yaHecho) avanzarTxt = 'Ir al quiz';
+    else if (m.tipo === 'politica' && !yaHecho) avanzarTxt = 'Firmar y terminar el curso';
+    else if (esUltimo) avanzarTxt = 'Ver mi certificado';
+    const completar = (i) => {
+      const d = Object.assign({}, this.state.done); d[i] = true;
+      if (i === MODS.length - 1) this.setState({ done: d, view: this.state.encHecha ? 'cert' : 'encuesta' });
+      else this.setState({ done: d, cur: i + 1, view: 'contenido', visto: false, leido: false, acepta: false });
+    };
+    const avanzar = () => {
+      if (m.quiz && !yaHecho) this.setState({ view: 'quiz', resp: {}, quizEnviado: false });
+      else if (yaHecho && esUltimo && terminado) this.setState({ view: s.encHecha ? 'cert' : 'encuesta' });
+      else if (yaHecho) this.setState({ cur: s.cur + 1, view: 'contenido', visto: !!s.done[s.cur + 1], leido: !!s.done[s.cur + 1], acepta: !!s.done[s.cur + 1] });
+      else completar(s.cur);
+    };
+
+    const correctas = QUIZ.filter((q, i) => s.resp[i] === q.ok).length;
+    const pct = Math.round(correctas / QUIZ.length * 100);
+    const aprobado = s.quizEnviado && pct >= 70;
+    const preguntas = QUIZ.map((q, i) => ({
+      n: i + 1, q: q.q, name: 'q' + i,
+      ops: q.ops.map((t, j) => {
+        const elegida = s.resp[i] === j, esOk = q.ok === j;
+        let bd = elegida ? '#0077D4' : '#DDE3EA', bg = elegida ? '#EEF5FC' : '#FFFFFF', tag = '', tagC = '#0A2245';
+        if (s.quizEnviado) {
+          if (esOk && aprobado) { bd = '#007B0C'; bg = '#FFFFFF'; tag = 'Correcta'; tagC = '#007B0C'; }
+          else if (elegida && esOk) { bd = '#007B0C'; tag = 'Bien'; tagC = '#007B0C'; }
+          else if (elegida && !esOk) { bd = '#9E3B2E'; bg = '#FFFFFF'; tag = 'Tu respuesta'; tagC = '#9E3B2E'; }
+        }
+        return { t: t, on: elegida, bd: bd, bg: bg, tag: tag, tagC: tagC, pick: () => { const r = Object.assign({}, this.state.resp); r[i] = j; this.setState({ resp: r }); } };
+      })
+    }));
+    const res = aprobado
+      ? { bg: '#007B0C', fg: '#FFFFFF', titulo: 'Aprobado · ' + correctas + ' de ' + QUIZ.length + ' (' + pct + ' %)', txt: 'Bien hecho. Ya puedes seguir con el próximo módulo.' }
+      : { bg: '#9E3B2E', fg: '#FFFFFF', titulo: 'Aún no · ' + correctas + ' de ' + QUIZ.length + ' (' + pct + ' %)', txt: 'Necesitas 70 %. Repasa el video si quieres y vuelve a intentarlo; no hay límite de intentos.' };
+
+    const enc = s.enc || {};
+    const setEnc = (k, v) => () => { const n = Object.assign({}, this.state.enc || {}); n[k] = v; this.setState({ enc: n }); };
+    const escalas = [['u', '¿Qué tan útil fue para tu trabajo?', 'Nada útil', 'Muy útil'], ['c', '¿Qué tan claro fue el contenido?', 'Nada claro', 'Muy claro']].map(([k, q, mn, mx]) => ({
+      q: q, min: mn, max: mx,
+      ops: [1, 2, 3, 4, 5].map((n) => ({ n: String(n), aria: n + ' de 5', on: enc[k] === n ? 'true' : 'false', bd: enc[k] === n ? '#0A2245' : '#9AA6B5', bg: enc[k] === n ? '#0A2245' : '#FFFFFF', fg: enc[k] === n ? '#FFFFFF' : '#0A2245', go: setEnc(k, n) }))
+    }));
+    const recomienda = ['Sí', 'Tal vez', 'No'].map((l) => ({ l: l, on: enc.r === l ? 'true' : 'false', bd: enc.r === l ? '#0A2245' : '#9AA6B5', bg: enc.r === l ? '#0A2245' : '#FFFFFF', fg: enc.r === l ? '#FFFFFF' : '#0A2245', go: setEnc('r', l) }));
+    const verTxt = s.version === 'nueva' ? 'Estás en la versión nueva del curso. El módulo 2 quedó como pendiente para que lo revises.' : 'Sigues con la versión que empezaste. Tu certificado indicará esa versión.';
+    return {
+      escalas, recomienda, vEnc: s.view === 'encuesta', encIncompleta: !(enc.u && enc.c && enc.r),
+      enviarEnc: () => this.setState({ encHecha: true, view: 'cert' }),
+      verPendiente: !s.version, verElegida: !!s.version, verTxt,
+      verNueva: () => { const d = Object.assign({}, this.state.done); delete d[1]; this.setState({ version: 'nueva', done: d }); }, verAnterior: () => this.setState({ version: 'anterior' }),
+      lista, cur: { t: m.t, tipoL: m.tipoL, isVideo: m.tipo === 'video', isDoc: m.tipo === 'documento', isCheck: m.tipo === 'checklist', isPol: m.tipo === 'politica' },
+      curN: s.cur + 1, yaHecho,
+      avancePct: Math.round(nDone / MODS.length * 100) + '%', avanceTxt: nDone + ' de ' + MODS.length + ' módulos completados',
+      vContenido: s.view === 'contenido', vQuiz: s.view === 'quiz', vCert: s.view === 'cert',
+      noVisto: !s.visto && !yaHecho, marcarVisto: () => this.setState({ visto: true }),
+      leido: s.leido || yaHecho, toggleLeido: () => this.setState({ leido: !this.state.leido }),
+      checks: ITEMS.map((t, i) => ({ t: t, on: !!s.checks[i] || yaHecho, bg: (s.checks[i] || yaHecho) ? '#F5EBDC' : '#FFFFFF', toggle: () => { const c = Object.assign({}, this.state.checks); c[i] = !c[i]; this.setState({ checks: c }); } })),
+      checkTxt: (yaHecho ? ITEMS.length : nChecks) + ' de ' + ITEMS.length + ' revisados',
+      acepta: s.acepta || yaHecho, toggleAcepta: () => this.setState({ acepta: !this.state.acepta }),
+      avanzar, avanzarTxt, noPuede: !puede,
+      preguntas, res, intentoN: s.intentos,
+      quizEnviado: s.quizEnviado, quizPendiente: !s.quizEnviado, aprobado, reprobado: s.quizEnviado && !aprobado, bloqQuiz: s.quizEnviado,
+      faltan: Object.keys(s.resp).length < QUIZ.length,
+      enviarQuiz: () => this.setState({ quizEnviado: true }),
+      reintentar: () => this.setState({ resp: {}, quizEnviado: false, intentos: this.state.intentos + 1 }),
+      volverVideo: () => this.setState({ view: 'contenido', resp: {}, quizEnviado: false }),
+      cerrarQuiz: () => completar(0)
+    };
+  }
+}
+
+return Component;})();
+</script>
+<script>
+(function(){
+var root=document.getElementById('root');
+var inst={},tplDom={},handlers=[],current='Login',pending=false;
+function esc(s){return String(s==null?'':s).replace(/&/g,'&amp;').replace(/</g,'&lt;').replace(/>/g,'&gt;').replace(/"/g,'&quot;');}
+function look(expr,scope){expr=expr.trim();if(expr==='true')return true;if(expr==='false')return false;var parts=expr.split('.');var v=scope[parts[0]];for(var i=1;i<parts.length;i++){if(v==null)return undefined;v=v[parts[i]];}return v;}
+var HOLE=/\{\{([^}]*)\}\}/g;
+function interp(str,scope){return str.replace(HOLE,function(_,e){var v=look(e,scope);return v==null?'':String(v);});}
+function whole(str){var m=str.match(/^\s*\{\{([^}]*)\}\}\s*$/);return m?m[1]:null;}
+var BOOL={checked:1,disabled:1,selected:1,readonly:1};
+var VOID={input:1,br:1,img:1,hr:1,meta:1,link:1};
+function reg(fn){handlers.push(fn);return handlers.length-1;}
+function renderKids(node,scope,ctx){var out='';for(var c=node.firstChild;c;c=c.nextSibling)out+=renderNode(c,scope,ctx);return out;}
+function renderNode(n,scope,ctx){
+ if(n.nodeType===3)return esc(interp(n.nodeValue,scope));
+ if(n.nodeType!==1)return '';
+ var tag=n.tagName.toLowerCase();
+ if(tag==='sc-for'){var list=look(whole(n.getAttribute('list'))||'',scope)||[];var as=n.getAttribute('as');var o='';list.forEach(function(it){var s=Object.create(scope);s[as]=it;o+=renderKids(n,s,ctx);});return o;}
+ if(tag==='sc-if'){var w=whole(n.getAttribute('value')||'');return look(w||'false',scope)?renderKids(n,scope,ctx):'';}
+ if(n.hasAttribute('data-for')){var l2=look(whole(n.getAttribute('data-for'))||'',scope)||[];var as2=n.getAttribute('data-as');var o2='';l2.forEach(function(it){var s=Object.create(scope);s[as2]=it;o2+=renderEl(n,tag,s,ctx);});return o2;}
+ return renderEl(n,tag,scope,ctx);
+}
+function renderEl(n,tag,scope,ctx){
+ var attrs='',ctl=false,selVal=null,optVal=null,txtLike=false;
+ for(var i=0;i<n.attributes.length;i++){var a=n.attributes[i],name=a.name,val=a.value;
+  if(name==='data-for'||name==='data-as'||name.indexOf('hint-')===0)continue;
+  var w=whole(val);
+  if(name.indexOf('on')===0&&w!==null){var fn=look(w,scope);if(typeof fn==='function')attrs+=' data-h-'+name.slice(2)+'="'+reg(fn)+'"';continue;}
+  if(BOOL[name]){var bv=w!==null?look(w,scope):true;if(name==='checked')ctl=true;if(bv)attrs+=' '+name;continue;}
+  if(name==='value'){var vv=w!==null?look(w,scope):val;if(tag==='select'){selVal=vv==null?'':String(vv);ctl=true;continue;}if(tag!=='option')ctl=true;else optVal=String(vv);attrs+=' value="'+esc(vv)+'"';continue;}
+  attrs+=' '+name+'="'+esc(w!==null?look(w,scope):interp(val,scope))+'"';
+ }
+ if(tag==='option'&&ctx.selVal!=null){var ov=optVal!=null?optVal:interp(n.textContent,scope).trim();if(ov===ctx.selVal&&attrs.indexOf(' selected')<0)attrs+=' selected';}
+ if(ctl)attrs+=' data-ctl="1"';
+ if(VOID[tag])return '<'+tag+attrs+'>';
+ var kidCtx=selVal!=null?{selVal:selVal}:ctx;
+ return '<'+tag+attrs+'>'+renderKids(n,scope,kidCtx)+'</'+tag+'>';
+}
+function getInst(f){if(!inst[f]){var C=SCREENS[f];inst[f]=new C(Object.assign({},PROPS[f]));}return inst[f];}
+function render(){pending=false;handlers=[];var c=getInst(current);var vals=c.renderVals();var tpl=tplDom[current]||(tplDom[current]=document.getElementById('tpl-'+current).content);
+ var html='<div id="root" class="scr-'+current+'">'+renderKids(tpl,vals,{})+'</div>';
+ morphdom(root,html,{onBeforeElUpdated:function(from,to){
+  if(to.getAttribute&&to.getAttribute('data-ctl'))return true;
+  var t=from.tagName;
+  if(t==='INPUT'){var ty=from.type;if(ty==='checkbox'||ty==='radio'){to.checked=from.checked;if(from.checked)to.setAttribute('checked','');else to.removeAttribute('checked');}else if(ty!=='file'){to.value=from.value;to.setAttribute('value',from.value);}}
+  else if(t==='TEXTAREA'){to.value=from.value;to.textContent=from.value;}
+  else if(t==='SELECT'){var v=from.value;Array.prototype.forEach.call(to.options,function(o){if(o.value===v)o.setAttribute('selected','');else o.removeAttribute('selected');});}
+  return true;}});
+ document.querySelectorAll('.pv-tab').forEach(function(b){b.setAttribute('aria-current',b.getAttribute('data-go')===current?'page':'false');});
+}
+window.scheduleRender=function(){if(!pending){pending=true;Promise.resolve().then(render);}};
+function go(f){current=f;render();window.scrollTo(0,0);}
+document.querySelectorAll('.pv-tab').forEach(function(b){b.addEventListener('click',function(){go(b.getAttribute('data-go'));});});
+function txt(el){if(el.tagName==='TEXTAREA')return true;if(el.tagName!=='INPUT')return false;return ['checkbox','radio','file'].indexOf(el.type)<0;}
+function fire(el,kind,e){var id=el.getAttribute('data-h-'+kind);if(id!=null&&handlers[+id])handlers[+id](e);}
+root.addEventListener('click',function(e){
+ var a=e.target.closest('a');if(a){var h=a.getAttribute('href')||'';if(h==='#'){e.preventDefault();}else if(/\.dc\.html$/.test(h)){e.preventDefault();go(h.replace('.dc.html',''));return;}}
+ var el=e.target.closest('[data-h-click]');if(el&&!el.disabled)fire(el,'click',e);
+});
+root.addEventListener('input',function(e){var el=e.target;if(el.hasAttribute('data-h-change')&&txt(el))fire(el,'change',e);});
+root.addEventListener('change',function(e){var el=e.target;if(el.hasAttribute('data-h-change')&&!txt(el))fire(el,'change',e);});
+render();
+})();
+</script>
+</body>
+</html>
