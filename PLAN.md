@@ -53,6 +53,19 @@ Cada etapa termina publicada en Firebase Hosting para probarla.
 6. **Acceso definitivo:** ingreso con RUT y contraseña (Firebase Authentication), cambio de contraseña en el primer ingreso y reglas de seguridad de Firestore por rol.
 7. **Puesta en marcha:** pruebas, carga de personas reales y piloto en un edificio.
 
+## Estado actual (15 de octubre de 2026)
+
+Las etapas 1 a 5 están construidas con datos en el navegador (localStorage), listas para conectar Firestore:
+
+- Ingreso provisional (elegir persona) y vistas según rol, incluido "ver como" en solo lectura.
+- Mis cursos, explorador con inscripción, proponer cursos, mi perfil con certificados.
+- Curso por dentro: video y documento por link, checklist, política con firma (nombre, RUT, fecha), quiz con nota mínima e intentos, encuesta final y certificado imprimible como PDF.
+- Mi equipo: avances, asignar con plazo, usuarios con rutas, crear curso (con ayuda de RRHH o solo), capacitación presencial con convocatoria y asistencia.
+- Gerente (equipo directo y equipos de sus BM en solo lectura) y visualizador (unidades asignadas).
+- Administración: bandeja con respuestas, cursos (publicar, archivar, editar nueva versión), rutas, personas (crear, editar con cambio de cargo, carga masiva pegando desde Excel), estructura y reportes por persona, unidad y curso, exportables a Excel.
+
+Pendiente: conectar Firestore, acceso con RUT y contraseña (etapa 6) y puesta en marcha (etapa 7). Mejoras posibles: detectar automáticamente el fin de un video de YouTube y permitir que la persona elija versión cuando un curso cambia a mitad de camino.
+
 ## Pendientes fuera del código
 
 - Confirmar con TI el uso de Firebase con datos de colaboradores (RUT, cargo y avances), igual que en LARning.
