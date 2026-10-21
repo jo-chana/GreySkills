@@ -17,7 +17,7 @@ GS.FIREBASE = {
 
 // Clave común del acceso provisional, guardada como huella SHA-256 (no el texto de la clave).
 // El código es público: esto solo frena a curiosos, no es seguridad real. En null, no se pide clave.
-GS.CLAVE_HASH = null;
+GS.CLAVE_HASH = '4179f5b763f02f590c08c8d7880ac9af606ae43ed9dce1920ed36154e0f5e585';
 
 // Si la base compartida está completamente vacía, carga una sola vez los datos de ejemplo.
 // Se cambia a false antes de cargar personas reales.
