@@ -188,7 +188,12 @@ window.GS = window.GS || {};
 
   // ---------- Inicio ----------
   GS.iniciar = async () => {
-    await GS.store.init();
+    try { await GS.store.init(); }
+    catch (e) {
+      console.error(e);
+      document.getElementById('app').innerHTML = String(html`<p style="padding:24px;font-family:Arial,sans-serif">No se pudo conectar con la base de datos de Grey Skills. Revisa tu conexión y recarga la página.</p>`);
+      return;
+    }
     GS.store.alCambiar(() => GS.render());
     conectarEventos();
     window.addEventListener('hashchange', GS.render);
