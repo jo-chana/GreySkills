@@ -7,15 +7,11 @@ window.GS = window.GS || {};
   const S = () => GS.store;
 
   // ---------- Ingreso provisional ----------
-  // Sin contraseña: se elige a una persona de la lista. Se reemplaza por RUT y contraseña en la etapa 6.
+  // Clave común y luego se elige una vista (un usuario genérico por rol). Se reemplaza por RUT y contraseña en la etapa 6.
   GS.vistas.ingreso = {
     titulo: 'Ingreso',
     render() {
-      const q = GS.normalizar((GS.ui.ingreso || {}).q || '');
-      const orden = ['admin', 'gerente', 'jefatura', 'visualizador', 'trabajador'];
-      const personas = GS.personasActivas()
-        .filter((p) => !q || GS.normalizar(p.nombre + ' ' + p.rut + ' ' + GS.cargoDe(p) + ' ' + GS.unidadDe(p)).includes(q))
-        .sort((a, b) => orden.indexOf(a.rol) - orden.indexOf(b.rol) || a.nombre.localeCompare(b.nombre, 'es'));
+      const bloqueado = GS.CLAVE_HASH && !GS.sesion.get().acceso;
       return html`<div class="login">
         <div class="login-hero">
           <div class="brand"><span class="brand-name" style="font-size:26px">Grey Skills</span><span class="brand-tag">Greystar Chile</span></div>
@@ -24,21 +20,27 @@ window.GS = window.GS || {};
         </div>
         <div class="login-side"><div class="login-box">
           <h2 class="h2" style="font-size:28px">Ingresa</h2>
-          <div class="notice">Acceso provisional para pruebas: elige con qué persona quieres entrar. Cada rol ve la plataforma distinta. El ingreso con RUT y contraseña se agrega más adelante.</div>
-          <div><label class="label" for="ingreso-q">Buscar persona</label>
-            <input id="ingreso-q" class="input" type="search" placeholder="Nombre, RUT, cargo o edificio" value="${(GS.ui.ingreso || {}).q || ''}" data-bind="ingreso.q" data-input="refrescar"></div>
+          ${bloqueado ? html`<div class="notice">Acceso provisional para pruebas. Escribe la clave de acceso.</div>
+          <form data-submit="clave" class="stack-sm">
+            <div><label class="label" for="ingreso-clave">Clave de acceso</label>
+              <input id="ingreso-clave" class="input" type="password" name="clave" autocomplete="current-password" required></div>
+            <button class="btn self-start" type="submit">Continuar</button>
+          </form>` : html`<div class="notice">Acceso provisional para pruebas: elige una vista. Cada una entra con un usuario genérico de ese rol y su equipo de prueba. El ingreso con RUT y contraseña se agrega más adelante.</div>
           <div class="login-list">
-            ${personas.length ? personas.map((p) => html`<button type="button" class="login-person" data-action="entrar" data-id="${p.id}">
-              <span class="avatar" aria-hidden="true">${GS.iniciales(p.nombre)}</span>
-              <span class="login-person-txt"><span>${p.nombre}</span><span>${GS.cargoDe(p)} · ${GS.unidadDe(p)}</span></span>
-              <span class="chip c-suave">${GS.ROLES[p.rol]}</span>
-            </button>`) : html`<p class="muted">No hay personas que coincidan.</p>`}
-          </div>
+            ${GS.VISTAS.filter((v) => GS.persona(v.id)).map((v) => html`<button type="button" class="login-person" data-action="entrar" data-id="${v.id}">
+              <span class="avatar" aria-hidden="true">${GS.iniciales(GS.ROLES[v.rol])}</span>
+              <span class="login-person-txt"><span>${GS.ROLES[v.rol]}</span><span>${v.d}</span></span>
+            </button>`)}
+          </div>`}
         </div></div>
       </div>`;
     }
   };
   GS.accion('refrescar', () => {});
+  GS.accion('clave', async (f, ev, datos) => {
+    if (!(await GS.claveOk(datos.get('clave')))) { GS.toast('Clave incorrecta.', 'error'); return false; }
+    GS.sesion.desbloquear();
+  });
   GS.accion('entrar', (el) => { GS.sesion.entrar(el.dataset.id); GS.ui = {}; const p = GS.persona(el.dataset.id); GS.ir(p.rol === 'admin' ? '#/admin' : '#/cursos'); return false; });
 
   // ---------- Mis cursos ----------

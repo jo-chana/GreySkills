@@ -15,6 +15,10 @@ GS.FIREBASE = {
   appId: '1:83517558197:web:086c9c600e969295ce1dfc'
 };
 
+// Clave común del acceso provisional, guardada como huella SHA-256 (no el texto de la clave).
+// El código es público: esto solo frena a curiosos, no es seguridad real. En null, no se pide clave.
+GS.CLAVE_HASH = null;
+
 // Si la base compartida está completamente vacía, carga una sola vez los datos de ejemplo.
 // Se cambia a false antes de cargar personas reales.
 GS.DATOS_DE_PRUEBA = true;

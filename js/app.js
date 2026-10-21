@@ -11,14 +11,25 @@ window.GS = window.GS || {};
   let sesionMem = {};
   function leerSesion() { try { return JSON.parse(sessionStorage.getItem(SKEY)) || {}; } catch (e) { return sesionMem; } }
   function guardarSesion(s) { sesionMem = s; try { sessionStorage.setItem(SKEY, JSON.stringify(s)); } catch (e) { /* solo en memoria */ } }
+  // La clave común de acceso (GS.CLAVE_HASH en js/config.js) se pide una vez por pestaña.
   GS.sesion = {
     get: leerSesion,
-    entrar(personaId) { guardarSesion({ personaId }); },
-    salir() { guardarSesion({}); GS.ui = {}; },
+    desbloquear() { const s = leerSesion(); s.acceso = true; guardarSesion(s); },
+    entrar(personaId) { guardarSesion({ personaId, acceso: leerSesion().acceso }); },
+    salir() { guardarSesion({ acceso: leerSesion().acceso }); GS.ui = {}; },
     verComo(personaId) { const s = leerSesion(); s.viewAs = personaId; guardarSesion(s); GS.ui = {}; },
     dejarVerComo() { const s = leerSesion(); delete s.viewAs; guardarSesion(s); GS.ui = {}; }
   };
-  GS.real = () => { const s = leerSesion(); const p = s.personaId && GS.persona(s.personaId); return p && p.activo ? p : null; };
+  GS.real = () => {
+    const s = leerSesion();
+    if (GS.CLAVE_HASH && !s.acceso) return null;
+    const p = s.personaId && GS.persona(s.personaId);
+    return p && p.activo ? p : null;
+  };
+  GS.claveOk = async (texto) => {
+    const buf = await crypto.subtle.digest('SHA-256', new TextEncoder().encode(String(texto || '').trim()));
+    return Array.from(new Uint8Array(buf)).map((b) => b.toString(16).padStart(2, '0')).join('') === GS.CLAVE_HASH;
+  };
   GS.yo = () => { const s = leerSesion(); const r = GS.real(); if (!r) return null; if (s.viewAs && r.rol === 'admin') { return GS.persona(s.viewAs) || r; } return r; };
   GS.soloLectura = () => { const s = leerSesion(); const r = GS.real(); return !!(s.viewAs && r && r.rol === 'admin' && GS.persona(s.viewAs)); };
 
@@ -188,7 +199,7 @@ window.GS = window.GS || {};
 
   // ---------- Inicio ----------
   GS.iniciar = async () => {
-    try { await GS.store.init(); }
+    try { await GS.store.init(); await GS.asegurarVistas(); }
     catch (e) {
       console.error(e);
       document.getElementById('app').innerHTML = String(html`<p style="padding:24px;font-family:Arial,sans-serif">No se pudo conectar con la base de datos de Grey Skills. Revisa tu conexión y recarga la página.</p>`);

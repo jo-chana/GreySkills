@@ -262,4 +262,76 @@ window.GS = window.GS || {};
 
     return { version: GS.SEED_VERSION, unidades, cargos, personas, cursos, rutas, inscripciones, propuestas, solicitudes, presencialCatalogo, convocatorias };
   };
+
+  // ---------- Acceso genérico por vista ----------
+  // Un usuario de prueba por rol, con su propio equipo en el "Edificio Demo". Se agregan a la base si faltan.
+  GS.VISTAS = [
+    { id: 'v-admin', rol: 'admin', d: 'Bandeja, cursos, rutas, personas, estructura y reportes.' },
+    { id: 'v-gerente', rol: 'gerente', d: 'Su equipo directo y los equipos de sus jefaturas.' },
+    { id: 'v-jefatura', rol: 'jefatura', d: 'Avances del equipo, asignar y crear cursos, capacitación presencial.' },
+    { id: 'v-visualizador', rol: 'visualizador', d: 'Seguimiento de las unidades asignadas, solo lectura.' },
+    { id: 'v-trabajador', rol: 'trabajador', d: 'Mis cursos, explorador, curso por dentro, quiz y certificado.' }
+  ];
+
+  GS.datosVistas = function () {
+    const dia = (n) => GS.sumarDias(GS.hoy(), n);
+    const ahora = GS.ahora();
+    const unidades = [
+      { id: 'u-vista-ger', nombre: 'Gerencia Demo', tipo: 'gerencia', padreId: null, jefeId: 'v-gerente' },
+      { id: 'u-vista', nombre: 'Edificio Demo', tipo: 'edificio', padreId: 'u-vista-ger', jefeId: 'v-jefatura' }
+    ];
+    const P = (id, nombre, rut, rol, unidadId, cargoId, jefeId, extra) => Object.assign(
+      { id, nombre, rut: rutCon(rut), rol, unidadId, cargoId, jefeId, activo: true, rutas: [], sigue: [], creadoEn: ahora }, extra || {});
+    const personas = [
+      P('v-admin', 'Vista Administrador', 20111222, 'admin', 'u-rrhh', 'c-hrbp', null),
+      P('v-gerente', 'Vista Gerente', 20222333, 'gerente', 'u-vista-ger', 'c-gop', null),
+      P('v-jefatura', 'Vista Jefatura', 20333444, 'jefatura', 'u-vista', 'c-bm', 'v-gerente', { rutas: ['r-bm'] }),
+      P('v-visualizador', 'Vista Visualizador', 20444555, 'visualizador', 'u-rrhh', 'c-pp', null, { sigue: ['u-vista', 'u-nativo'] }),
+      P('v-trabajador', 'Vista Trabajador', 20555666, 'trabajador', 'u-vista', 'c-gs', 'v-jefatura', { rutas: ['r-gs'] }),
+      P('v-demo-aseo', 'Demo Aseo', 20666777, 'trabajador', 'u-vista', 'c-aseo', 'v-jefatura', { rutas: ['r-aseo'] }),
+      P('v-demo-mant', 'Demo Mantención', 20777888, 'trabajador', 'u-vista', 'c-mant', 'v-jefatura', { rutas: ['r-mant'] })
+    ];
+    const inscripciones = [];
+    function I(personaId, cursoId, origen, plazoDias, pct) {
+      const k = GS.curso(cursoId);
+      if (!k) return;
+      const nHechos = Math.round(pct / 100 * k.modulos.length);
+      const terminado = nHechos === k.modulos.length;
+      const ins = {
+        id: 'i-' + personaId + '-' + cursoId, personaId, cursoId, origen,
+        asignadoPor: origen === 'asignado' ? (personas.find((p) => p.id === personaId).jefeId || 'v-admin') : null,
+        plazo: plazoDias == null ? null : dia(plazoDias), version: k.version,
+        hechos: k.modulos.slice(0, nHechos).map((m) => m.id), checks: {}, firmas: {}, quiz: {}, creadoEn: ahora,
+        completadoEn: terminado ? dia(-15) : null,
+        encuesta: terminado ? { utilidad: 5, claridad: 4, recomienda: 'Sí', comentario: '' } : null
+      };
+      if (terminado) {
+        ins.hechos.forEach((h) => {
+          const m = k.modulos.find((x) => x.id === h);
+          if (m.tipo === 'politica') ins.firmas[h] = { fecha: ins.completadoEn };
+          if (m.quiz) ins.quiz[h] = { intentos: 1, aprobado: true, nota: 100 };
+        });
+      }
+      inscripciones.push(ins);
+    }
+    I('v-trabajador', 'k-ind', 'asignado', 5, 60); I('v-trabajador', 'k-odi', 'asignado', -3, 25); I('v-trabajador', 'k-kar', 'asignado', null, 100);
+    I('v-trabajador', 'k-ate', 'asignado', 20, 0); I('v-trabajador', 'k-cul', 'inscrito', null, 33);
+    I('v-demo-aseo', 'k-ind', 'asignado', null, 100); I('v-demo-aseo', 'k-aseo', 'asignado', 10, 0); I('v-demo-aseo', 'k-odi', 'asignado', -1, 50);
+    I('v-demo-mant', 'k-ind', 'asignado', 3, 80); I('v-demo-mant', 'k-mant', 'asignado', 25, 33);
+    I('v-jefatura', 'k-ind', 'asignado', null, 100); I('v-jefatura', 'k-lid', 'asignado', 30, 25);
+    I('v-gerente', 'k-ind', 'asignado', null, 100);
+    return { unidades, personas, inscripciones };
+  };
+
+  // Agrega solo lo que falta: no pisa cambios hechos a estos usuarios ni a su avance.
+  GS.asegurarVistas = async function () {
+    const d = GS.datosVistas();
+    const unidades = d.unidades.filter((u) => !GS.store.get('unidades', u.id));
+    const personas = d.personas.filter((p) => !GS.store.get('personas', p.id));
+    const nuevas = personas.map((p) => p.id);
+    const inscripciones = d.inscripciones.filter((i) => nuevas.includes(i.personaId) && !GS.store.get('inscripciones', i.id));
+    if (unidades.length) await GS.store.addMany('unidades', unidades);
+    if (personas.length) await GS.store.addMany('personas', personas);
+    if (inscripciones.length) await GS.store.addMany('inscripciones', inscripciones);
+  };
 })(window.GS);
