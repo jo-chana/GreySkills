@@ -6,7 +6,14 @@
 // de la información la dan las reglas de seguridad de Firestore.
 window.GS = window.GS || {};
 
-GS.FIREBASE = null;
+GS.FIREBASE = {
+  apiKey: 'AIzaSyClvslKK0WgS3Gr7MBhN8saypFBTxSRaeM',
+  authDomain: 'greyskills-a6a7b.firebaseapp.com',
+  projectId: 'greyskills-a6a7b',
+  storageBucket: 'greyskills-a6a7b.firebasestorage.app',
+  messagingSenderId: '83517558197',
+  appId: '1:83517558197:web:086c9c600e969295ce1dfc'
+};
 
 // Si la base compartida está completamente vacía, carga una sola vez los datos de ejemplo.
 // Se cambia a false antes de cargar personas reales.
