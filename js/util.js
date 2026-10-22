@@ -22,11 +22,45 @@ window.GS = window.GS || {};
   GS.html = (strings, ...vals) => new Raw(strings.reduce((acc, s, i) => acc + s + (i < vals.length ? fmt(vals[i]) : ''), ''));
   GS.attr = (cond, name) => (cond ? GS.raw(' ' + name) : '');
 
+  // ---------- Idioma (español por defecto, inglés a un clic) ----------
+  // Los textos se escriben en español dentro de GS.t('...') y la traducción está en js/i18n-en.js.
+  // Variables: GS.t('Hola, {nombre}', { nombre }). Si una variable es html`...`, el resultado también lo es.
+  // El contenido que escriben las personas (cursos, nombres, unidades) no se traduce.
+  const KEY_IDIOMA = 'greyskills:idioma';
+  GS.idioma = (() => {
+    try {
+      const q = new URLSearchParams(location.search).get('lang');
+      if (q === 'en' || q === 'es') { localStorage.setItem(KEY_IDIOMA, q); return q; }
+      return localStorage.getItem(KEY_IDIOMA) === 'en' ? 'en' : 'es';
+    } catch (e) { return 'es'; }
+  })();
+  document.documentElement.lang = GS.idioma;
+  GS.cambiarIdioma = (l) => {
+    try { localStorage.setItem(KEY_IDIOMA, l); } catch (e) { /* solo esta visita */ }
+    const u = new URL(location.href);
+    u.searchParams.set('lang', l);
+    location.replace(u.toString());
+  };
+  GS.faltanTraducir = new Set();
+  GS.t = (es, vars) => {
+    let s = es;
+    if (GS.idioma === 'en') {
+      const en = (GS.EN || {})[es];
+      if (en != null) s = en; else GS.faltanTraducir.add(es);
+    }
+    if (!vars) return s;
+    const conHtml = Object.values(vars).some((v) => v instanceof Raw);
+    const r = (conHtml ? esc(s) : s).replace(/\{(\w+)\}/g, (m, k) => (k in vars ? (conHtml ? fmt(vars[k]) : String(vars[k] == null ? '' : vars[k])) : m));
+    return conHtml ? new Raw(r) : r;
+  };
+
   // ---------- Identificadores ----------
   GS.uid = () => Date.now().toString(36) + Math.random().toString(36).slice(2, 8);
 
   // ---------- Fechas (formato ISO 'AAAA-MM-DD') ----------
-  const MESES = ['enero', 'febrero', 'marzo', 'abril', 'mayo', 'junio', 'julio', 'agosto', 'septiembre', 'octubre', 'noviembre', 'diciembre'];
+  const MESES = GS.idioma === 'en'
+    ? ['January', 'February', 'March', 'April', 'May', 'June', 'July', 'August', 'September', 'October', 'November', 'December']
+    : ['enero', 'febrero', 'marzo', 'abril', 'mayo', 'junio', 'julio', 'agosto', 'septiembre', 'octubre', 'noviembre', 'diciembre'];
 
   function toISO(d) {
     const p = (n) => String(n).padStart(2, '0');
@@ -44,9 +78,14 @@ window.GS = window.GS || {};
   GS.fecha = (iso, conAnio) => {
     if (!iso) return '';
     const d = parseISO(iso);
+    if (GS.idioma === 'en') return MESES[d.getMonth()] + ' ' + d.getDate() + (conAnio ? ', ' + d.getFullYear() : '');
     return d.getDate() + ' de ' + MESES[d.getMonth()] + (conAnio ? ' de ' + d.getFullYear() : '');
   };
-  GS.fechaCorta = (iso) => { if (!iso) return ''; const d = parseISO(iso); return d.getDate() + ' ' + MESES[d.getMonth()].slice(0, 3); };
+  GS.fechaCorta = (iso) => {
+    if (!iso) return '';
+    const d = parseISO(iso);
+    return GS.idioma === 'en' ? MESES[d.getMonth()].slice(0, 3) + ' ' + d.getDate() : d.getDate() + ' ' + MESES[d.getMonth()].slice(0, 3);
+  };
 
   // ---------- RUT chileno ----------
   GS.limpiarRut = (rut) => String(rut || '').replace(/[^0-9kK]/g, '').toUpperCase();
@@ -72,7 +111,8 @@ window.GS = window.GS || {};
   GS.primerNombre = (nombre) => String(nombre || '').split(/\s+/)[0];
   GS.capitalizar = (s) => (s ? s.charAt(0).toUpperCase() + s.slice(1) : '');
   GS.normalizar = (s) => String(s || '').toLowerCase().normalize('NFD').replace(/[̀-ͯ]/g, '');
-  GS.plural = (n, uno, varios) => n + ' ' + (n === 1 ? uno : varios);
+  // uno y varios se escriben en español; se traducen aquí.
+  GS.plural = (n, uno, varios) => n + ' ' + GS.t(n === 1 ? uno : varios);
 
   // ---------- Avisos ----------
   let toastTimer = null;

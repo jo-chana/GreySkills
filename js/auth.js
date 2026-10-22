@@ -32,9 +32,9 @@ window.GS = window.GS || {};
   }
 
   function mensajeIngreso(e) {
-    if (e && e.code === 'auth/too-many-requests') return 'Demasiados intentos. Espera unos minutos e inténtalo de nuevo.';
-    if (e && e.code === 'auth/network-request-failed') return 'Sin conexión a internet. Revisa tu conexión e inténtalo de nuevo.';
-    return 'RUT o clave incorrectos.';
+    if (e && e.code === 'auth/too-many-requests') return GS.t('Demasiados intentos. Espera unos minutos e inténtalo de nuevo.');
+    if (e && e.code === 'auth/network-request-failed') return GS.t('Sin conexión a internet. Revisa tu conexión e inténtalo de nuevo.');
+    return GS.t('RUT o clave incorrectos.');
   }
 
   GS.auth = {
@@ -62,16 +62,16 @@ window.GS = window.GS || {};
       if (!vigente) {
         await auth.signOut();
         acceso = null;
-        GS.ui.ingreso = { msg: 'Tu acceso está desactivado. Si crees que es un error, habla con tu jefatura.' };
+        GS.ui.ingreso = { msg: GS.t('Tu acceso está desactivado. Si crees que es un error, habla con tu jefatura.') };
       }
     },
 
     async ingresar(rut, clave) {
-      if (!GS.rutValido(rut)) throw new Error('Revisa tu RUT: el dígito verificador no calza.');
-      if (!clave) throw new Error('Escribe tu clave.');
+      if (!GS.rutValido(rut)) throw new Error(GS.t('Revisa tu RUT: el dígito verificador no calza.'));
+      if (!clave) throw new Error(GS.t('Escribe tu clave.'));
       const app = await GS.firebase();
       const d = await docAcceso(app.firestore(), rut).get();
-      if (!d.exists) throw new Error('Este RUT todavía no tiene acceso. Pídele a tu jefatura que te lo cree.');
+      if (!d.exists) throw new Error(GS.t('Este RUT todavía no tiene acceso. Pídele a tu jefatura que te lo cree.'));
       try { await app.auth().signInWithEmailAndPassword(correo(rut, d.data().n), String(clave).trim()); }
       catch (e) { console.error(e); throw new Error(mensajeIngreso(e)); }
     },
@@ -86,19 +86,19 @@ window.GS = window.GS || {};
     // actual: clave vigente (no se pide en el cambio obligatorio del primer ingreso).
     async cambiarClave(actual, nueva, repetir) {
       nueva = String(nueva || '');
-      if (nueva.length < 8) throw new Error('La clave nueva debe tener al menos 8 caracteres.');
-      if (nueva !== String(repetir || '')) throw new Error('Las dos claves nuevas no coinciden.');
+      if (nueva.length < 8) throw new Error(GS.t('La clave nueva debe tener al menos 8 caracteres.'));
+      if (nueva !== String(repetir || '')) throw new Error(GS.t('Las dos claves nuevas no coinciden.'));
       const app = await GS.firebase();
       const u = app.auth().currentUser;
-      if (!u || !acceso) throw new Error('Tu sesión terminó. Vuelve a ingresar.');
+      if (!u || !acceso) throw new Error(GS.t('Tu sesión terminó. Vuelve a ingresar.'));
       if (actual != null) {
         try { await u.reauthenticateWithCredential(firebase.auth.EmailAuthProvider.credential(u.email, String(actual).trim())); }
-        catch (e) { throw new Error(e && e.code === 'auth/too-many-requests' ? mensajeIngreso(e) : 'La clave actual no es correcta.'); }
+        catch (e) { throw new Error(e && e.code === 'auth/too-many-requests' ? mensajeIngreso(e) : GS.t('La clave actual no es correcta.')); }
       }
       try { await u.updatePassword(nueva); }
       catch (e) {
-        if (e && e.code === 'auth/requires-recent-login') throw new Error('Por seguridad, cierra sesión, vuelve a ingresar y cambia la clave de inmediato.');
-        if (e && e.code === 'auth/weak-password') throw new Error('Esa clave es muy débil. Usa una más larga.');
+        if (e && e.code === 'auth/requires-recent-login') throw new Error(GS.t('Por seguridad, cierra sesión, vuelve a ingresar y cambia la clave de inmediato.'));
+        if (e && e.code === 'auth/weak-password') throw new Error(GS.t('Esa clave es muy débil. Usa una más larga.'));
         throw e;
       }
       if (acceso.provisoria) {
@@ -110,8 +110,8 @@ window.GS = window.GS || {};
     // Crea (o restablece) el acceso de una persona. Devuelve la clave provisoria para entregársela.
     // La clave no se guarda en ninguna parte: solo se muestra a quien la creó.
     async crearAcceso(persona, porId) {
-      if (!this.disponible()) throw new Error('Para crear accesos hay que conectar la base compartida.');
-      if (!persona.activo) throw new Error(persona.nombre + ' está desactivada. Reactívala antes de crear su acceso.');
+      if (!this.disponible()) throw new Error(GS.t('Para crear accesos hay que conectar la base compartida.'));
+      if (!persona.activo) throw new Error(GS.t('{nombre} está desactivada. Reactívala antes de crear su acceso.', { nombre: persona.nombre }));
       const app = await GS.firebase();
       const fs = app.firestore();
       if (!altas) {
@@ -128,10 +128,10 @@ window.GS = window.GS || {};
           // Quedó una cuenta de un intento anterior que no terminó: se usa el número siguiente.
           if (e && e.code === 'auth/email-already-in-use' && intento < 5) { n++; continue; }
           console.error(e);
-          if (e && e.code === 'auth/too-many-requests') throw new Error('Firebase limita cuántos accesos se crean por hora. Espera un rato y vuelve a intentarlo.');
-          if (e && e.code === 'auth/operation-not-allowed') throw new Error('Falta activar "Correo electrónico/contraseña" en Firebase Authentication.');
-          if (e && e.code === 'auth/network-request-failed') throw new Error('Sin conexión a internet. Inténtalo de nuevo.');
-          throw new Error('No se pudo crear el acceso. Inténtalo de nuevo.');
+          if (e && e.code === 'auth/too-many-requests') throw new Error(GS.t('Firebase limita cuántos accesos se crean por hora. Espera un rato y vuelve a intentarlo.'));
+          if (e && e.code === 'auth/operation-not-allowed') throw new Error(GS.t('Falta activar "Correo electrónico/contraseña" en Firebase Authentication.'));
+          if (e && e.code === 'auth/network-request-failed') throw new Error(GS.t('Sin conexión a internet. Inténtalo de nuevo.'));
+          throw new Error(GS.t('No se pudo crear el acceso. Inténtalo de nuevo.'));
         }
       }
       await altas.signOut();

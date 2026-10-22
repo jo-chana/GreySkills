@@ -266,11 +266,11 @@ window.GS = window.GS || {};
   // ---------- Acceso genérico por vista ----------
   // Un usuario de prueba por rol, con su propio equipo en el "Edificio Demo". Se agregan a la base si faltan.
   GS.VISTAS = [
-    { id: 'v-admin', rol: 'admin', d: 'Bandeja, cursos, rutas, personas, estructura y reportes.' },
-    { id: 'v-gerente', rol: 'gerente', d: 'Su equipo directo y los equipos de sus jefaturas.' },
-    { id: 'v-jefatura', rol: 'jefatura', d: 'Avances del equipo, asignar y crear cursos, capacitación presencial.' },
-    { id: 'v-visualizador', rol: 'visualizador', d: 'Seguimiento de las unidades asignadas, solo lectura.' },
-    { id: 'v-trabajador', rol: 'trabajador', d: 'Mis cursos, explorador, curso por dentro, quiz y certificado.' }
+    { id: 'v-admin', rol: 'admin', d: GS.t('Bandeja, cursos, rutas, personas, estructura y reportes.') },
+    { id: 'v-gerente', rol: 'gerente', d: GS.t('Su equipo directo y los equipos de sus jefaturas.') },
+    { id: 'v-jefatura', rol: 'jefatura', d: GS.t('Avances del equipo, asignar y crear cursos, capacitación presencial.') },
+    { id: 'v-visualizador', rol: 'visualizador', d: GS.t('Seguimiento de las unidades asignadas, solo lectura.') },
+    { id: 'v-trabajador', rol: 'trabajador', d: GS.t('Mis cursos, explorador, curso por dentro, quiz y certificado.') }
   ];
 
   GS.datosVistas = function () {

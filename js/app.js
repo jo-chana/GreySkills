@@ -45,12 +45,12 @@ window.GS = window.GS || {};
 
   // Pestañas visibles según rol.
   GS.pestanas = (p) => {
-    const t = [['cursos', 'Mis cursos'], ['explorar', 'Explorador de cursos']];
-    if (p.rol !== 'admin') t.push(['proponer', 'Proponer cursos']);
-    if (p.rol === 'jefatura' || p.rol === 'gerente') t.push(['equipo', 'Mi equipo']);
-    if (p.rol === 'visualizador') t.push(['equipo', 'Seguimiento']);
-    if (p.rol === 'admin') t.push(['admin', 'Administración']);
-    t.push(['perfil', 'Mi perfil']);
+    const t = [['cursos', GS.t('Mis cursos')], ['explorar', GS.t('Explorador de cursos')]];
+    if (p.rol !== 'admin') t.push(['proponer', GS.t('Proponer cursos')]);
+    if (p.rol === 'jefatura' || p.rol === 'gerente') t.push(['equipo', GS.t('Mi equipo')]);
+    if (p.rol === 'visualizador') t.push(['equipo', GS.t('Seguimiento')]);
+    if (p.rol === 'admin') t.push(['admin', GS.t('Administración')]);
+    t.push(['perfil', GS.t('Mi perfil')]);
     return t;
   };
   const RUTAS_LIBRES = ['curso', 'certificado', 'editor'];
@@ -69,13 +69,13 @@ window.GS = window.GS || {};
   async function ejecutar(nombre, el, ev, extra) {
     const a = acciones[nombre];
     if (!a) { console.warn('Acción no encontrada:', nombre); return; }
-    if (a.escribe && GS.soloLectura()) { GS.toast('Modo solo lectura: en "ver como" no se guardan cambios.'); return; }
+    if (a.escribe && GS.soloLectura()) { GS.toast(GS.t('Modo solo lectura: en "ver como" no se guardan cambios.')); return; }
     try {
       const r = await a.fn(el, ev, extra);
       if (r !== false) GS.render();
     } catch (e) {
       console.error(e);
-      GS.toast(e && e.message ? e.message : 'Algo salió mal. Inténtalo de nuevo.', 'error');
+      GS.toast(e && e.message ? e.message : GS.t('Algo salió mal. Inténtalo de nuevo.'), 'error');
     }
   }
 
@@ -132,10 +132,10 @@ window.GS = window.GS || {};
     GS.sesion.salir(); GS.ir('#/ingreso'); return false;
   });
   GS.accion('restablecer', async () => {
-    if (!confirm('Esto borra todo lo que has probado en este navegador y vuelve a cargar los datos de ejemplo. ¿Seguir?')) return false;
+    if (!confirm(GS.t('Esto borra todo lo que has probado en este navegador y vuelve a cargar los datos de ejemplo. ¿Seguir?'))) return false;
     await GS.store.reset();
     GS.ui = {};
-    GS.toast('Datos de prueba restablecidos.');
+    GS.toast(GS.t('Datos de prueba restablecidos.'));
   });
   GS.accion('salir-ver-como', () => { GS.sesion.dejarVerComo(); GS.ir('#/admin/personas'); return false; });
 
@@ -143,26 +143,32 @@ window.GS = window.GS || {};
   function barraProvisional(real) {
     if (GS.auth.activo()) return '';
     return html`<div class="devbar no-print"><div class="wrap">
-      <span><strong>Acceso provisional</strong> · datos de prueba${real ? html` · ingresaste como ${real.nombre} (${GS.ROLES[real.rol]})` : ''}</span>
-      ${real ? html`<button type="button" data-action="cambiar-persona">Cambiar de persona</button>` : ''}
-      <button type="button" data-action="restablecer">Restablecer datos de prueba</button>
+      <span><strong>${GS.t('Acceso provisional')}</strong> · ${GS.t('datos de prueba')}${real ? html` · ${GS.t('ingresaste como {nombre} ({rol})', { nombre: real.nombre, rol: GS.ROLES[real.rol] })}` : ''}</span>
+      ${real ? html`<button type="button" data-action="cambiar-persona">${GS.t('Cambiar de persona')}</button>` : ''}
+      <button type="button" data-action="restablecer">${GS.t('Restablecer datos de prueba')}</button>
+      <span class="devbar-lang">${[['es', 'Español'], ['en', 'English']].map(([k, l]) => html`<button type="button" data-action="idioma" data-v="${k}" aria-pressed="${String(GS.idioma === k)}" lang="${k}">${l}</button>`)}</span>
     </div></div>`;
   }
   function avisoVerComo(yo) {
     if (!GS.soloLectura()) return '';
     return html`<div class="viewas no-print" role="status"><div class="wrap">
-      <span>Estás viendo Grey Skills como ${yo.nombre} (${GS.ROLES[yo.rol].toLowerCase()}). Modo solo lectura: nada de lo que hagas se guarda.</span>
-      <button type="button" class="btn btn-sm" data-action="salir-ver-como">Volver a mi vista</button>
+      <span>${GS.t('Estás viendo Grey Skills como {nombre} ({rol}). Modo solo lectura: nada de lo que hagas se guarda.', { nombre: yo.nombre, rol: GS.ROLES[yo.rol].toLowerCase() })}</span>
+      <button type="button" class="btn btn-sm" data-action="salir-ver-como">${GS.t('Volver a mi vista')}</button>
     </div></div>`;
   }
+  // Selector de idioma: ES | EN. claro: versión para fondos claros (pantallas de ingreso).
+  GS.botonIdioma = (claro) => html`<div class="lang${claro ? ' lang-claro' : ''} no-print" role="group" aria-label="Idioma / Language">
+    ${[['es', 'ES', 'Español'], ['en', 'EN', 'English']].map(([k, l, nombre]) => html`<button type="button" data-action="idioma" data-v="${k}" aria-pressed="${String(GS.idioma === k)}" lang="${k}" title="${nombre}">${l}</button>`)}
+  </div>`;
+  GS.accion('idioma', (el) => { if (el.dataset.v !== GS.idioma) GS.cambiarIdioma(el.dataset.v); return false; });
   GS.marca = () => html`<a class="brand" href="#/cursos"><span class="brand-name">Grey Skills</span><span class="brand-tag">Greystar Chile</span></a>`;
 
   function encabezado(yo, actual) {
     const pend = yo.rol === 'admin' && GS.bandejaPendientes ? GS.bandejaPendientes() : 0;
     return html`<header class="header no-print"><div class="wrap">
       ${GS.marca()}
-      <nav class="nav" aria-label="Secciones">
-        ${GS.pestanas(yo).map(([k, l]) => html`<a href="#/${k}" aria-current="${k === actual ? 'page' : 'false'}">${l}${k === 'admin' && pend ? html`<span class="badge" aria-label="${pend} pendientes">${pend}</span>` : ''}</a>`)}
+      <nav class="nav" aria-label="${GS.t('Secciones')}">
+        ${GS.pestanas(yo).map(([k, l]) => html`<a href="#/${k}" aria-current="${k === actual ? 'page' : 'false'}">${l}${k === 'admin' && pend ? html`<span class="badge" aria-label="${GS.t('{n} pendientes', { n: pend })}">${pend}</span>` : ''}</a>`)}
       </nav>
       <a class="me" href="#/perfil">
         <span class="avatar" aria-hidden="true">${GS.iniciales(yo.nombre)}</span>
@@ -180,12 +186,12 @@ window.GS = window.GS || {};
     // Con sesión abierta por RUT, la pantalla de ingreso no aplica: se va a "Mis cursos".
     if (real && r.nombre === 'ingreso' && GS.auth.activo()) { history.replaceState(null, '', '#/cursos'); r.nombre = 'cursos'; }
     if (!real || r.nombre === 'ingreso') {
-      pintar(app, html`${barraProvisional(null)}${GS.vistas.ingreso.render()}`, 'Ingreso');
+      pintar(app, html`${barraProvisional(null)}${GS.vistas.ingreso.render()}`, GS.t('Ingreso'));
       return;
     }
     // Primer ingreso (o clave restablecida): debe cambiar la clave provisoria antes de seguir.
     if (GS.auth.provisoria()) {
-      pintar(app, GS.vistas.claveNueva.render({ yo: real }), 'Crea tu clave');
+      pintar(app, GS.vistas.claveNueva.render({ yo: real }), GS.t('Crea tu clave'));
       return;
     }
     const yo = GS.yo();
@@ -226,18 +232,18 @@ window.GS = window.GS || {};
       if (!GS.auth.activo()) await GS.asegurarVistas();
       else if (GS.auth.personaId() && !GS.real()) {
         await GS.auth.salir();
-        GS.ui.ingreso = { msg: 'Tu acceso está desactivado. Si crees que es un error, habla con tu jefatura.' };
+        GS.ui.ingreso = { msg: GS.t('Tu acceso está desactivado. Si crees que es un error, habla con tu jefatura.') };
       }
     }
     catch (e) {
       console.error(e);
-      document.getElementById('app').innerHTML = String(html`<p style="padding:24px;font-family:Arial,sans-serif">No se pudo conectar con la base de datos de Grey Skills. Revisa tu conexión y recarga la página.</p>`);
+      document.getElementById('app').innerHTML = String(html`<p style="padding:24px;font-family:Arial,sans-serif">${GS.t('No se pudo conectar con la base de datos de Grey Skills. Revisa tu conexión y recarga la página.')}</p>`);
       return;
     }
     GS.store.alCambiar(() => GS.render());
     conectarEventos();
     window.addEventListener('hashchange', GS.render);
     GS.render();
-    if (!GS.store.persistente()) GS.toast('Este navegador no permite guardar datos. Prueba con Chrome o Edge.', 'error');
+    if (!GS.store.persistente()) GS.toast(GS.t('Este navegador no permite guardar datos. Prueba con Chrome o Edge.'), 'error');
   };
 })(window.GS);

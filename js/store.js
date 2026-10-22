@@ -35,7 +35,7 @@ window.GS = window.GS || {};
     try { localStorage.setItem(KEY, JSON.stringify(db)); }
     catch (e) {
       disponible = false;
-      GS.toast('Este navegador no permite guardar. Los cambios se perderán al cerrar la página.', 'error');
+      GS.toast(GS.t('Este navegador no permite guardar. Los cambios se perderán al cerrar la página.'), 'error');
     }
   }
   function valido(d) { return d && d.version === GS.SEED_VERSION && COLECCIONES.every((c) => Array.isArray(d[c])); }
@@ -60,7 +60,7 @@ window.GS = window.GS || {};
       const s = document.createElement('script');
       s.src = src;
       s.onload = ok;
-      s.onerror = () => mal(new Error('No se pudo cargar Firebase. Revisa tu conexión a internet.'));
+      s.onerror = () => mal(new Error(GS.t('No se pudo cargar Firebase. Revisa tu conexión a internet.')));
       document.head.appendChild(s);
     });
   }
@@ -68,7 +68,7 @@ window.GS = window.GS || {};
   // Firestore no acepta listas dentro de listas: se avisa antes de escribir para no perder el dato.
   function revisar(o) {
     (function rec(v) {
-      if (Array.isArray(v)) v.forEach((x) => { if (Array.isArray(x)) throw new Error('Dato no compatible con la base compartida (lista dentro de lista).'); rec(x); });
+      if (Array.isArray(v)) v.forEach((x) => { if (Array.isArray(x)) throw new Error(GS.t('Dato no compatible con la base compartida (lista dentro de lista).')); rec(x); });
       else if (v && typeof v === 'object') Object.values(v).forEach(rec);
     })(o);
     return o;
@@ -79,7 +79,7 @@ window.GS = window.GS || {};
   function enviar(promesa) {
     promesa.catch((e) => {
       console.error(e);
-      GS.toast('No se pudo guardar en la base compartida: ' + (e && e.code === 'permission-denied' ? 'no tienes permiso para este cambio.' : 'inténtalo de nuevo.'), 'error');
+      GS.toast(GS.t('No se pudo guardar en la base compartida: {motivo}', { motivo: e && e.code === 'permission-denied' ? GS.t('no tienes permiso para este cambio.') : GS.t('inténtalo de nuevo.') }), 'error');
     });
   }
 
@@ -111,7 +111,7 @@ window.GS = window.GS || {};
       }, (e) => {
         console.error(e);
         if (primera) { primera = false; mal(e); }
-        else GS.toast('Se perdió la conexión con la base compartida. Recarga la página.', 'error');
+        else GS.toast(GS.t('Se perdió la conexión con la base compartida. Recarga la página.'), 'error');
       });
     })));
     // Base recién creada: carga los datos de ejemplo una sola vez, si está permitido.
@@ -179,7 +179,7 @@ window.GS = window.GS || {};
     },
     async reset() {
       // Protección: la base compartida nunca se borra desde la plataforma.
-      if (fs) throw new Error('En la base compartida los datos no se pueden restablecer desde aquí.');
+      if (fs) throw new Error(GS.t('En la base compartida los datos no se pueden restablecer desde aquí.'));
       db = GS.seed();
       guardarLocal();
     }

@@ -6,34 +6,34 @@ window.GS = window.GS || {};
 
   // ---------- Catálogos fijos ----------
   GS.ROLES = {
-    trabajador: 'Trabajador', jefatura: 'Jefatura', gerente: 'Gerente', visualizador: 'Visualizador', admin: 'Administrador'
+    trabajador: GS.t('Trabajador'), jefatura: GS.t('Jefatura'), gerente: GS.t('Gerente'), visualizador: GS.t('Visualizador'), admin: GS.t('Administrador')
   };
   GS.CATEGORIAS = [
-    { id: 'residente', l: 'Atención al residente' },
-    { id: 'seguridad', l: 'Seguridad' },
-    { id: 'cultura', l: 'Cultura' },
-    { id: 'herramientas', l: 'Herramientas' }
+    { id: 'residente', l: GS.t('Atención al residente') },
+    { id: 'seguridad', l: GS.t('Seguridad') },
+    { id: 'cultura', l: GS.t('Cultura') },
+    { id: 'herramientas', l: GS.t('Herramientas') }
   ];
   GS.GRUPOS_CARGO = ['Guest Service', 'Aseo', 'Mantención', 'Building Manager Assistant', 'Building Manager', 'Cargos de oficina central'];
   GS.TIPOS_MODULO = {
-    video: { l: 'Video', c: 'c-sky' },
-    documento: { l: 'Documento', c: 'c-none' },
-    checklist: { l: 'Checklist', c: 'c-suave' },
-    politica: { l: 'Política', c: 'c-gris' }
+    video: { l: GS.t('Video'), c: 'c-sky' },
+    documento: { l: GS.t('Documento'), c: 'c-none' },
+    checklist: { l: GS.t('Checklist'), c: 'c-suave' },
+    politica: { l: GS.t('Política'), c: 'c-gris' }
   };
   GS.ESTADOS_CURSO = {
-    borrador: { l: 'Borrador', c: 'c-gris' },
-    revision: { l: 'En revisión', c: 'c-sky' },
-    devuelto: { l: 'Devuelto', c: 'c-warn' },
-    publicado: { l: 'Publicado', c: 'c-ok' },
-    archivado: { l: 'Archivado', c: 'c-suave' }
+    borrador: { l: GS.t('Borrador'), c: 'c-gris' },
+    revision: { l: GS.t('En revisión'), c: 'c-sky' },
+    devuelto: { l: GS.t('Devuelto'), c: 'c-warn' },
+    publicado: { l: GS.t('Publicado'), c: 'c-ok' },
+    archivado: { l: GS.t('Archivado'), c: 'c-suave' }
   };
   GS.SEM = {
-    ok: { l: 'Al día', c: 'c-ok' },
-    warn: { l: 'Por vencer', c: 'c-warn' },
-    late: { l: 'Vencido', c: 'c-late' },
-    done: { l: 'Completado', c: 'c-done' },
-    none: { l: 'Sin fecha límite', c: 'c-none' }
+    ok: { l: GS.t('Al día'), c: 'c-ok' },
+    warn: { l: GS.t('Por vencer'), c: 'c-warn' },
+    late: { l: GS.t('Vencido'), c: 'c-late' },
+    done: { l: GS.t('Completado'), c: 'c-done' },
+    none: { l: GS.t('Sin fecha límite'), c: 'c-none' }
   };
   GS.PORTADAS = [['#0A2245', 'Navy', '#92C9EB'], ['#0077D4', 'Ocean', '#FFFFFF'], ['#92C9EB', 'Sky', '#0A2245'], ['#F5EBDC', 'Stucco', '#0A2245']];
   GS.tintaPortada = (hex) => (GS.PORTADAS.find((p) => p[0] === hex) || GS.PORTADAS[0])[2];
@@ -51,7 +51,7 @@ window.GS = window.GS || {};
   GS.personasActivas = () => S().where('personas', (p) => p.activo);
 
   // Lugar de trabajo para el alcance de un curso: su edificio, o la oficina central.
-  GS.OFICINA = { id: 'oficina', nombre: 'Oficina central' };
+  GS.OFICINA = { id: 'oficina', nombre: GS.t('Oficina central') };
   GS.lugares = () => S().where('unidades', (u) => u.tipo === 'edificio').concat([GS.OFICINA]);
   GS.lugarDe = (p) => { const u = GS.unidad(p.unidadId); return u && u.tipo === 'edificio' ? u.id : 'oficina'; };
   GS.grupoDe = (p) => { const c = GS.cargo(p.cargoId); return c ? c.grupo : ''; };
@@ -68,13 +68,13 @@ window.GS = window.GS || {};
   GS.esParaTodos = (a) => a && a.edificios === 'todos' && a.cargos === 'todos';
   GS.alcanceTexto = (a) => {
     if (!a) return '';
-    const ed = a.edificios === 'todos' ? 'todos los edificios y la oficina central'
-      : (a.edificios.length ? a.edificios.map(GS.nombreLugar).join(', ') : 'ningún edificio elegido aún');
-    const cg = a.cargos === 'todos' ? 'todos los cargos' : (a.cargos.length ? a.cargos.join(', ') : 'ningún cargo elegido aún');
-    return cg + ' de ' + ed;
+    const ed = a.edificios === 'todos' ? GS.t('todos los edificios y la oficina central')
+      : (a.edificios.length ? a.edificios.map(GS.nombreLugar).join(', ') : GS.t('ningún edificio elegido aún'));
+    const cg = a.cargos === 'todos' ? GS.t('todos los cargos') : (a.cargos.length ? a.cargos.join(', ') : GS.t('ningún cargo elegido aún'));
+    return GS.t('{cargos} de {lugares}', { cargos: cg, lugares: ed });
   };
-  GS.alcanceEdificiosCorto = (a) => (a.edificios === 'todos' ? 'Todos' : a.edificios.map((id) => GS.nombreLugar(id).replace('Edificio ', '')).join(', ') || '—');
-  GS.alcanceCargosCorto = (a) => (a.cargos === 'todos' ? 'Todos' : a.cargos.map((c) => c.replace('Building Manager Assistant', 'BMA').replace('Cargos de oficina central', 'Oficina')).join(', ') || '—');
+  GS.alcanceEdificiosCorto = (a) => (a.edificios === 'todos' ? GS.t('Todos') : a.edificios.map((id) => GS.nombreLugar(id).replace('Edificio ', '')).join(', ') || '—');
+  GS.alcanceCargosCorto = (a) => (a.cargos === 'todos' ? GS.t('Todos') : a.cargos.map((c) => c.replace('Building Manager Assistant', 'BMA').replace('Cargos de oficina central', GS.t('Oficina'))).join(', ') || '—');
 
   // ---------- Avance ----------
   GS.ins = (personaId, cursoId) => S().all('inscripciones').find((i) => i.personaId === personaId && i.cursoId === cursoId) || null;
@@ -96,9 +96,9 @@ window.GS = window.GS || {};
   };
   GS.plazoTxt = (ins, corto) => {
     const f = corto ? GS.fechaCorta : GS.fecha;
-    if (ins.completadoEn) return 'Terminado el ' + f(ins.completadoEn);
-    if (!ins.plazo) return corto ? 'Sin fecha' : 'Sin fecha límite';
-    return (GS.estado(ins) === 'late' ? 'Venció el ' : 'Vence el ') + f(ins.plazo);
+    if (ins.completadoEn) return GS.t('Terminado el {fecha}', { fecha: f(ins.completadoEn) });
+    if (!ins.plazo) return corto ? GS.t('Sin fecha') : GS.t('Sin fecha límite');
+    return GS.estado(ins) === 'late' ? GS.t('Venció el {fecha}', { fecha: f(ins.plazo) }) : GS.t('Vence el {fecha}', { fecha: f(ins.plazo) });
   };
   GS.resumenPersona = (p) => {
     const cursos = GS.insDe(p.id).map((ins) => ({ ins, curso: GS.curso(ins.cursoId), pct: GS.avance(ins), k: GS.estado(ins) }));
@@ -124,29 +124,29 @@ window.GS = window.GS || {};
       const opciones = (yo.sigue || []).map((uid) => ({ id: uid, l: (GS.unidad(uid) || { nombre: uid }).nombre }));
       const s = opciones.find((o) => o.id === sel) || opciones[0];
       return {
-        titulo: 'Seguimiento', opciones, sel: s ? s.id : null, editable: false,
-        sub: s ? s.l + ' · unidad asignada a tu seguimiento' : 'La administración aún no te asigna unidades para seguir.',
-        msg: 'Tienes acceso de visualizador a las unidades que te asignó la administración. Puedes revisar avances, sin editar.',
+        titulo: GS.t('Seguimiento'), opciones, sel: s ? s.id : null, editable: false,
+        sub: s ? GS.t('{unidad} · unidad asignada a tu seguimiento', { unidad: s.l }) : GS.t('La administración aún no te asigna unidades para seguir.'),
+        msg: GS.t('Tienes acceso de visualizador a las unidades que te asignó la administración. Puedes revisar avances, sin editar.'),
         personas: s ? S().where('personas', (p) => p.unidadId === s.id && p.activo) : []
       };
     }
     if (yo.rol === 'gerente') {
       const directos = GS.equipo(yo.id);
-      const opciones = [{ id: 'directo', l: 'Mi equipo directo' }].concat(
+      const opciones = [{ id: 'directo', l: GS.t('Mi equipo directo') }].concat(
         directos.filter((d) => GS.equipo(d.id).length).map((d) => ({ id: d.id, l: GS.unidadDe(d) })));
       const s = opciones.find((o) => o.id === sel) || opciones[0];
       if (s.id === 'directo') {
-        return { titulo: 'Mi equipo', opciones, sel: s.id, editable: true, sub: GS.unidadDe(yo) + ' · tu equipo directo', personas: directos };
+        return { titulo: GS.t('Mi equipo'), opciones, sel: s.id, editable: true, sub: GS.t('{unidad} · tu equipo directo', { unidad: GS.unidadDe(yo) }), personas: directos };
       }
       return {
-        titulo: 'Mi equipo', opciones, sel: s.id, editable: false,
-        sub: s.l + ' · equipo de ' + GS.nombreDe(s.id),
-        msg: 'Estás viendo este equipo como gerente. Puedes revisar avances; las asignaciones y cambios los hace su jefatura directa.',
+        titulo: GS.t('Mi equipo'), opciones, sel: s.id, editable: false,
+        sub: GS.t('{unidad} · equipo de {nombre}', { unidad: s.l, nombre: GS.nombreDe(s.id) }),
+        msg: GS.t('Estás viendo este equipo como gerente. Puedes revisar avances; las asignaciones y cambios los hace su jefatura directa.'),
         personas: GS.equipo(s.id)
       };
     }
     const personas = GS.equipo(yo.id);
-    return { titulo: 'Mi equipo', opciones: [], sel: null, editable: true, sub: GS.unidadDe(yo) + ' · ' + GS.plural(personas.length, 'persona', 'personas'), personas };
+    return { titulo: GS.t('Mi equipo'), opciones: [], sel: null, editable: true, sub: GS.unidadDe(yo) + ' · ' + GS.plural(personas.length, 'persona', 'personas'), personas };
   };
 
   GS.rutaDeCargo = (cargoId) => S().all('rutas').find((r) => r.cargoId === cargoId) || null;
