@@ -1,0 +1,167 @@
+// Reglas de seguridad de Grey Skills (Firestore).
+//
+// Se aplican en el servidor: valen aunque alguien se salte las pantallas.
+// Para publicarlas: consola de Firebase → Firestore Database → Reglas → pegar este archivo → Publicar.
+// Requieren el ingreso con RUT (GS.ACCESO = 'rut' en js/config.js): con el acceso por vista nadie podría entrar.
+//
+// Protección contra pérdida de información:
+// - Nadie puede borrar personas, avances, accesos, propuestas, solicitudes ni capacitaciones presenciales.
+//   Solo la administración puede eliminar cursos en borrador y rutas.
+// - El avance solo crece: módulos hechos, firmas, quiz rendidos, encuesta y fecha de término no se pueden quitar.
+// - Cada rol escribe solo lo suyo.
+rules_version = '2';
+service cloud.firestore {
+  match /databases/{database}/documents {
+
+    // ---------- Quién está conectado ----------
+    // La cuenta se llama <rut>.<n>@cuentas.greyskills.app y vale solo si accesos/<rut> tiene ese mismo n
+    // (al restablecer la clave, n sube y la cuenta anterior deja de valer).
+    function doc(col, id) { return /databases/$(database)/documents/$(col)/$(id); }
+    function partes() { return request.auth.token.email.split('[.@]'); }
+    function rutCuenta() { return partes()[0].upper(); }
+    function acceso() { return get(doc('accesos', rutCuenta())).data; }
+    function conCuenta() {
+      return request.auth != null
+        && request.auth.token.email is string
+        && request.auth.token.email.matches('^[0-9k]+[.][0-9]+@cuentas[.]greyskills[.]app$')
+        && exists(doc('accesos', rutCuenta()))
+        && acceso().n == int(partes()[1]);
+    }
+    function miId() { return acceso().personaId; }
+    function yo() { return get(doc('personas', miId())).data; }
+    function activo() { return conCuenta() && yo().activo == true; }
+    function esAdmin() { return activo() && yo().rol == 'admin'; }
+    function esJefeDe(personaId) { return activo() && get(doc('personas', personaId)).data.jefeId == miId(); }
+    function lidera() { return activo() && yo().rol in ['jefatura', 'gerente']; }
+    function cambia() { return request.resource.data.diff(resource.data).affectedKeys(); }
+    function limpio(rut) { return rut.replace('[^0-9kK]', '').upper(); }
+
+    // ---------- Accesos (RUT → cuenta vigente) ----------
+    // Se lee antes de ingresar, por eso cualquiera puede consultar un RUT puntual (no listar).
+    match /accesos/{rut} {
+      allow get: if true;
+      allow list: if esAdmin();
+      // Crear o restablecer: administración o jefatura directa. El RUT debe ser el de la persona y n solo sube.
+      allow create: if (esAdmin() || esJefeDe(request.resource.data.personaId))
+        && limpio(get(doc('personas', request.resource.data.personaId)).data.rut) == rut
+        && request.resource.data.n is int;
+      allow update: if (
+          (esAdmin() || esJefeDe(request.resource.data.personaId))
+          && request.resource.data.personaId == resource.data.personaId
+          && request.resource.data.n > resource.data.n
+        ) || (
+          // La propia persona solo puede marcar que ya cambió su clave provisoria.
+          conCuenta() && rutCuenta() == rut
+          && cambia().hasOnly(['provisoria'])
+          && request.resource.data.provisoria == false
+        );
+      allow delete: if false;
+    }
+
+    // ---------- Personas ----------
+    match /personas/{id} {
+      allow read: if activo();
+      allow create: if esAdmin() || (
+        lidera()
+        && request.resource.data.jefeId == miId()
+        && request.resource.data.rol == 'trabajador'
+        && request.resource.data.unidadId == yo().unidadId
+        && request.resource.data.activo == true
+      );
+      // La jefatura directa solo activa/desactiva y registra el acceso; el resto lo cambia la administración.
+      allow update: if esAdmin() || (esJefeDe(id) && cambia().hasOnly(['activo', 'cuenta']));
+      allow delete: if false;
+    }
+
+    // ---------- Avance (inscripciones) ----------
+    function avanceNoRetrocede() {
+      let antes = resource.data;
+      let despues = request.resource.data;
+      return despues.personaId == antes.personaId
+        && despues.cursoId == antes.cursoId
+        && despues.get('hechos', []).hasAll(antes.get('hechos', []))
+        && despues.get('firmas', {}).keys().hasAll(antes.get('firmas', {}).keys())
+        && despues.get('quiz', {}).keys().hasAll(antes.get('quiz', {}).keys())
+        && (antes.get('completadoEn', null) == null || despues.get('completadoEn', null) == antes.get('completadoEn', null))
+        && (antes.get('encuesta', null) == null || despues.get('encuesta', null) != null);
+    }
+    match /inscripciones/{id} {
+      allow read: if activo();
+      allow create: if esAdmin()
+        || esJefeDe(request.resource.data.personaId)
+        || (activo() && request.resource.data.personaId == miId() && request.resource.data.origen == 'inscrito');
+      allow update: if avanceNoRetrocede() && (
+        esAdmin()
+        // La persona registra su propio avance.
+        || (activo() && resource.data.personaId == miId()
+            && cambia().hasOnly(['hechos', 'checks', 'quiz', 'firmas', 'completadoEn', 'encuesta']))
+        // La jefatura directa asigna y pone plazo.
+        || (esJefeDe(resource.data.personaId) && cambia().hasOnly(['origen', 'asignadoPor', 'plazo']))
+      );
+      allow delete: if false;
+    }
+
+    // ---------- Cursos ----------
+    match /cursos/{id} {
+      allow read: if activo();
+      allow create: if esAdmin() || (
+        lidera() && request.resource.data.autorId == miId() && request.resource.data.estado == 'borrador'
+      );
+      // El autor edita su curso y lo envía a revisión; publicar y archivar es de la administración.
+      allow update: if esAdmin() || (
+        activo()
+        && resource.data.autorId == miId()
+        && request.resource.data.autorId == miId()
+        && request.resource.data.get('version', 1) == resource.data.get('version', 1)
+        && request.resource.data.estado in [resource.data.estado, 'revision']
+        && (request.resource.data.estado != 'publicado' || cambia().hasOnly(['borradorEdicion']))
+      );
+      allow delete: if esAdmin() && resource.data.estado == 'borrador';
+    }
+
+    // ---------- Propuestas y solicitudes ----------
+    match /propuestas/{id} {
+      allow read: if activo();
+      allow create: if activo() && request.resource.data.personaId == miId() && request.resource.data.estado == 'revision';
+      allow update: if esAdmin();
+      allow delete: if false;
+    }
+    match /solicitudes/{id} {
+      allow read: if activo();
+      allow create: if lidera() && request.resource.data.personaId == miId() && request.resource.data.estado == 'pendiente';
+      allow update: if esAdmin();
+      allow delete: if false;
+    }
+
+    // ---------- Capacitación presencial ----------
+    match /convocatorias/{id} {
+      allow read: if activo();
+      allow create: if esAdmin() || (lidera() && request.resource.data.convocadoPor == miId());
+      allow update: if esAdmin() || (activo() && resource.data.convocadoPor == miId() && cambia().hasOnly(['asistencia']));
+      allow delete: if false;
+    }
+    match /presencialCatalogo/{id} {
+      allow read: if activo();
+      allow create, update: if esAdmin();
+      allow delete: if false;
+    }
+
+    // ---------- Estructura y rutas (solo administración) ----------
+    match /unidades/{id} {
+      allow read: if activo();
+      allow create, update: if esAdmin();
+      allow delete: if false;
+    }
+    match /cargos/{id} {
+      allow read: if activo();
+      allow create, update: if esAdmin();
+      allow delete: if false;
+    }
+    match /rutas/{id} {
+      allow read: if activo();
+      allow create, update, delete: if esAdmin();
+    }
+
+    // Cualquier otra colección queda cerrada.
+  }
+}

@@ -545,7 +545,35 @@ window.GS = window.GS || {};
   });
 
   // ---------- Pantalla ----------
-  const SUBS = [['bandeja', 'Bandeja'], ['cursos', 'Cursos'], ['rutas', 'Rutas'], ['personas', 'Personas'], ['estructura', 'Estructura'], ['reportes', 'Reportes']];
+  // ---------- Respaldo ----------
+  // Descarga toda la base en un archivo, para guardarlo fuera de Firebase (segunda capa de protección).
+  const COLECCIONES_RESPALDO = ['unidades', 'cargos', 'personas', 'cursos', 'rutas', 'inscripciones', 'propuestas', 'solicitudes', 'presencialCatalogo', 'convocatorias'];
+  function vistaRespaldo() {
+    const n = (c) => S().all(c).length;
+    return html`<div class="card card-pad stack" style="max-width:860px">
+      <h2 class="h2">Respaldo de la información</h2>
+      <p style="margin:0">Descarga un archivo con toda la información de Grey Skills: ${GS.plural(n('personas'), 'persona', 'personas')}, ${GS.plural(n('cursos'), 'curso', 'cursos')}, ${GS.plural(n('inscripciones'), 'registro de avance', 'registros de avance')} y el resto de la configuración.</p>
+      <div class="notice">Descárgalo al menos una vez por semana y guárdalo en una carpeta de la empresa, fuera de Firebase. Si algún día se pierde información, con este archivo se puede recuperar. Contiene datos personales (nombres y RUT): guárdalo con el mismo cuidado que una planilla de personal.</div>
+      <button type="button" class="btn self-start" data-action="respaldo-descargar">Descargar respaldo completo</button>
+    </div>`;
+  }
+  GS.accion('respaldo-descargar', async () => {
+    const datos = { app: 'Grey Skills', fecha: GS.ahora(), colecciones: {} };
+    COLECCIONES_RESPALDO.forEach((c) => { datos.colecciones[c] = S().all(c); });
+    if (GS.store.modo() === 'firestore') {
+      const snap = await (await GS.firebase()).firestore().collection('accesos').get();
+      datos.colecciones.accesos = snap.docs.map((d) => Object.assign({ id: d.id }, d.data()));
+    }
+    const url = URL.createObjectURL(new Blob([JSON.stringify(datos, null, 1)], { type: 'application/json' }));
+    const a = document.createElement('a');
+    a.href = url; a.download = 'greyskills-respaldo-' + GS.hoy() + '.json';
+    document.body.appendChild(a); a.click(); a.remove();
+    setTimeout(() => URL.revokeObjectURL(url), 1000);
+    GS.toast('Respaldo descargado. Guárdalo en una carpeta de la empresa.');
+    return false;
+  });
+
+  const SUBS = [['bandeja', 'Bandeja'], ['cursos', 'Cursos'], ['rutas', 'Rutas'], ['personas', 'Personas'], ['estructura', 'Estructura'], ['reportes', 'Reportes'], ['respaldo', 'Respaldo']];
   GS.vistas.admin = {
     titulo: 'Administración',
     render({ real, params }) {
@@ -557,6 +585,7 @@ window.GS = window.GS || {};
       else if (sub === 'personas') cuerpo = vistaPersonas(real);
       else if (sub === 'estructura') cuerpo = vistaEstructura();
       else if (sub === 'reportes') cuerpo = vistaReportes();
+      else if (sub === 'respaldo') cuerpo = vistaRespaldo();
       else cuerpo = vistaBandeja();
       return html`<section class="stack-lg" style="gap:22px">
         <div><h1 class="h1">Administración</h1><p class="lead">Acceso total a cursos, personas y estructura de Greystar Chile.</p></div>

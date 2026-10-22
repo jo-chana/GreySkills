@@ -149,10 +149,10 @@ window.GS = window.GS || {};
       if (fs) nuevos.forEach(revisar);
       col(nombre).push(...nuevos);
       if (fs) {
-        // Firestore acepta hasta 500 escrituras por lote.
-        for (let i = 0; i < nuevos.length; i += 400) {
+        // Lotes chicos: las reglas de seguridad revisan cada escritura y tienen un límite de consultas por lote.
+        for (let i = 0; i < nuevos.length; i += 10) {
           const lote = fs.batch();
-          nuevos.slice(i, i + 400).forEach((o) => lote.set(fs.collection(nombre).doc(o.id), sinId(o)));
+          nuevos.slice(i, i + 10).forEach((o) => lote.set(fs.collection(nombre).doc(o.id), sinId(o)));
           enviar(lote.commit());
         }
       } else guardarLocal();

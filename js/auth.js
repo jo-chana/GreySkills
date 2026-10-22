@@ -54,7 +54,16 @@ window.GS = window.GS || {};
       const user = await new Promise((ok) => { const off = auth.onAuthStateChanged((u) => { off(); ok(u); }); });
       if (!user) return;
       acceso = await leerAcceso(app.firestore(), user);
-      if (!acceso) await auth.signOut();
+      if (!acceso) { await auth.signOut(); return; }
+      // Persona desactivada: las reglas no le dejan leer su ficha.
+      let vigente = false;
+      try { const p = await app.firestore().collection('personas').doc(acceso.personaId).get(); vigente = p.exists && p.data().activo === true; }
+      catch (e) { if (!e || e.code !== 'permission-denied') throw e; }
+      if (!vigente) {
+        await auth.signOut();
+        acceso = null;
+        GS.ui.ingreso = { msg: 'Tu acceso está desactivado. Si crees que es un error, habla con tu jefatura.' };
+      }
     },
 
     async ingresar(rut, clave) {

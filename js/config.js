@@ -21,6 +21,7 @@ GS.FIREBASE = {
 GS.ACCESO = 'vista';
 
 // Dominio con que se arman las cuentas a partir del RUT (12345678k.1@...). No se envían correos.
+// Si se cambia, hay que cambiarlo también en firestore.rules.
 GS.DOMINIO_CUENTAS = 'cuentas.greyskills.app';
 
 // Clave común del acceso provisional, guardada como huella SHA-256 (no el texto de la clave).
