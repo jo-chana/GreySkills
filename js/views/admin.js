@@ -299,26 +299,31 @@ window.GS = window.GS || {};
     } else if (st.modo === 'carga') {
       panel = vistaCarga();
     }
+    const sinAcceso = GS.auth.disponible() ? S().where('personas', (p) => p.activo && !p.cuenta && C.puedeDarAcceso(p, real)) : [];
     return html`<div class="stack" style="gap:16px">
+      ${C.panelClaves()}
       <div class="row">
         <div class="searchbar"><label class="sr-only" for="ap-q">Buscar persona</label><input id="ap-q" class="input" type="search" placeholder="Buscar por nombre, RUT, unidad o cargo" value="${st.q}" data-bind="aPersonas.q" data-input="refrescar"></div>
         <button type="button" class="btn" data-action="persona-modo" data-v="nueva">Agregar persona</button>
         <button type="button" class="btn2" data-action="persona-modo" data-v="carga">Carga masiva desde Excel</button>
+        ${sinAcceso.length ? html`<button type="button" class="btn2" data-action="accesos-pendientes">Crear accesos pendientes (${sinAcceso.length})</button>` : ''}
       </div>
       ${panel}
       <label class="check small"><input type="checkbox" data-bind="aPersonas.mostrarInactivos" data-rerender${GS.attr(st.mostrarInactivos, 'checked')}>Mostrar personas desactivadas</label>
       <div class="card table-wrap"><table>
-        <thead><tr><th>Persona</th><th>RUT</th><th>Unidad</th><th>Cargo</th><th>Rol</th><th><span class="sr-only">Acciones</span></th></tr></thead>
+        <thead><tr><th>Persona</th><th>RUT</th><th>Unidad</th><th>Cargo</th><th>Rol</th>${GS.auth.disponible() ? html`<th>Acceso</th>` : ''}<th><span class="sr-only">Acciones</span></th></tr></thead>
         <tbody>${lista.map((p) => html`<tr class="${p.activo ? '' : 'inactivo'}">
           <td class="strong">${p.nombre}${p.activo ? '' : html`<div class="muted xs">Desactivada</div>`}</td><td>${p.rut}</td>
           <td>${p.rol === 'visualizador' && (p.sigue || []).length ? 'Sigue: ' + p.sigue.map((u) => (GS.unidad(u) || { nombre: u }).nombre.replace('Edificio ', '')).join(', ') : GS.unidadDe(p)}</td>
           <td>${GS.cargoDe(p)}</td><td><span class="chip c-suave">${GS.ROLES[p.rol]}</span></td>
+          ${GS.auth.disponible() ? html`<td>${C.celdaAcceso(p)}</td>` : ''}
           <td class="actions">
+            ${C.botonAcceso(p, real)}
             ${p.id !== real.id && p.activo ? html`<button type="button" class="btn2 btn-sm" data-action="ver-como" data-id="${p.id}">Ver como</button>` : ''}
             <button type="button" class="btn2 btn-sm" data-action="persona-editar" data-id="${p.id}">Editar</button>
             ${p.id !== real.id ? html`<button type="button" class="btn2 btn-sm" data-action="toggle-activo" data-id="${p.id}">${p.activo ? 'Desactivar' : 'Reactivar'}</button>` : ''}
           </td></tr>`)}</tbody></table></div>
-      <p class="muted small" style="margin:0">En "Editar" se cambia rol, unidad, cargo y jefatura. Para visualizadores se eligen las unidades que puede seguir. "Nueva contraseña" se agrega cuando activemos el ingreso con RUT.</p>
+      <p class="muted small" style="margin:0">En "Editar" se cambia rol, unidad, cargo y jefatura. Para visualizadores se eligen las unidades que puede seguir.${GS.auth.disponible() ? ' "Crear acceso" y "Restablecer clave" generan una clave provisoria que la persona cambia en su primer ingreso.' : ''}</p>
     </div>`;
   }
   GS.accion('persona-modo', (el) => { const st = GS.ui.aPersonas; st.modo = st.modo === el.dataset.v ? null : el.dataset.v; delete GS.ui.nuevaPersona; delete GS.ui.carga; });
@@ -327,7 +332,8 @@ window.GS = window.GS || {};
   GS.accion('ver-como', (el) => { GS.sesion.verComo(el.dataset.id); GS.ir('#/cursos'); return false; });
   GS.accion('crear-persona', async () => {
     const p = await C.crearPersona(GS.ui.nuevaPersona, GS.yo().id);
-    GS.toast(p.nombre + ' quedó creada.');
+    const r = GS.auth.disponible() ? await C.darAccesos([p], GS.yo().id) : { error: null };
+    GS.toast(p.nombre + ' quedó creada.' + (r.error ? ' No se pudo crear su acceso: ' + r.error.message + ' Puedes crearlo desde la lista.' : ''), r.error ? 'error' : undefined);
     delete GS.ui.nuevaPersona;
     GS.ui.aPersonas.modo = null;
   }, { escribe: true });
@@ -350,6 +356,14 @@ window.GS = window.GS || {};
     GS.toast(msg);
     delete GS.ui.editPersona;
     GS.ui.aPersonas.modo = null;
+  }, { escribe: true });
+
+  GS.accion('accesos-pendientes', async () => {
+    const yo = GS.yo();
+    const lista = S().where('personas', (p) => p.activo && !p.cuenta && C.puedeDarAcceso(p, yo));
+    if (!confirm('Se crearán ' + GS.plural(lista.length, 'acceso', 'accesos') + ' con su clave provisoria. Firebase permite alrededor de 100 por hora; si se alcanza el límite, el resto queda pendiente. ¿Seguir?')) return false;
+    const r = await C.darAccesos(lista, yo.id);
+    GS.toast(GS.plural(r.creados, 'acceso creado', 'accesos creados') + '.' + (r.error ? ' ' + r.error.message : ''), r.error ? 'error' : undefined);
   }, { escribe: true });
 
   // Carga masiva: se pega una tabla copiada desde Excel.
@@ -394,10 +408,16 @@ window.GS = window.GS || {};
   GS.accion('carga-crear', async () => {
     const st = GS.ui.carga;
     const ok = st.filas.filter((f) => !f.error);
+    const creadas = [];
     for (const f of ok) {
-      await C.crearPersona({ nombre: f.nombre, rut: f.rut, rol: f.rol, unidadId: f.unidad.id, cargoId: f.cargo.id, jefeId: f.jefeId, rutaCargo: true, quitados: [], otra: '', otraQuitados: [], plazo: '', sigue: [] }, GS.yo().id);
+      creadas.push(await C.crearPersona({ nombre: f.nombre, rut: f.rut, rol: f.rol, unidadId: f.unidad.id, cargoId: f.cargo.id, jefeId: f.jefeId, rutaCargo: true, quitados: [], otra: '', otraQuitados: [], plazo: '', sigue: [] }, GS.yo().id));
     }
-    GS.toast(GS.plural(ok.length, 'persona creada', 'personas creadas') + '.');
+    let msg = GS.plural(ok.length, 'persona creada', 'personas creadas') + '.';
+    if (GS.auth.disponible()) {
+      const r = await C.darAccesos(creadas, GS.yo().id);
+      msg += ' ' + GS.plural(r.creados, 'acceso creado', 'accesos creados') + '.' + (r.error ? ' ' + r.error.message + ' Los que faltan se crean con "Crear accesos pendientes".' : '');
+    }
+    GS.toast(msg);
     delete GS.ui.carga;
     GS.ui.aPersonas.modo = null;
   }, { escribe: true });

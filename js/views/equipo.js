@@ -111,22 +111,24 @@ window.GS = window.GS || {};
         <div><label class="label" for="ne-n">Nombre completo</label><input id="ne-n" class="input" data-bind="nuevaPersonaEq.nombre" value="${s.nombre}" required maxlength="100"></div>
         <div><label class="label" for="ne-rut">RUT</label><input id="ne-rut" class="input" placeholder="12.345.678-9" data-bind="nuevaPersonaEq.rut" value="${s.rut}" required maxlength="12"></div>
         <div><label class="label" for="ne-c">Cargo</label><select id="ne-c" class="input" data-bind="nuevaPersonaEq.cargoId" data-change="reset-quitados" data-path="nuevaPersonaEq">${C.opciones(cargos.map((c) => [c.id, c.nombre]), s.cargoId)}</select></div>
-        <p class="muted small" style="margin:0">Quedará en ${GS.unidadDe(yo)}, con rol de trabajador y a tu cargo. La contraseña se define cuando se active el ingreso con RUT.</p>
+        <p class="muted small" style="margin:0">Quedará en ${GS.unidadDe(yo)}, con rol de trabajador y a tu cargo.${GS.auth.disponible() ? ' Al crearla verás su clave provisoria para que se la entregues.' : ''}</p>
         ${C.rutasPersona('nuevaPersonaEq')}
         <button class="btn self-start" type="submit">Crear usuario</button>
       </form>`;
     }
     return html`<div class="stack" style="gap:18px">
+      ${C.panelClaves()}
       <button type="button" class="btn self-start" data-action="toggle-usuarios">${st.abierto ? 'Cerrar formulario' : 'Agregar persona'}</button>
       ${form}
       ${lista.length ? html`<div class="card table-wrap"><table>
-        <thead><tr><th>Persona</th><th>RUT</th><th>Cargo</th><th>Estado</th><th><span class="sr-only">Acciones</span></th></tr></thead>
+        <thead><tr><th>Persona</th><th>RUT</th><th>Cargo</th><th>Estado</th>${GS.auth.disponible() ? html`<th>Acceso</th>` : ''}<th><span class="sr-only">Acciones</span></th></tr></thead>
         <tbody>${lista.map((p) => html`<tr class="${p.activo ? '' : 'inactivo'}">
           <td class="strong">${p.nombre}</td><td>${p.rut}</td><td>${GS.cargoDe(p)}</td>
           <td><span class="chip ${p.activo ? 'c-ok' : 'c-gris'}">${p.activo ? 'Activo' : 'Desactivado'}</span></td>
-          <td class="actions"><button type="button" class="btn2 btn-sm" data-action="toggle-activo" data-id="${p.id}">${p.activo ? 'Desactivar' : 'Reactivar'}</button></td>
+          ${GS.auth.disponible() ? html`<td>${C.celdaAcceso(p)}</td>` : ''}
+          <td class="actions">${C.botonAcceso(p, yo)}<button type="button" class="btn2 btn-sm" data-action="toggle-activo" data-id="${p.id}">${p.activo ? 'Desactivar' : 'Reactivar'}</button></td>
         </tr>`)}</tbody></table></div>` : C.vacio('Todavía no tienes personas a tu cargo.')}
-      <p class="muted small" style="margin:0">Una persona desactivada no puede ingresar, pero conserva su historial de cursos y certificados.</p>
+      <p class="muted small" style="margin:0">Una persona desactivada no puede ingresar, pero conserva su historial de cursos y certificados.${GS.auth.disponible() ? ' Si alguien olvida su clave, usa "Restablecer clave" y entrégale la nueva clave provisoria.' : ''}</p>
     </div>`;
   }
   GS.accion('toggle-usuarios', () => { GS.ui.usuarios.abierto = !GS.ui.usuarios.abierto; if (!GS.ui.usuarios.abierto) delete GS.ui.nuevaPersonaEq; });
@@ -136,7 +138,8 @@ window.GS = window.GS || {};
     const s = GS.ui.nuevaPersonaEq;
     s.unidadId = yo.unidadId; s.jefeId = yo.id; s.rol = 'trabajador';
     const p = await C.crearPersona(s, yo.id);
-    GS.toast(p.nombre + ' quedó creada en tu equipo.');
+    const r = GS.auth.disponible() ? await C.darAccesos([p], yo.id) : { error: null };
+    GS.toast(p.nombre + ' quedó creada en tu equipo.' + (r.error ? ' No se pudo crear su acceso: ' + r.error.message + ' Puedes crearlo desde la lista.' : ''), r.error ? 'error' : undefined);
     delete GS.ui.nuevaPersonaEq;
     GS.ui.usuarios.abierto = false;
   }, { escribe: true });

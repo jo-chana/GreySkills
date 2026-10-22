@@ -83,10 +83,22 @@ window.GS = window.GS || {};
     });
   }
 
-  async function iniciarFirestore(cfg) {
-    await cargarScript(SDK + 'firebase-app-compat.js');
-    await cargarScript(SDK + 'firebase-firestore-compat.js');
-    fs = firebase.initializeApp(cfg).firestore();
+  // Carga Firebase una sola vez; lo usan la base de datos y el acceso (js/auth.js).
+  let cargando = null;
+  GS.firebase = () => {
+    if (!cargando) {
+      cargando = (async () => {
+        await cargarScript(SDK + 'firebase-app-compat.js');
+        await Promise.all([cargarScript(SDK + 'firebase-firestore-compat.js'), cargarScript(SDK + 'firebase-auth-compat.js')]);
+        return firebase.initializeApp(GS.FIREBASE);
+      })();
+      cargando.catch(() => { cargando = null; });
+    }
+    return cargando;
+  };
+
+  async function iniciarFirestore() {
+    fs = (await GS.firebase()).firestore();
     try { await fs.enablePersistence({ synchronizeTabs: true }); } catch (e) { /* sin copia offline en este navegador */ }
     db = {};
     await Promise.all(COLECCIONES.map((c) => new Promise((ok, mal) => {
@@ -111,7 +123,7 @@ window.GS = window.GS || {};
 
   GS.store = {
     async init() {
-      if (GS.FIREBASE) await iniciarFirestore(GS.FIREBASE);
+      if (GS.FIREBASE) await iniciarFirestore();
       else iniciarLocal();
     },
     alCambiar(fn) { oyentes.push(fn); },

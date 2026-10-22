@@ -15,6 +15,14 @@ GS.FIREBASE = {
   appId: '1:83517558197:web:086c9c600e969295ce1dfc'
 };
 
+// Cómo se ingresa a la plataforma:
+// - 'vista': acceso provisional, se elige un usuario genérico por rol (con la clave común de abajo).
+// - 'rut':   cada persona entra con su RUT y su contraseña.
+GS.ACCESO = 'vista';
+
+// Dominio con que se arman las cuentas a partir del RUT (12345678k.1@...). No se envían correos.
+GS.DOMINIO_CUENTAS = 'cuentas.greyskills.app';
+
 // Clave común del acceso provisional, guardada como huella SHA-256 (no el texto de la clave).
 // El código es público: esto solo frena a curiosos, no es seguridad real. En null, no se pide clave.
 GS.CLAVE_HASH = '4179f5b763f02f590c08c8d7880ac9af606ae43ed9dce1920ed36154e0f5e585';

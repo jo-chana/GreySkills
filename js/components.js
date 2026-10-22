@@ -195,6 +195,61 @@ window.GS = window.GS || {};
   });
 
   // Valida y crea una persona con sus cursos de ruta. Devuelve la persona creada.
+  // ---------- Accesos (RUT y clave) ----------
+  // Puede crear o restablecer el acceso: la administración, o la jefatura directa de la persona.
+  // Con ingreso por RUT nadie restablece su propia clave (la cambia en "Mi perfil").
+  C.puedeDarAcceso = (p, yo) => GS.auth.disponible() && p.activo && (p.id !== yo.id || !GS.auth.activo()) && (yo.rol === 'admin' || p.jefeId === yo.id);
+  C.celdaAcceso = (p) => (p.cuenta
+    ? html`<span class="chip c-ok">Con acceso</span>`
+    : html`<span class="chip c-gris">Sin acceso</span>`);
+  C.botonAcceso = (p, yo) => (C.puedeDarAcceso(p, yo)
+    ? html`<button type="button" class="btn2 btn-sm" data-action="crear-acceso" data-id="${p.id}">${p.cuenta ? 'Restablecer clave' : 'Crear acceso'}</button>`
+    : '');
+  // Crea accesos uno por uno y guarda las claves para mostrarlas. Se detiene si Firebase pide esperar.
+  C.darAccesos = async (personas, por) => {
+    const nuevas = [];
+    let error = null;
+    for (const p of personas) {
+      try { nuevas.push({ nombre: p.nombre, rut: p.rut, clave: await GS.auth.crearAcceso(p, por) }); }
+      catch (e) { error = e; break; }
+    }
+    GS.ui.claves = (GS.ui.claves || []).concat(nuevas);
+    return { creados: nuevas.length, error };
+  };
+  // Las claves provisorias solo se muestran aquí, una vez. No quedan guardadas en ninguna parte.
+  C.panelClaves = () => {
+    const claves = GS.ui.claves || [];
+    if (!claves.length) return '';
+    return html`<div class="card card-pad stack card-focus" role="status">
+      <h2 class="h2">${claves.length === 1 ? 'Clave provisoria creada' : 'Claves provisorias creadas'}</h2>
+      <div class="notice">Anótalas o descárgalas ahora: por seguridad no se vuelven a mostrar. Cada persona entra con su RUT y esta clave, y en su primer ingreso debe cambiarla por una propia.</div>
+      <div class="table-wrap"><table>
+        <thead><tr><th>Persona</th><th>RUT</th><th>Clave provisoria</th></tr></thead>
+        <tbody>${claves.map((c) => html`<tr><td class="strong">${c.nombre}</td><td>${c.rut}</td><td><code style="font-size:16px;letter-spacing:1px">${c.clave}</code></td></tr>`)}</tbody>
+      </table></div>
+      <div class="row">
+        <button type="button" class="btn2" data-action="claves-descargar">Descargar en Excel</button>
+        <button type="button" class="btn" data-action="claves-cerrar">Listo, ya las anoté</button>
+      </div>
+    </div>`;
+  };
+  GS.accion('crear-acceso', async (el) => {
+    const p = GS.persona(el.dataset.id);
+    const yo = GS.yo();
+    if (!p || !C.puedeDarAcceso(p, yo)) throw new Error('No puedes cambiar el acceso de esta persona.');
+    if (p.cuenta && !confirm('Se creará una clave provisoria nueva para ' + p.nombre + ' y la actual dejará de funcionar. Su avance no se pierde. ¿Seguir?')) return false;
+    const r = await C.darAccesos([p], yo.id);
+    if (r.error) throw r.error;
+  }, { escribe: true });
+  GS.accion('claves-descargar', () => {
+    GS.descargarCSV('claves-provisorias-' + GS.hoy() + '.csv', [['Nombre', 'RUT', 'Clave provisoria']].concat((GS.ui.claves || []).map((c) => [c.nombre, c.rut, c.clave])));
+    return false;
+  });
+  GS.accion('claves-cerrar', () => {
+    if ((GS.ui.claves || []).length && !confirm('Después de cerrar no podrás volver a ver estas claves. ¿Ya las anotaste o descargaste?')) return false;
+    delete GS.ui.claves;
+  });
+
   C.crearPersona = async (s, por) => {
     const nombre = String(s.nombre || '').trim();
     if (nombre.length < 3) throw new Error('Escribe el nombre completo.');

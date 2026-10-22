@@ -20,7 +20,7 @@ window.GS = window.GS || {};
         </div>
         <div class="login-side"><div class="login-box">
           <h2 class="h2" style="font-size:28px">Ingresa</h2>
-          ${bloqueado ? html`<div class="notice">Acceso provisional para pruebas. Escribe la clave de acceso.</div>
+          ${GS.auth.activo() ? formIngresoRut() : bloqueado ? html`<div class="notice">Acceso provisional para pruebas. Escribe la clave de acceso.</div>
           <form data-submit="clave" class="stack-sm">
             <div><label class="label" for="ingreso-clave">Clave de acceso</label>
               <input id="ingreso-clave" class="input" type="password" name="clave" autocomplete="current-password" required></div>
@@ -36,6 +36,63 @@ window.GS = window.GS || {};
       </div>`;
     }
   };
+  function formIngresoRut() {
+    const st = GS.ui.ingreso || {};
+    return html`${st.msg ? html`<div class="notice">${st.msg}</div>` : ''}
+    <form data-submit="ingresar-rut" class="stack-sm">
+      <div><label class="label" for="ingreso-rut">RUT</label>
+        <input id="ingreso-rut" class="input" name="rut" value="${st.rut || ''}" data-bind="ingreso.rut" placeholder="12.345.678-9" autocomplete="username" inputmode="text" required maxlength="12"></div>
+      <div><label class="label" for="ingreso-clave">Clave</label>
+        <input id="ingreso-clave" class="input" type="password" name="clave" autocomplete="current-password" required></div>
+      <button class="btn self-start" type="submit">Ingresar</button>
+    </form>
+    <p class="muted small" style="margin:0">¿Olvidaste tu clave o es tu primera vez? Pídele a tu jefatura que te entregue una clave provisoria.</p>`;
+  }
+  GS.accion('ingresar-rut', async (f, ev, datos) => {
+    try { await GS.auth.ingresar(datos.get('rut'), datos.get('clave')); }
+    catch (e) { GS.ui.ingreso = Object.assign(GS.ui.ingreso || {}, { msg: e.message }); return; }
+    location.reload();
+    return false;
+  });
+
+  // Cambio obligatorio de la clave provisoria (primer ingreso o clave restablecida).
+  GS.vistas.claveNueva = {
+    render({ yo }) {
+      return html`<div class="login">
+        <div class="login-hero">
+          <div class="brand"><span class="brand-name" style="font-size:26px">Grey Skills</span><span class="brand-tag">Greystar Chile</span></div>
+          <div style="max-width:460px"><h1>Hola, ${GS.primerNombre(yo.nombre)}.</h1><p>Antes de empezar, crea una clave que solo tú conozcas.</p></div>
+          <div class="login-line"></div>
+        </div>
+        <div class="login-side"><div class="login-box">
+          <h2 class="h2" style="font-size:28px">Crea tu clave</h2>
+          <div class="notice">Entraste con una clave provisoria. Elige una nueva de al menos 8 caracteres. No la compartas con nadie, ni con tu jefatura.</div>
+          ${formClave('clave-nueva', false)}
+          <button type="button" class="btn2 self-start" data-action="cambiar-persona">Salir</button>
+        </div></div>
+      </div>`;
+    }
+  };
+  function formClave(accion, pedirActual) {
+    return html`<form data-submit="${accion}" class="stack-sm">
+      ${pedirActual ? html`<div><label class="label" for="${accion}-a">Clave actual</label><input id="${accion}-a" class="input" type="password" name="actual" autocomplete="current-password" required></div>` : ''}
+      <div><label class="label" for="${accion}-n">Clave nueva</label><input id="${accion}-n" class="input" type="password" name="nueva" autocomplete="new-password" minlength="8" required></div>
+      <div><label class="label" for="${accion}-r">Repite la clave nueva</label><input id="${accion}-r" class="input" type="password" name="repetir" autocomplete="new-password" minlength="8" required></div>
+      <button class="btn self-start" type="submit">Guardar clave</button>
+    </form>`;
+  }
+  GS.accion('clave-nueva', async (f, ev, datos) => {
+    await GS.auth.cambiarClave(null, datos.get('nueva'), datos.get('repetir'));
+    GS.toast('Listo, tu clave quedó guardada.');
+    GS.ir('#/cursos');
+    return false;
+  });
+  GS.accion('clave-cambiar', async (f, ev, datos) => {
+    await GS.auth.cambiarClave(datos.get('actual'), datos.get('nueva'), datos.get('repetir'));
+    GS.ui.perfilClave = false;
+    GS.toast('Listo, tu clave quedó cambiada.');
+  });
+  GS.accion('toggle-perfil-clave', () => { GS.ui.perfilClave = !GS.ui.perfilClave; });
   GS.accion('refrescar', () => {});
   GS.accion('clave', async (f, ev, datos) => {
     if (!(await GS.claveOk(datos.get('clave')))) { GS.toast('Clave incorrecta.', 'error'); return false; }
@@ -197,7 +254,11 @@ window.GS = window.GS || {};
               <dt class="muted">Jefatura</dt><dd style="margin:0">${jefe ? jefe.nombre + ', ' + GS.cargoDe(jefe) : '—'}</dd>
               <dt class="muted">Rol</dt><dd style="margin:0">${GS.ROLES[yo.rol]}</dd>
             </dl>
-            <div class="row"><button type="button" class="btn2" data-action="cambiar-persona">Cerrar sesión</button></div>
+            <div class="row">
+              ${GS.auth.activo() ? html`<button type="button" class="btn2" data-action="toggle-perfil-clave">${GS.ui.perfilClave ? 'Cancelar' : 'Cambiar mi clave'}</button>` : ''}
+              <button type="button" class="btn2" data-action="cambiar-persona">Cerrar sesión</button>
+            </div>
+            ${GS.auth.activo() && GS.ui.perfilClave ? formClave('clave-cambiar', true) : ''}
           </div>
           <div class="grow stack-lg" style="gap:20px">
             ${proximas.length ? html`<div class="stack"><h2 class="h2">Próximas capacitaciones presenciales</h2>${proximas.map((c) => {

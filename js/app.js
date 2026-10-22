@@ -20,10 +20,13 @@ window.GS = window.GS || {};
     verComo(personaId) { const s = leerSesion(); s.viewAs = personaId; guardarSesion(s); GS.ui = {}; },
     dejarVerComo() { const s = leerSesion(); delete s.viewAs; guardarSesion(s); GS.ui = {}; }
   };
+  // Con ingreso por RUT, la persona sale de la cuenta con sesión abierta; si no, de la vista elegida.
   GS.real = () => {
     const s = leerSesion();
-    if (GS.CLAVE_HASH && !s.acceso) return null;
-    const p = s.personaId && GS.persona(s.personaId);
+    let id = s.personaId;
+    if (GS.auth.activo()) id = GS.auth.personaId();
+    else if (GS.CLAVE_HASH && !s.acceso) return null;
+    const p = id && GS.persona(id);
     return p && p.activo ? p : null;
   };
   GS.claveOk = async (texto) => {
@@ -118,7 +121,16 @@ window.GS = window.GS || {};
 
   // ---------- Acciones generales ----------
   GS.accion('ir', (el) => { GS.ir(el.getAttribute('href') || el.dataset.href); return false; });
-  GS.accion('cambiar-persona', () => { GS.sesion.salir(); GS.ir('#/ingreso'); return false; });
+  GS.accion('cambiar-persona', async () => {
+    if (GS.auth.activo()) {
+      await GS.auth.salir();
+      GS.sesion.salir();
+      location.replace(location.pathname + '#/ingreso');
+      location.reload();
+      return false;
+    }
+    GS.sesion.salir(); GS.ir('#/ingreso'); return false;
+  });
   GS.accion('restablecer', async () => {
     if (!confirm('Esto borra todo lo que has probado en este navegador y vuelve a cargar los datos de ejemplo. ¿Seguir?')) return false;
     await GS.store.reset();
@@ -129,6 +141,7 @@ window.GS = window.GS || {};
 
   // ---------- Diseño común ----------
   function barraProvisional(real) {
+    if (GS.auth.activo()) return '';
     return html`<div class="devbar no-print"><div class="wrap">
       <span><strong>Acceso provisional</strong> · datos de prueba${real ? html` · ingresaste como ${real.nombre} (${GS.ROLES[real.rol]})` : ''}</span>
       ${real ? html`<button type="button" data-action="cambiar-persona">Cambiar de persona</button>` : ''}
@@ -164,8 +177,15 @@ window.GS = window.GS || {};
     const r = GS.ruta();
     const real = GS.real();
 
+    // Con sesión abierta por RUT, la pantalla de ingreso no aplica: se va a "Mis cursos".
+    if (real && r.nombre === 'ingreso' && GS.auth.activo()) { history.replaceState(null, '', '#/cursos'); r.nombre = 'cursos'; }
     if (!real || r.nombre === 'ingreso') {
       pintar(app, html`${barraProvisional(null)}${GS.vistas.ingreso.render()}`, 'Ingreso');
+      return;
+    }
+    // Primer ingreso (o clave restablecida): debe cambiar la clave provisoria antes de seguir.
+    if (GS.auth.provisoria()) {
+      pintar(app, GS.vistas.claveNueva.render({ yo: real }), 'Crea tu clave');
       return;
     }
     const yo = GS.yo();
@@ -199,7 +219,16 @@ window.GS = window.GS || {};
 
   // ---------- Inicio ----------
   GS.iniciar = async () => {
-    try { await GS.store.init(); await GS.asegurarVistas(); }
+    try {
+      await GS.auth.init();
+      // Con ingreso por RUT, los datos se cargan solo después de ingresar.
+      if (!GS.auth.activo() || GS.auth.personaId()) await GS.store.init();
+      if (!GS.auth.activo()) await GS.asegurarVistas();
+      else if (GS.auth.personaId() && !GS.real()) {
+        await GS.auth.salir();
+        GS.ui.ingreso = { msg: 'Tu acceso está desactivado. Si crees que es un error, habla con tu jefatura.' };
+      }
+    }
     catch (e) {
       console.error(e);
       document.getElementById('app').innerHTML = String(html`<p style="padding:24px;font-family:Arial,sans-serif">No se pudo conectar con la base de datos de Grey Skills. Revisa tu conexión y recarga la página.</p>`);
