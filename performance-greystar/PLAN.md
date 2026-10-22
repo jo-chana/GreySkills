@@ -1,6 +1,6 @@
-# Evaluación de Desempeño: plan de construcción
+# Performance Greystar: plan de construcción
 
-Plataforma para evaluar el desempeño de las personas de Greystar Chile. Referencia visual y funcional: [mockup.html](mockup.html) (ábrelo con doble clic; arriba hay pestañas para recorrer cada pantalla).
+Plataforma para evaluar el desempeño de las personas de Greystar Chile. Referencia visual y funcional: [docs/mockup.html](docs/mockup.html) (ábrelo con doble clic; arriba hay pestañas para recorrer cada pantalla).
 
 Este documento es una **propuesta para validar con RRHH** antes de construir. Los valores marcados como *propuesta* (escalas, ponderaciones, tipo de evaluación por cargo, plazos) son puntos de partida y quedan configurables en la plataforma.
 
@@ -10,16 +10,21 @@ Este documento es una **propuesta para validar con RRHH** antes de construir. Lo
 2. La evaluación se hace en un solo lugar, con plazos y avisos, en vez de planillas por correo.
 3. Cada persona es evaluada por quien corresponde según su cargo: **90°, 180° o 360°**.
 4. Gerencia y RRHH calibran los resultados antes de comunicarlos, para que una misma nota signifique lo mismo en todos los edificios.
-5. Cada evaluación termina en una conversación y un plan de desarrollo, con cursos sugeridos de Grey Skills.
+5. Cada evaluación termina en una conversación y un plan de desarrollo, con cursos sugeridos de Grey Skills (la plataforma de aprendizaje).
 
-## Dónde vive (decisión pendiente)
+## Plataforma y stack
 
-| Opción | A favor | En contra |
+Performance Greystar es una **plataforma propia**, separada de Grey Skills: su propio repositorio, su propio proyecto de Firebase y su propio link. Así los datos de desempeño, más sensibles que el avance de cursos, quedan aislados.
+
+| Pieza | Herramienta | Para qué |
 |---|---|---|
-| **Módulo dentro de Grey Skills** (recomendada) | Reutiliza personas, unidades, cargos, jefaturas, roles, acceso con RUT y clave, "ver como" y exportación a Excel. El plan de desarrollo enlaza directo a cursos. Un solo link para la gente. | Grey Skills pasa a guardar datos más sensibles; hay que cerrar bien las reglas de seguridad. |
-| Plataforma separada | Datos de desempeño aislados en otro proyecto de Firebase. | Duplica personas y estructura (hay que mantenerlas sincronizadas), otro link y otro acceso. |
+| Código | GitHub (repo `performance-greystar`, privado) | Repositorio, historial y respaldo |
+| Pantallas | HTML, CSS y JavaScript (SDK de Firebase desde CDN) | Vistas según rol, sin herramientas de compilación |
+| Base de datos | Firestore (proyecto de Firebase propio) | Personas, ciclos, objetivos, evaluaciones y resultados |
+| Publicación | Firebase Hosting | Link de la plataforma |
+| Acceso | Firebase Authentication | Ingreso con RUT y contraseña desde la primera versión con datos reales |
 
-En ambos casos se usa el **mismo stack** (HTML, CSS y JavaScript con Firebase: Firestore, Hosting y Authentication) y las mismas colecciones de `personas`, `unidades` y `cargos`.
+Personas, unidades, cargos y jefaturas se cargan en Performance Greystar (carga masiva desde Excel, igual que en Grey Skills). Más adelante se puede evaluar una sincronización con Grey Skills o con la fuente de RRHH, para no mantener la estructura dos veces.
 
 ## Tipo de evaluación según cargo (*propuesta*)
 
@@ -118,11 +123,13 @@ Las notas son **más sensibles** que el avance de cursos: cada persona ve solo l
 
 ## Plan de desarrollo
 
-Al cerrar la conversación, la jefatura registra 1 a 3 acciones de desarrollo ligadas a las competencias más bajas. La plataforma sugiere **cursos de Grey Skills** asociados a esa competencia; si se eligen, quedan asignados con plazo en Grey Skills (si se construye como módulo). Cada competencia del catálogo puede tener cursos asociados.
+Al cerrar la conversación, la jefatura registra 1 a 3 acciones de desarrollo ligadas a las competencias más bajas. La plataforma sugiere **cursos de Grey Skills** asociados a esa competencia, con su link y el plazo acordado. Cada competencia del catálogo puede tener cursos asociados. *A futuro:* que el curso quede asignado automáticamente en Grey Skills.
 
 ## Modelo de datos (colecciones de Firestore)
 
-Se reutilizan `personas`, `unidades` y `cargos`. Nuevas:
+- **Estructura y personas:** `unidades`, `cargos` y `personas` (RUT, nombre, rol, unidad, cargo, jefatura, activo), con la misma forma que en Grey Skills para facilitar una sincronización futura.
+
+Propias del desempeño:
 
 - **`ciclos`**: nombre (Evaluación 2026), estado (borrador / objetivos / evaluación / calibración / conversación / cerrado), fechas de cada etapa, configuración por cargo (tipo 90/180/360, competencias, peso competencias/objetivos), pesos por evaluador, escala.
 - **`competencias`**: nombre, tipo (corporativa / de cargo), descripción, conductas por nivel, cursos asociados.
@@ -136,27 +143,27 @@ Las notas de pares y del equipo se guardan con el evaluador para controlar dupli
 
 Cada etapa termina publicada en Firebase Hosting para probarla con datos de prueba.
 
-0. **Validación:** revisar este plan y el mockup con RRHH; definir dónde vive, competencias, escalas, tipo por cargo y pesos.
-1. **Configuración del ciclo:** catálogo de competencias con conductas, tipo y pesos por cargo, fechas de etapas.
-2. **Objetivos:** fijar, aceptar y editar objetivos; revisión de mitad de año.
-3. **Evaluación:** formularios de autoevaluación, jefatura, pares y equipo; selección y aprobación de pares; avance por equipo.
-4. **Cálculo y calibración:** nota final, vista de calibración con distribución y ajustes justificados.
-5. **Conversación y cierre:** resultado para la persona, comparación por evaluador, plan de desarrollo con cursos, toma de conocimiento.
-6. **Reportes:** avance del ciclo, distribución por unidad y cargo, brechas por competencia, exportables a Excel.
-7. **Seguridad y puesta en marcha:** reglas de Firestore por rol (requisito antes de datos reales), piloto en uno o dos edificios y luego toda la empresa.
+0. **Preparación:** crear el proyecto de Firebase de Performance Greystar; revisar este plan y el mockup con RRHH y definir competencias, escalas, tipo por cargo y pesos.
+1. **Base:** acceso, roles, estructura (unidades, cargos, jefaturas) y personas con carga desde Excel.
+2. **Configuración del ciclo:** catálogo de competencias con conductas, tipo y pesos por cargo, fechas de etapas.
+3. **Objetivos:** fijar, aceptar y editar objetivos; revisión de mitad de año.
+4. **Evaluación:** formularios de autoevaluación, jefatura, pares y equipo; selección y aprobación de pares; avance por equipo.
+5. **Cálculo y calibración:** nota final, vista de calibración con distribución y ajustes justificados.
+6. **Conversación y cierre:** resultado para la persona, comparación por evaluador, plan de desarrollo con cursos, toma de conocimiento.
+7. **Reportes:** avance del ciclo, distribución por unidad y cargo, brechas por competencia, exportables a Excel.
+8. **Seguridad y puesta en marcha:** reglas de Firestore por rol (requisito antes de datos reales), piloto en uno o dos edificios y luego toda la empresa.
 
 ## Decisiones pendientes con RRHH
 
-1. Dónde vive: módulo de Grey Skills o plataforma separada.
-2. Lista de competencias corporativas y de cargo, con sus conductas por nivel.
-3. Tipo de evaluación por cargo (tabla de arriba) y si hay excepciones.
-4. Pesos: competencias vs. objetivos por cargo, y peso de cada evaluador en 360°.
-5. Si la autoevaluación pondera o es solo referencial.
-6. Si la calibración usa una distribución sugerida (por ejemplo, máximo 15 % en "Destaca") o es libre.
-7. Frecuencia: un ciclo anual con revisión de mitad de año, o dos ciclos semestrales.
-8. Si el resultado se conecta con bonos o reajustes (cambia el nivel de seguridad y auditoría que se necesita).
-9. Cómo evalúa el personal operativo sin computador: la jefatura en su teléfono durante la conversación, o un tótem/tablet en el edificio.
-10. Si el rol visualizador ve notas o solo avance.
+1. Lista de competencias corporativas y de cargo, con sus conductas por nivel.
+2. Tipo de evaluación por cargo (tabla de arriba) y si hay excepciones.
+3. Pesos: competencias vs. objetivos por cargo, y peso de cada evaluador en 360°.
+4. Si la autoevaluación pondera o es solo referencial.
+5. Si la calibración usa una distribución sugerida (por ejemplo, máximo 15 % en "Destaca") o es libre.
+6. Frecuencia: un ciclo anual con revisión de mitad de año, o dos ciclos semestrales.
+7. Si el resultado se conecta con bonos o reajustes (cambia el nivel de seguridad y auditoría que se necesita).
+8. Cómo evalúa el personal operativo sin computador: la jefatura en su teléfono durante la conversación, o un tótem/tablet en el edificio.
+9. Si el rol visualizador ve notas o solo avance.
 
 ## Pendientes fuera del código
 

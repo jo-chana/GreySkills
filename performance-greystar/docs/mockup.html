@@ -4,7 +4,7 @@
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
 <meta name="color-scheme" content="light">
-<title>Evaluación de Desempeño · Mockup</title>
+<title>Performance Greystar · Mockup</title>
 <style>
 :root {
   --navy: #0A2245; --ocean: #0077D4; --sky: #92C9EB; --stucco: #F5EBDC;
@@ -201,14 +201,14 @@ const etapas = (actual) => `<div class="steps" aria-label="Etapas del ciclo">${E
 
 function header(nav, on, nombre, rol) {
   return `<header class="top"><div class="top-in">
-    <div class="brand"><span class="brand-name">Grey Skills</span><span class="brand-tag">Desempeño</span></div>
+    <div class="brand"><span class="brand-name">Performance</span><span class="brand-tag">Greystar</span></div>
     <nav class="nav" aria-label="Secciones">${nav.map((n) => `<span class="${n === on ? 'on' : ''}">${n}</span>`).join('')}</nav>
     <div class="me"><span class="avatar">${ini(nombre)}</span><span><div class="me-name">${nombre}</div><div class="me-role">${rol}</div></span></div>
   </div></header>`;
 }
-const NAV_T = ['Mis cursos', 'Mi evaluación', 'Mi perfil'];
-const NAV_J = ['Mis cursos', 'Mi evaluación', 'Mi equipo', 'Mi perfil'];
-const NAV_G = ['Mis cursos', 'Mi evaluación', 'Mi equipo', 'Calibración', 'Mi perfil'];
+const NAV_T = ['Mi evaluación', 'Mis objetivos', 'Mi historial'];
+const NAV_J = ['Mi evaluación', 'Mis objetivos', 'Mi equipo', 'Mi historial'];
+const NAV_G = ['Mi evaluación', 'Mis objetivos', 'Mi equipo', 'Calibración', 'Mi historial'];
 const NAV_A = ['Administración', 'Ciclos', 'Competencias', 'Calibración', 'Reportes'];
 
 // ---------- Competencias de Guest Service ----------
@@ -524,7 +524,7 @@ S.resultado = {
           <tr><td class="strong">Comunicación</td><td>Enviar aviso a residentes 72 h antes de cada trabajo en áreas comunes.</td><td><span class="chip c-sky">Comunicación efectiva con residentes</span></td><td>31 mar</td></tr>
           <tr><td class="strong">Liderazgo de equipo</td><td>Reunión quincenal de 15 min con el equipo de Guest Service.</td><td><span class="chip c-sky">Feedback para jefaturas</span></td><td>30 abr</td></tr>
         </tbody></table></div>
-      <p class="xs muted">Los cursos quedan asignados con plazo en Grey Skills y su avance se ve en tu ruta.</p>
+      <p class="xs muted">Los cursos se toman en Grey Skills, la plataforma de aprendizaje; aquí queda el link y el plazo acordado.</p>
     </section>
     <section class="card pad stack" style="border:2px solid var(--ocean)">
       <h2 class="h2">Toma de conocimiento</h2>
