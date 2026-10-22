@@ -146,7 +146,6 @@ window.GS = window.GS || {};
       <span><strong>${GS.t('Acceso provisional')}</strong> · ${GS.t('datos de prueba')}${real ? html` · ${GS.t('ingresaste como {nombre} ({rol})', { nombre: real.nombre, rol: GS.ROLES[real.rol] })}` : ''}</span>
       ${real ? html`<button type="button" data-action="cambiar-persona">${GS.t('Cambiar de persona')}</button>` : ''}
       <button type="button" data-action="restablecer">${GS.t('Restablecer datos de prueba')}</button>
-      <span class="devbar-lang">${[['es', 'Español'], ['en', 'English']].map(([k, l]) => html`<button type="button" data-action="idioma" data-v="${k}" aria-pressed="${String(GS.idioma === k)}" lang="${k}">${l}</button>`)}</span>
     </div></div>`;
   }
   function avisoVerComo(yo) {
@@ -156,8 +155,9 @@ window.GS = window.GS || {};
       <button type="button" class="btn btn-sm" data-action="salir-ver-como">${GS.t('Volver a mi vista')}</button>
     </div></div>`;
   }
-  // Selector de idioma: ES | EN. claro: versión para fondos claros (pantallas de ingreso).
-  GS.botonIdioma = (claro) => html`<div class="lang${claro ? ' lang-claro' : ''} no-print" role="group" aria-label="Idioma / Language">
+  // Selector de idioma: ES | EN.
+  // claro: para fondos claros (ingreso y Mi perfil). mini: versión chica bajo el nombre, en el encabezado.
+  GS.botonIdioma = (claro, mini) => html`<div class="lang${claro ? ' lang-claro' : ''}${mini ? ' lang-mini' : ''} no-print" role="group" aria-label="Idioma / Language">
     ${[['es', 'ES', 'Español'], ['en', 'EN', 'English']].map(([k, l, nombre]) => html`<button type="button" data-action="idioma" data-v="${k}" aria-pressed="${String(GS.idioma === k)}" lang="${k}" title="${nombre}">${l}</button>`)}
   </div>`;
   GS.accion('idioma', (el) => { if (el.dataset.v !== GS.idioma) GS.cambiarIdioma(el.dataset.v); return false; });
@@ -170,10 +170,13 @@ window.GS = window.GS || {};
       <nav class="nav" aria-label="${GS.t('Secciones')}">
         ${GS.pestanas(yo).map(([k, l]) => html`<a href="#/${k}" aria-current="${k === actual ? 'page' : 'false'}">${l}${k === 'admin' && pend ? html`<span class="badge" aria-label="${GS.t('{n} pendientes', { n: pend })}">${pend}</span>` : ''}</a>`)}
       </nav>
-      <a class="me" href="#/perfil">
-        <span class="avatar" aria-hidden="true">${GS.iniciales(yo.nombre)}</span>
-        <span class="me-txt"><span class="me-name">${yo.nombre}</span><span class="me-role">${GS.cargoDe(yo)} · ${GS.unidadDe(yo)}</span></span>
-      </a>
+      <div class="me-box">
+        <a class="me" href="#/perfil" title="${yo.nombre} · ${GS.cargoDe(yo)} · ${GS.unidadDe(yo)}">
+          <span class="avatar" aria-hidden="true">${GS.iniciales(yo.nombre)}</span>
+          <span class="me-txt"><span class="me-name">${yo.nombre}</span><span class="me-role">${GS.cargoDe(yo)} · ${GS.unidadDe(yo)}</span></span>
+        </a>
+        ${GS.botonIdioma(false, true)}
+      </div>
     </div></header>`;
   }
 
