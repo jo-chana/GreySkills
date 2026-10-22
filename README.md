@@ -2,6 +2,8 @@
 
 Plataforma de aprendizaje de Greystar Chile. Ver el plan completo en [PLAN.md](PLAN.md) y el mockup original en [docs/mockup.html](docs/mockup.html).
 
+**En diseño:** módulo de Evaluación de Desempeño. Ver [docs/desempeno/PLAN.md](docs/desempeno/PLAN.md) y su mockup en [docs/desempeno/mockup.html](docs/desempeno/mockup.html).
+
 ## Cómo abrirla
 
 No requiere instalar nada. Abre `index.html` con doble clic en Chrome o Edge.

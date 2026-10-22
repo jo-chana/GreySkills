@@ -1,0 +1,621 @@
+<!doctype html>
+<html lang="es">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+<meta name="color-scheme" content="light">
+<title>Evaluación de Desempeño · Mockup</title>
+<style>
+:root {
+  --navy: #0A2245; --ocean: #0077D4; --sky: #92C9EB; --stucco: #F5EBDC;
+  --fondo: #F4F6F9; --borde: #DDE3EA; --borde-suave: #EEF1F5; --borde-fuerte: #9AA6B5;
+  --gris-barra: #E3E8EF; --texto-suave: #4A5A70; --texto-claro: #C9D3E0;
+  --verde: #007B0C; --amarillo: #FFD972; --rojo: #9E3B2E;
+  --radio: 12px; --sans: "Helvetica Neue", Arial, sans-serif; --serif: Georgia, "Times New Roman", serif;
+}
+*, *::before, *::after { box-sizing: border-box; }
+html, body { margin: 0; }
+body { background: var(--fondo); color: var(--navy); font: 16px/1.45 var(--serif); }
+button { font: inherit; color: inherit; }
+a { color: var(--ocean); }
+button:focus-visible, a:focus-visible, input:focus-visible, select:focus-visible, textarea:focus-visible { outline: 3px solid var(--sky); outline-offset: 2px; }
+@media (prefers-reduced-motion: reduce) { * { transition: none !important; } }
+
+/* Barra del mockup */
+.pv { position: sticky; top: 0; z-index: 50; background: #FFF; border-bottom: 1px solid var(--borde); }
+.pv-in { max-width: 1200px; margin: 0 auto; padding: 8px 24px; display: flex; flex-wrap: wrap; align-items: center; gap: 6px 14px; }
+.pv-t { font: 700 14px var(--sans); margin-right: 6px; }
+.pv-tabs { display: flex; flex-wrap: wrap; gap: 6px; }
+.pv-tab { min-height: 38px; padding: 0 14px; border-radius: var(--radio); border: 1px solid var(--borde-fuerte); background: #FFF; color: var(--navy); font: 700 14px var(--sans); cursor: pointer; }
+.pv-tab[aria-current="page"] { background: var(--navy); border-color: var(--navy); color: #FFF; }
+
+/* Encabezado de la plataforma */
+.top { background: var(--navy); color: #FFF; }
+.top-in { max-width: 1200px; margin: 0 auto; padding: 0 24px; display: flex; flex-wrap: wrap; align-items: center; gap: 8px 28px; }
+.brand { display: flex; flex-direction: column; padding: 12px 0; }
+.brand-name { font: 24px var(--serif); letter-spacing: .3px; }
+.brand-tag { font: 700 11px var(--sans); color: var(--sky); letter-spacing: 1.5px; text-transform: uppercase; }
+.nav { display: flex; flex-wrap: wrap; gap: 4px; flex: 1 1 auto; }
+.nav span { padding: 22px 12px 19px; border-bottom: 3px solid transparent; font: 15px var(--sans); color: var(--texto-claro); }
+.nav span.on { border-bottom-color: var(--sky); color: #FFF; font-weight: 700; }
+.me { display: flex; align-items: center; gap: 10px; margin-left: auto; padding: 10px 0; }
+.avatar { width: 40px; height: 40px; flex: none; border-radius: var(--radio); background: var(--sky); color: var(--navy); display: flex; align-items: center; justify-content: center; font: 700 14px var(--sans); }
+.me-name { font: 700 14px var(--sans); }
+.me-role { font: 12px var(--sans); color: var(--texto-claro); }
+
+/* Estructura */
+.main { max-width: 1200px; margin: 0 auto; padding: 32px 24px 72px; }
+.stack { display: flex; flex-direction: column; gap: 14px; }
+.stack-lg { display: flex; flex-direction: column; gap: 26px; }
+.stack-sm { display: flex; flex-direction: column; gap: 6px; }
+.row { display: flex; flex-wrap: wrap; align-items: center; gap: 10px; }
+.row-between { display: flex; flex-wrap: wrap; align-items: flex-end; justify-content: space-between; gap: 16px; }
+.split { display: flex; flex-wrap: wrap; gap: 24px; align-items: flex-start; }
+.split > .side { flex: 1 1 320px; min-width: 0; }
+.split > .grow { flex: 999 1 520px; min-width: 0; }
+.grid { display: grid; grid-template-columns: repeat(auto-fill, minmax(220px, 1fr)); gap: 16px; }
+.h1 { margin: 0 0 6px; font: 700 32px/1.15 var(--sans); }
+.h2 { margin: 0; font: 700 22px/1.25 var(--sans); }
+.h3 { margin: 0; font: 700 18px/1.3 var(--sans); }
+.eyebrow { margin: 0 0 4px; font: 700 13px var(--sans); letter-spacing: 1px; text-transform: uppercase; color: var(--texto-suave); }
+.lead { margin: 0; font-size: 17px; color: var(--texto-suave); }
+.muted { color: var(--texto-suave); }
+.small { font-size: 14px; }
+.xs { font: 13px var(--sans); }
+.strong { font-family: var(--sans); font-weight: 700; }
+p { margin: 0; }
+
+.card { background: #FFF; border: 1px solid var(--borde); border-radius: var(--radio); }
+.pad { padding: 22px 24px; }
+.pad-sm { padding: 16px 18px; }
+.notice { background: var(--stucco); border-radius: var(--radio); padding: 14px 18px; font-size: 15px; }
+.notice-info { background: var(--sky); }
+.notice-warn { background: var(--amarillo); }
+.kpi { font: 700 34px/1.1 var(--sans); }
+
+.btn, .btn2 { display: inline-flex; align-items: center; justify-content: center; gap: 6px; min-height: 44px; padding: 0 20px; border-radius: var(--radio); font: 700 15px var(--sans); cursor: pointer; white-space: nowrap; }
+.btn { border: 1px solid var(--navy); background: var(--navy); color: #FFF; }
+.btn:hover { background: var(--ocean); border-color: var(--ocean); }
+.btn:disabled { opacity: .4; cursor: default; background: var(--navy); border-color: var(--navy); }
+.btn2 { border: 1px solid var(--navy); background: #FFF; color: var(--navy); }
+.btn2:hover { background: var(--stucco); }
+.btn-sm { min-height: 36px; padding: 0 14px; font-size: 14px; }
+
+.chip { display: inline-flex; align-items: center; min-height: 26px; padding: 0 10px; border-radius: var(--radio); font: 700 12px var(--sans); white-space: nowrap; }
+.c-ok { background: var(--verde); color: #FFF; }
+.c-warn { background: var(--amarillo); color: var(--navy); }
+.c-late { background: var(--rojo); color: #FFF; }
+.c-done { background: var(--navy); color: #FFF; }
+.c-none { background: var(--stucco); color: var(--navy); }
+.c-sky { background: var(--sky); color: var(--navy); }
+.c-suave { background: var(--gris-barra); color: var(--navy); }
+.t90 { background: var(--stucco); color: var(--navy); }
+.t180 { background: var(--sky); color: var(--navy); }
+.t360 { background: var(--navy); color: #FFF; }
+
+.bar { flex: 1; height: 8px; background: var(--gris-barra); border-radius: var(--radio); overflow: hidden; min-width: 40px; }
+.bar > span { display: block; height: 100%; background: var(--ocean); }
+.bar-row { display: flex; align-items: center; gap: 10px; }
+.bar-pct { font: 700 13px var(--sans); min-width: 44px; text-align: right; }
+
+.table-wrap { overflow-x: auto; }
+table { border-collapse: collapse; width: 100%; }
+th { text-align: left; font: 700 13px var(--sans); color: var(--texto-suave); padding: 12px 14px; border-bottom: 1px solid var(--borde); white-space: nowrap; }
+td { padding: 12px 14px; border-bottom: 1px solid var(--borde-suave); font-size: 15px; vertical-align: middle; }
+tr:last-child td { border-bottom: none; }
+.num { text-align: right; font-family: var(--sans); font-variant-numeric: tabular-nums; }
+
+.label { display: block; margin-bottom: 6px; font: 700 14px var(--sans); }
+.input { width: 100%; min-height: 42px; padding: 8px 12px; border: 1px solid var(--borde-fuerte); border-radius: var(--radio); font: 15px var(--serif); color: var(--navy); background: #FFF; }
+textarea.input { resize: vertical; }
+.input-num { width: 90px; text-align: right; font-family: var(--sans); }
+.check { display: flex; align-items: flex-start; gap: 10px; font-size: 15px; cursor: pointer; }
+.check input { width: 20px; height: 20px; flex: none; margin-top: 2px; accent-color: var(--navy); }
+
+/* Etapas del ciclo */
+.steps { display: grid; grid-template-columns: repeat(7, minmax(110px, 1fr)); gap: 6px; overflow-x: auto; }
+.step { padding: 10px 12px; border-radius: var(--radio); background: var(--gris-barra); font: 13px/1.3 var(--sans); min-width: 110px; }
+.step b { display: block; font-size: 14px; }
+.step.done { background: var(--navy); color: #FFF; }
+.step.now { background: var(--ocean); color: #FFF; }
+
+/* Escala de evaluación */
+.scale { display: flex; flex-wrap: wrap; gap: 6px; }
+.scale button { min-width: 44px; min-height: 44px; padding: 0 10px; border-radius: var(--radio); border: 1px solid var(--borde-fuerte); background: #FFF; font: 700 15px var(--sans); cursor: pointer; }
+.scale button:hover { background: var(--stucco); }
+.scale button[aria-pressed="true"] { background: var(--navy); border-color: var(--navy); color: #FFF; }
+.scale .no { font-weight: 400; font-size: 13px; }
+.comp { border-top: 1px solid var(--borde-suave); padding-top: 18px; }
+.comp:first-child { border-top: none; padding-top: 0; }
+.conducta { font-size: 14px; color: var(--texto-suave); padding-left: 14px; border-left: 3px solid var(--sky); }
+
+/* Comparación por evaluador */
+.cmp { display: grid; grid-template-columns: minmax(150px, 1.2fr) 3fr; gap: 6px 16px; align-items: center; }
+.cmp-bars { display: flex; flex-direction: column; gap: 4px; }
+.cmp-l { display: flex; align-items: center; gap: 8px; font: 12px var(--sans); }
+.cmp-l .bar { height: 10px; }
+.cmp-l .k { width: 90px; flex: none; color: var(--texto-suave); }
+.cmp-l .v { width: 30px; flex: none; text-align: right; font-weight: 700; }
+.s-auto > span { background: var(--borde-fuerte); }
+.s-jefe > span { background: var(--navy); }
+.s-par > span { background: var(--ocean); }
+.s-eq > span { background: var(--sky); }
+.legend { display: flex; flex-wrap: wrap; gap: 14px; font: 13px var(--sans); }
+.legend i { display: inline-block; width: 12px; height: 12px; border-radius: 3px; margin-right: 6px; vertical-align: -1px; }
+
+/* Distribución de calibración */
+.dist { display: grid; grid-template-columns: repeat(5, 1fr); gap: 10px; align-items: end; height: 190px; }
+.dist-col { display: flex; flex-direction: column; align-items: center; justify-content: flex-end; gap: 6px; height: 100%; }
+.dist-bar { width: 100%; max-width: 80px; background: var(--ocean); border-radius: 6px 6px 0 0; transition: height .25s; }
+.dist-n { font: 700 14px var(--sans); }
+.dist-l { font: 12px/1.2 var(--sans); text-align: center; color: var(--texto-suave); min-height: 30px; }
+.dist-ref { font: 11px var(--sans); color: var(--texto-suave); }
+
+.big-score { font: 700 56px/1 var(--sans); }
+.hidden { display: none !important; }
+
+@media (max-width: 640px) {
+  .main { padding: 24px 16px 56px; }
+  .pv-in, .top-in { padding-left: 16px; padding-right: 16px; }
+  .h1 { font-size: 26px; }
+  .nav { display: none; }
+  .cmp { grid-template-columns: 1fr; }
+  .pad { padding: 18px 16px; }
+}
+</style>
+</head>
+<body>
+
+<div class="pv"><div class="pv-in">
+  <span class="pv-t">Mockup</span>
+  <div class="pv-tabs" role="tablist" id="tabs"></div>
+</div></div>
+
+<div id="root"></div>
+
+<script>
+// Mockup estático: datos ficticios, nada se guarda.
+const $ = (s, el = document) => el.querySelector(s);
+const esc = (s) => String(s).replace(/[&<>"]/g, (c) => ({ '&': '&amp;', '<': '&lt;', '>': '&gt;', '"': '&quot;' }[c]));
+const ini = (n) => n.split(' ').map((x) => x[0]).slice(0, 2).join('');
+const f1 = (n) => n.toFixed(1).replace('.', ',');
+
+const ESCALA = [
+  { n: 1, l: 'No cumple' }, { n: 2, l: 'Cumple parcialmente' }, { n: 3, l: 'Cumple' },
+  { n: 4, l: 'Supera' }, { n: 5, l: 'Destaca' }
+];
+const resultado = (x) => x < 2 ? 'No cumple' : x < 2.8 ? 'Cumple parcialmente' : x < 3.7 ? 'Cumple' : x < 4.5 ? 'Supera' : 'Destaca';
+const chipTipo = (t) => `<span class="chip t${t}">${t}°</span>`;
+const ESTADO = {
+  env: '<span class="chip c-ok">Enviada</span>', cur: '<span class="chip c-warn">En curso</span>',
+  pen: '<span class="chip c-suave">Pendiente</span>', atr: '<span class="chip c-late">Atrasada</span>',
+  na: '<span class="muted xs">No aplica</span>'
+};
+
+const ETAPAS = [
+  ['Configuración', '1–15 sep'], ['Objetivos', '16 sep–4 oct'], ['Mitad de año', 'omitida'],
+  ['Evaluación', '13 oct–7 nov'], ['Calibración', '10–21 nov'], ['Conversación', '24 nov–12 dic'], ['Cierre', '15–19 dic']
+];
+const etapas = (actual) => `<div class="steps" aria-label="Etapas del ciclo">${ETAPAS.map(([t, d], i) =>
+  `<div class="step ${i < actual ? 'done' : i === actual ? 'now' : ''}" ${i === actual ? 'aria-current="step"' : ''}><b>${t}</b>${d}</div>`).join('')}</div>`;
+
+function header(nav, on, nombre, rol) {
+  return `<header class="top"><div class="top-in">
+    <div class="brand"><span class="brand-name">Grey Skills</span><span class="brand-tag">Desempeño</span></div>
+    <nav class="nav" aria-label="Secciones">${nav.map((n) => `<span class="${n === on ? 'on' : ''}">${n}</span>`).join('')}</nav>
+    <div class="me"><span class="avatar">${ini(nombre)}</span><span><div class="me-name">${nombre}</div><div class="me-role">${rol}</div></span></div>
+  </div></header>`;
+}
+const NAV_T = ['Mis cursos', 'Mi evaluación', 'Mi perfil'];
+const NAV_J = ['Mis cursos', 'Mi evaluación', 'Mi equipo', 'Mi perfil'];
+const NAV_G = ['Mis cursos', 'Mi evaluación', 'Mi equipo', 'Calibración', 'Mi perfil'];
+const NAV_A = ['Administración', 'Ciclos', 'Competencias', 'Calibración', 'Reportes'];
+
+// ---------- Competencias de Guest Service ----------
+const COMPS_GS = [
+  { id: 'srv', t: 'Servicio al residente', tipo: 'Corporativa', c: ['Saluda y atiende al residente por su nombre.', 'Resuelve o deriva la solicitud el mismo día y avisa cómo quedó.'] },
+  { id: 'eq', t: 'Trabajo en equipo', tipo: 'Corporativa', c: ['Comparte información del turno con el equipo.', 'Ofrece ayuda cuando ve a un compañero sobrepasado.'] },
+  { id: 'resp', t: 'Responsabilidad', tipo: 'Corporativa', c: ['Llega a la hora y cumple su turno completo.', 'Cumple los procedimientos del edificio sin que se los recuerden.'] },
+  { id: 'com', t: 'Comunicación', tipo: 'Corporativa', c: ['Se expresa con claridad y respeto, también por escrito.'] },
+  { id: 'reg', t: 'Registro y seguimiento de solicitudes', tipo: 'De cargo', c: ['Registra toda solicitud en el sistema con datos completos.', 'Hace seguimiento hasta el cierre.'] },
+  { id: 'emer', t: 'Manejo de contingencias', tipo: 'De cargo', c: ['Aplica el protocolo de emergencias y avisa a quien corresponde.'] }
+];
+
+// ================== Pantallas ==================
+const S = {};
+
+S.inicio = {
+  tab: 'Mi evaluación', render: () => `${header(NAV_T, 'Mi evaluación', 'Camila Rojas', 'Guest Service · Edificio Nativo')}
+  <main class="main stack-lg">
+    <div class="row-between">
+      <div><p class="eyebrow">Evaluación de Desempeño 2026</p><h1 class="h1">Mi evaluación</h1>
+        <p class="lead">Tu evaluación es ${chipTipo(180)}: tú te autoevalúas y Andrés Soto, tu jefatura, te evalúa. Después conversan el resultado.</p></div>
+    </div>
+    ${etapas(3)}
+    <div class="split">
+      <section class="grow stack">
+        <h2 class="h2">Lo que tienes pendiente</h2>
+        <div class="card pad row-between" style="align-items:center">
+          <div class="stack-sm"><span class="chip c-warn" style="align-self:flex-start">Vence en 16 días · 7 nov</span>
+            <h3 class="h3">Autoevaluación</h3>
+            <p class="muted small">6 competencias · 4 de 6 respondidas · se guarda sola mientras avanzas.</p>
+            <div class="bar-row" style="max-width:320px"><div class="bar"><span style="width:67%"></span></div><span class="bar-pct">67 %</span></div>
+          </div>
+          <button class="btn" data-go="form">Continuar autoevaluación</button>
+        </div>
+        <div class="notice notice-info small">Andrés no verá tu autoevaluación hasta enviar la suya. Tu resultado lo vas a ver después de la calibración, cuando lo conversen (24 nov – 12 dic).</div>
+        <h2 class="h2" style="margin-top:10px">Mis objetivos 2026</h2>
+        <div class="card table-wrap"><table>
+          <thead><tr><th>Objetivo</th><th>Indicador y meta</th><th class="num">Peso</th><th>Estado</th></tr></thead>
+          <tbody>
+            <tr><td class="strong">Resolver solicitudes a tiempo</td><td class="small">Solicitudes cerradas en ≤ 48 h · meta 90 %</td><td class="num">40 %</td><td><span class="chip c-ok">Aceptado</span></td></tr>
+            <tr><td class="strong">Satisfacción de residentes</td><td class="small">Encuesta mensual del lobby · meta 4,5 de 5</td><td class="num">35 %</td><td><span class="chip c-ok">Aceptado</span></td></tr>
+            <tr><td class="strong">Ruta de Guest Service al día</td><td class="small">Cursos de su ruta en Grey Skills · meta 100 %</td><td class="num">25 %</td><td><span class="chip c-ok">Aceptado</span></td></tr>
+          </tbody></table></div>
+      </section>
+      <aside class="side stack">
+        <div class="card pad stack-sm">
+          <p class="eyebrow">Cómo se calcula tu nota</p>
+          <div class="bar-row"><span class="small" style="width:120px">Competencias</span><div class="bar"><span style="width:70%"></span></div><span class="bar-pct">70 %</span></div>
+          <div class="bar-row"><span class="small" style="width:120px">Objetivos</span><div class="bar"><span style="width:30%"></span></div><span class="bar-pct">30 %</span></div>
+          <p class="xs muted" style="margin-top:6px">En competencias cuenta la nota de tu jefatura. Tu autoevaluación se muestra al lado para conversar las diferencias.</p>
+        </div>
+        <div class="card pad stack-sm">
+          <p class="eyebrow">Escala</p>
+          ${ESCALA.map((e) => `<div class="row small"><span class="chip c-suave" style="min-width:26px;justify-content:center">${e.n}</span>${e.l}</div>`).join('')}
+        </div>
+      </aside>
+    </div>
+  </main>`
+};
+
+S.form = {
+  tab: 'Autoevaluación', render: () => `${header(NAV_T, 'Mi evaluación', 'Camila Rojas', 'Guest Service · Edificio Nativo')}
+  <main class="main stack-lg" style="max-width:900px">
+    <div><p class="eyebrow">Autoevaluación · 2026</p><h1 class="h1">¿Cómo te fue este año?</h1>
+      <p class="lead">Para cada competencia, elige la nota que mejor describe lo que hiciste en el año. Piensa en ejemplos concretos.</p></div>
+    <div class="card pad stack-lg" id="comps">
+      ${COMPS_GS.map((c, i) => `<fieldset class="comp stack" data-comp="${c.id}">
+        <legend class="row" style="margin-bottom:8px"><span class="h3">${i + 1}. ${c.t}</span><span class="chip ${c.tipo === 'Corporativa' ? 'c-none' : 'c-sky'}">${c.tipo}</span></legend>
+        <div class="stack-sm">${c.c.map((x) => `<p class="conducta">${x}</p>`).join('')}</div>
+        <div class="scale" role="group" aria-label="Nota para ${c.t}">
+          ${ESCALA.map((e) => `<button type="button" data-n="${e.n}" aria-pressed="${[3, 4, 4, 3][i] === e.n}" title="${e.l}">${e.n}</button>`).join('')}
+          <button type="button" class="no" data-n="0" aria-pressed="false">No observado</button>
+        </div>
+        <p class="xs muted" data-lbl>${[3, 4, 4, 3][i] ? ESCALA[[3, 4, 4, 3][i] - 1].l : 'Sin responder'}</p>
+        <div data-coment class="hidden"><label class="label" for="cm-${c.id}">Cuéntanos un ejemplo concreto (obligatorio para 1 y 5)</label>
+          <textarea class="input" id="cm-${c.id}" rows="2"></textarea></div>
+      </fieldset>`).join('')}
+    </div>
+    <div class="card pad stack">
+      <label class="label" for="gral">Comentario general (opcional)</label>
+      <textarea class="input" id="gral" rows="3" placeholder="Lo que más te enorgullece del año, en qué te gustaría crecer…"></textarea>
+    </div>
+    <div class="row-between" style="align-items:center">
+      <p class="strong" id="prog">4 de 6 respondidas</p>
+      <div class="row"><button class="btn2">Guardar y seguir después</button><button class="btn" id="enviar" disabled>Enviar autoevaluación</button></div>
+    </div>
+  </main>`,
+  init() {
+    const upd = () => {
+      const sets = [...document.querySelectorAll('[data-comp]')];
+      let ok = 0;
+      sets.forEach((f) => {
+        const sel = f.querySelector('[aria-pressed="true"]');
+        const n = sel ? +sel.dataset.n : null;
+        f.querySelector('[data-lbl]').textContent = n === null ? 'Sin responder' : n === 0 ? 'No observado: no cuenta en el promedio' : ESCALA[n - 1].l;
+        const pideCom = n === 1 || n === 5;
+        f.querySelector('[data-coment]').classList.toggle('hidden', !pideCom);
+        if (n !== null && (!pideCom || f.querySelector('textarea').value.trim())) ok++;
+      });
+      $('#prog').textContent = `${ok} de ${sets.length} respondidas`;
+      $('#enviar').disabled = ok < sets.length;
+    };
+    $('#comps').addEventListener('click', (e) => {
+      const b = e.target.closest('.scale button'); if (!b) return;
+      b.parentNode.querySelectorAll('button').forEach((x) => x.setAttribute('aria-pressed', String(x === b)));
+      upd();
+    });
+    $('#comps').addEventListener('input', upd);
+    upd();
+  }
+};
+
+const EQUIPO = [
+  { n: 'Francisca Araya', c: 'Building Manager Assistant', t: 180, obj: 'ok', auto: 'env', jefe: 'cur', par: 'na' },
+  { n: 'Camila Rojas', c: 'Guest Service', t: 180, obj: 'ok', auto: 'cur', jefe: 'pen', par: 'na' },
+  { n: 'Diego Muñoz', c: 'Guest Service', t: 180, obj: 'ok', auto: 'env', jefe: 'env', par: 'na' },
+  { n: 'Valentina Pérez', c: 'Aseo', t: 90, obj: 'ok', auto: 'na', jefe: 'env', par: 'na' },
+  { n: 'Matías Contreras', c: 'Aseo', t: 90, obj: 'pend', auto: 'na', jefe: 'atr', par: 'na' }
+];
+S.equipo = {
+  tab: 'Mi equipo', render: () => `${header(NAV_J, 'Mi equipo', 'Andrés Soto', 'Jefatura · Edificio Nativo')}
+  <main class="main stack-lg">
+    <div><p class="eyebrow">Evaluación de Desempeño 2026 · Edificio Nativo</p><h1 class="h1">Mi equipo</h1>
+      <p class="lead">Etapa de evaluación: cierra el 7 de noviembre.</p></div>
+    <div class="grid">
+      <div class="card pad"><p class="eyebrow">Evaluaciones tuyas</p><p class="kpi">2 de 5</p><p class="small muted">enviadas</p></div>
+      <div class="card pad"><p class="eyebrow">Autoevaluaciones</p><p class="kpi">2 de 3</p><p class="small muted">las de 90° no llevan</p></div>
+      <div class="card pad"><p class="eyebrow">Objetivos</p><p class="kpi">4 de 5</p><p class="small muted">aceptados</p></div>
+      <div class="card pad" style="border:2px solid var(--rojo)"><p class="eyebrow">Atrasadas</p><p class="kpi" style="color:var(--rojo)">1</p><p class="small muted">Matías: objetivos sin aceptar</p></div>
+    </div>
+    <div class="card table-wrap"><table>
+      <thead><tr><th>Persona</th><th>Tipo</th><th>Objetivos</th><th>Autoevaluación</th><th>Tu evaluación</th><th></th></tr></thead>
+      <tbody>${EQUIPO.map((p) => `<tr>
+        <td><div class="row"><span class="avatar" style="width:34px;height:34px;font-size:12px">${ini(p.n)}</span><span><div class="strong">${p.n}</div><div class="xs muted">${p.c}</div></span></div></td>
+        <td>${chipTipo(p.t)}</td>
+        <td>${p.obj === 'ok' ? '<span class="chip c-ok">Aceptados</span>' : '<span class="chip c-late">Sin aceptar</span>'}</td>
+        <td>${ESTADO[p.auto]}</td><td>${ESTADO[p.jefe]}</td>
+        <td>${p.obj !== 'ok' ? '<button class="btn2 btn-sm" data-go="objetivos">Fijar objetivos</button>'
+          : p.jefe === 'env' ? '<button class="btn2 btn-sm">Ver</button>' : '<button class="btn btn-sm">Evaluar</button>'}</td></tr>`).join('')}
+      </tbody></table></div>
+    <div class="card pad stack">
+      <div class="row-between" style="align-items:center"><div><h2 class="h2">Tu propia evaluación ${chipTipo(360)}</h2>
+        <p class="muted small">Te evalúan Marcela Vidal (jefatura), 4 pares y tu equipo de 5 personas.</p></div>
+        <button class="btn2">Ver mis tareas</button></div>
+      <div class="table-wrap"><table>
+        <thead><tr><th>Evaluador</th><th class="num">Respondidas</th><th>Se muestra</th></tr></thead>
+        <tbody>
+          <tr><td>Autoevaluación</td><td class="num">0 de 1</td><td class="small">Nominativa, referencial</td></tr>
+          <tr><td>Jefatura (Marcela Vidal)</td><td class="num">0 de 1</td><td class="small">Nominativa</td></tr>
+          <tr><td>Pares (Tomás Reyes, Carolina Díaz y 2 más)</td><td class="num">2 de 4</td><td class="small">Promedio anónimo (mínimo 3)</td></tr>
+          <tr><td>Tu equipo</td><td class="num">3 de 5</td><td class="small">Promedio anónimo (mínimo 3)</td></tr>
+        </tbody></table></div>
+    </div>
+  </main>`
+};
+
+const OBJS = [
+  { t: 'Mantener pisos y áreas comunes según pauta', ind: 'Revisión semanal de pauta de aseo', meta: '95 % de ítems OK', p: 50 },
+  { t: 'Cero reclamos de residentes por aseo', ind: 'Reclamos registrados en el sistema', meta: '≤ 2 en el año', p: 30 },
+  { t: 'Ruta de Aseo al día', ind: 'Cursos de su ruta en Grey Skills', meta: '100 %', p: 10 }
+];
+S.objetivos = {
+  tab: 'Fijar objetivos', render: () => `${header(NAV_J, 'Mi equipo', 'Andrés Soto', 'Jefatura · Edificio Nativo')}
+  <main class="main stack-lg" style="max-width:1000px">
+    <div><p class="eyebrow">Mi equipo · Matías Contreras · Aseo · ${chipTipo(90)}</p><h1 class="h1">Objetivos 2026</h1>
+      <p class="lead">Entre 3 y 5 objetivos. Los pesos deben sumar 100 %. Matías los ve y los acepta (o lo conversan si no está de acuerdo).</p></div>
+    <div class="notice small">Objetivo heredado del edificio disponible: <b>NPS del edificio ≥ 60</b>. <button class="btn2 btn-sm" style="margin-left:8px" id="heredar">Agregar</button></div>
+    <div class="card table-wrap"><table>
+      <thead><tr><th>Objetivo</th><th>Indicador</th><th>Meta</th><th class="num">Peso %</th><th></th></tr></thead>
+      <tbody id="objs"></tbody>
+      <tfoot><tr><td colspan="3" class="strong">Total</td><td class="num strong" id="total"></td><td></td></tr></tfoot>
+    </table></div>
+    <div class="row-between" style="align-items:center">
+      <button class="btn2" id="addObj">+ Agregar objetivo</button>
+      <div class="row"><span class="xs" id="msg"></span><button class="btn" id="enviarObj">Enviar a Matías</button></div>
+    </div>
+  </main>`,
+  init() {
+    const objs = OBJS.map((o) => ({ ...o }));
+    const draw = () => {
+      $('#objs').innerHTML = objs.map((o, i) => `<tr>
+        <td><input class="input" value="${esc(o.t)}" data-i="${i}" data-k="t" aria-label="Objetivo ${i + 1}"></td>
+        <td><input class="input" value="${esc(o.ind)}" data-i="${i}" data-k="ind" aria-label="Indicador ${i + 1}"></td>
+        <td><input class="input" value="${esc(o.meta)}" data-i="${i}" data-k="meta" aria-label="Meta ${i + 1}" style="min-width:120px"></td>
+        <td class="num"><input class="input input-num" type="number" min="0" max="100" value="${o.p}" data-i="${i}" data-k="p" aria-label="Peso ${i + 1}"></td>
+        <td><button class="btn2 btn-sm" data-del="${i}" aria-label="Quitar objetivo ${i + 1}" ${objs.length <= 3 ? 'disabled' : ''}>Quitar</button></td></tr>`).join('');
+      sum();
+    };
+    const sum = () => {
+      const t = objs.reduce((a, o) => a + (+o.p || 0), 0);
+      $('#total').textContent = t + ' %';
+      $('#total').style.color = t === 100 ? 'var(--verde)' : 'var(--rojo)';
+      $('#msg').textContent = t === 100 ? '' : `Los pesos suman ${t} %; deben sumar 100 %.`;
+      $('#msg').style.color = 'var(--rojo)';
+      $('#enviarObj').disabled = t !== 100;
+      $('#addObj').disabled = objs.length >= 5;
+    };
+    $('#objs').addEventListener('input', (e) => { const el = e.target; if (el.dataset.k) { objs[el.dataset.i][el.dataset.k] = el.value; if (el.dataset.k === 'p') sum(); } });
+    $('#objs').addEventListener('click', (e) => { const b = e.target.closest('[data-del]'); if (b) { objs.splice(+b.dataset.del, 1); draw(); } });
+    $('#addObj').onclick = () => { objs.push({ t: '', ind: '', meta: '', p: 0 }); draw(); };
+    $('#heredar').onclick = (e) => { if (objs.length < 5) { objs.push({ t: 'NPS del edificio', ind: 'Encuesta trimestral a residentes', meta: '≥ 60', p: 10 }); e.target.disabled = true; draw(); } };
+    draw();
+  }
+};
+
+const CAL = [
+  { n: 'Andrés Soto', u: 'Nativo', c: 'Building Manager', t: 360, comp: 3.9, obj: 4.2 },
+  { n: 'Tomás Reyes', u: 'Brooklyn', c: 'Building Manager', t: 360, comp: 3.4, obj: 3.0 },
+  { n: 'Carolina Díaz', u: 'IMU', c: 'Building Manager', t: 360, comp: 4.6, obj: 4.8 },
+  { n: 'Francisca Araya', u: 'Nativo', c: 'Building Manager Assistant', t: 180, comp: 4.0, obj: 3.6 },
+  { n: 'Camila Rojas', u: 'Nativo', c: 'Guest Service', t: 180, comp: 3.7, obj: 4.0 },
+  { n: 'Diego Muñoz', u: 'Nativo', c: 'Guest Service', t: 180, comp: 2.6, obj: 2.0 },
+  { n: 'Ignacia Morales', u: 'Brooklyn', c: 'Guest Service', t: 180, comp: 4.8, obj: 5.0 },
+  { n: 'Benjamín Torres', u: 'IMU', c: 'Guest Service', t: 180, comp: 3.3, obj: 3.0 },
+  { n: 'Valentina Pérez', u: 'Nativo', c: 'Aseo', t: 90, comp: 3.5, obj: 4.0 },
+  { n: 'Matías Contreras', u: 'Nativo', c: 'Aseo', t: 90, comp: 3.0, obj: 3.0 },
+  { n: 'Felipe Castro', u: 'Brooklyn', c: 'Aseo', t: 90, comp: 4.6, obj: 4.0 },
+  { n: 'Rocío Silva', u: 'IMU', c: 'Aseo', t: 90, comp: 1.8, obj: 2.0 },
+  { n: 'Jorge Fuentes', u: 'Brooklyn', c: 'Mantención', t: 90, comp: 3.2, obj: 3.0 }
+];
+const pesoComp = (c) => /Building Manager/.test(c) ? 0.5 : 0.7;
+S.calibracion = {
+  tab: 'Calibración', render: () => `${header(NAV_G, 'Calibración', 'Marcela Vidal', 'Gerente · Operaciones')}
+  <main class="main stack-lg">
+    <div class="row-between"><div><p class="eyebrow">Evaluación de Desempeño 2026 · Gerencia de Operaciones</p><h1 class="h1">Calibración</h1>
+      <p class="lead">Revisa que una misma nota signifique lo mismo en todos los edificios. Cada ajuste necesita una justificación.</p></div>
+      <div class="row"><select class="input" aria-label="Filtrar por edificio" id="fU" style="width:auto"><option value="">Todos los edificios</option><option>Nativo</option><option>Brooklyn</option><option>IMU</option></select></div></div>
+    <div class="split">
+      <section class="side card pad stack">
+        <h2 class="h3">Distribución</h2>
+        <div class="dist" id="dist"></div>
+        <p class="xs muted">Referencia sugerida por RRHH (no obligatoria): Destaca ≤ 15 %, No cumple y Cumple parcialmente juntos ≥ 5 %.</p>
+        <div class="notice notice-warn small hidden" id="alerta"></div>
+      </section>
+      <section class="grow card table-wrap"><table>
+        <thead><tr><th>Persona</th><th>Tipo</th><th class="num">Comp.</th><th class="num">Obj.</th><th class="num">Calculada</th><th>Calibrado</th><th>Justificación</th></tr></thead>
+        <tbody id="cal"></tbody></table></section>
+    </div>
+    <div class="row" style="justify-content:flex-end"><button class="btn2">Exportar a Excel</button><button class="btn">Cerrar calibración de la gerencia</button></div>
+  </main>`,
+  init() {
+    const rows = CAL.map((p) => { const x = p.comp * pesoComp(p.c) + p.obj * (1 - pesoComp(p.c)); return { ...p, calc: x, adj: resultado(x), just: '' }; });
+    const ORDEN = ESCALA.map((e) => e.l);
+    const draw = () => {
+      const fu = $('#fU').value;
+      const vis = rows.filter((r) => !fu || r.u === fu);
+      $('#cal').innerHTML = vis.map((r) => { const i = rows.indexOf(r); const cambio = r.adj !== resultado(r.calc); return `<tr>
+        <td><div class="strong">${r.n}</div><div class="xs muted">${r.c} · ${r.u}</div></td>
+        <td>${chipTipo(r.t)}</td><td class="num">${f1(r.comp)}</td><td class="num">${f1(r.obj)}</td>
+        <td class="num"><b>${f1(r.calc)}</b><div class="xs muted">${resultado(r.calc)}</div></td>
+        <td><select class="input" data-i="${i}" aria-label="Resultado calibrado de ${r.n}" style="min-width:170px;${cambio ? 'border:2px solid var(--ocean)' : ''}">${ORDEN.map((o) => `<option ${o === r.adj ? 'selected' : ''}>${o}</option>`).join('')}</select></td>
+        <td>${cambio ? `<input class="input" data-j="${i}" value="${esc(r.just)}" placeholder="¿Por qué se ajusta?" style="min-width:180px;${r.just ? '' : 'border:2px solid var(--rojo)'}" aria-label="Justificación para ${r.n}">` : '<span class="xs muted">Sin ajuste</span>'}</td></tr>`; }).join('');
+      const cnt = ORDEN.map((o) => vis.filter((r) => r.adj === o).length);
+      const max = Math.max(1, ...cnt);
+      $('#dist').innerHTML = cnt.map((c, i) => `<div class="dist-col"><span class="dist-n">${c}</span>
+        <div class="dist-bar" style="height:${Math.max(4, (c / max) * 120)}px;${i === 4 ? 'background:var(--navy)' : i < 2 ? 'background:var(--rojo)' : ''}"></div>
+        <span class="dist-l">${ORDEN[i]}</span><span class="dist-ref">${vis.length ? Math.round((c / vis.length) * 100) : 0} %</span></div>`).join('');
+      const pDest = vis.length ? cnt[4] / vis.length : 0;
+      $('#alerta').classList.toggle('hidden', Math.round(pDest * 100) <= 15);
+      $('#alerta').textContent = `${Math.round(pDest * 100)} % está en "Destaca", sobre la referencia de 15 %. Revisa si todos cumplen la conducta de ese nivel.`;
+    };
+    $('#cal').addEventListener('change', (e) => { if (e.target.dataset.i) { rows[e.target.dataset.i].adj = e.target.value; draw(); } });
+    $('#cal').addEventListener('input', (e) => { if (e.target.dataset.j) { rows[e.target.dataset.j].just = e.target.value; e.target.style.border = e.target.value ? '' : '2px solid var(--rojo)'; } });
+    $('#fU').onchange = draw;
+    draw();
+  }
+};
+
+const RES = [
+  { t: 'Servicio al residente', a: 4, j: 4, p: 4.3, e: 4.5 },
+  { t: 'Trabajo en equipo', a: 4, j: 4, p: 3.8, e: 4.2 },
+  { t: 'Responsabilidad', a: 5, j: 4, p: 4.0, e: 4.4 },
+  { t: 'Comunicación', a: 4, j: 3, p: 3.3, e: 3.0 },
+  { t: 'Liderazgo de equipo', a: 4, j: 4, p: 3.8, e: 3.4 },
+  { t: 'Gestión del edificio', a: 4, j: 4, p: 4.0, e: 3.8 }
+];
+S.resultado = {
+  tab: 'Mi resultado', render: () => `${header(NAV_J, 'Mi evaluación', 'Andrés Soto', 'Jefatura · Edificio Nativo')}
+  <main class="main stack-lg">
+    <div><p class="eyebrow">Evaluación de Desempeño 2026 · ${chipTipo(360)}</p><h1 class="h1">Mi resultado</h1>
+      <p class="lead">Conversado con Marcela Vidal el 2 de diciembre.</p></div>
+    ${etapas(6)}
+    <div class="grid">
+      <div class="card pad"><p class="eyebrow">Resultado</p><p class="big-score">Supera</p><p class="small muted" style="margin-top:6px">Nota final 4,0 de 5</p></div>
+      <div class="card pad"><p class="eyebrow">Competencias · 50 %</p><p class="kpi">3,9</p>
+        <p class="xs muted">Jefatura 60 % · pares 20 % · equipo 20 %</p></div>
+      <div class="card pad"><p class="eyebrow">Objetivos · 50 %</p><p class="kpi">4,2</p><p class="xs muted">106 % de logro ponderado</p></div>
+    </div>
+    <div class="split">
+      <section class="grow card pad stack">
+        <div class="row-between" style="align-items:center"><h2 class="h2">Competencias por evaluador</h2>
+          <div class="legend"><span><i style="background:var(--borde-fuerte)"></i>Tú</span><span><i style="background:var(--navy)"></i>Jefatura</span><span><i style="background:var(--ocean)"></i>Pares (4)</span><span><i style="background:var(--sky)"></i>Tu equipo (5)</span></div></div>
+        <div class="cmp">${RES.map((r) => `<div class="strong small">${r.t}${Math.abs(r.a - r.j) >= 1 ? '<div class="xs muted" style="font-weight:400">Diferencia entre tú y tu jefatura</div>' : ''}</div>
+          <div class="cmp-bars">${[['Tú', r.a, 's-auto'], ['Jefatura', r.j, 's-jefe'], ['Pares', r.p, 's-par'], ['Tu equipo', r.e, 's-eq']].map(([k, v, c]) =>
+            `<div class="cmp-l"><span class="k">${k}</span><div class="bar ${c}"><span style="width:${v * 20}%"></span></div><span class="v">${f1(v)}</span></div>`).join('')}</div>`).join('')}</div>
+        <p class="xs muted">Pares y equipo se muestran como promedio, sin nombres. Tu autoevaluación no cuenta en la nota.</p>
+      </section>
+      <aside class="side stack">
+        <div class="card pad stack">
+          <h2 class="h3">Objetivos</h2>
+          ${[['NPS del edificio ≥ 60', 63, 4], ['Ocupación ≥ 95 %', 97, 4], ['Rotación del equipo ≤ 20 %', 12, 5], ['Ruta BM al día', 100, 4]].map(([t, v, n]) =>
+            `<div class="stack-sm"><div class="row-between" style="align-items:center"><span class="small strong">${t}</span><span class="chip c-suave">${n}</span></div><div class="small muted">Resultado: ${v}${t.includes('%') || t.includes('Ruta') ? ' %' : ''}</div></div>`).join('')}
+        </div>
+        <div class="card pad stack-sm"><h2 class="h3">Comentario de tu jefatura</h2>
+          <p class="small">"Gran año en ocupación y en mantener al equipo. El foco para 2027 es la comunicación con residentes en los cambios del edificio: avisar antes y por más canales."</p></div>
+      </aside>
+    </div>
+    <section class="card pad stack">
+      <h2 class="h2">Plan de desarrollo 2027</h2>
+      <div class="table-wrap"><table>
+        <thead><tr><th>Competencia</th><th>Acción acordada</th><th>Curso sugerido en Grey Skills</th><th>Plazo</th></tr></thead>
+        <tbody>
+          <tr><td class="strong">Comunicación</td><td>Enviar aviso a residentes 72 h antes de cada trabajo en áreas comunes.</td><td><span class="chip c-sky">Comunicación efectiva con residentes</span></td><td>31 mar</td></tr>
+          <tr><td class="strong">Liderazgo de equipo</td><td>Reunión quincenal de 15 min con el equipo de Guest Service.</td><td><span class="chip c-sky">Feedback para jefaturas</span></td><td>30 abr</td></tr>
+        </tbody></table></div>
+      <p class="xs muted">Los cursos quedan asignados con plazo en Grey Skills y su avance se ve en tu ruta.</p>
+    </section>
+    <section class="card pad stack" style="border:2px solid var(--ocean)">
+      <h2 class="h2">Toma de conocimiento</h2>
+      <p class="small muted">Firmar indica que conversaste el resultado, no necesariamente que estés de acuerdo.</p>
+      <div class="row"><label class="check"><input type="radio" name="acuerdo" value="si" checked> Estoy de acuerdo</label>
+        <label class="check"><input type="radio" name="acuerdo" value="no"> No estoy de acuerdo</label></div>
+      <div id="desac" class="hidden"><label class="label" for="cm">¿Qué no compartes? (lo verá RRHH)</label><textarea class="input" id="cm" rows="3"></textarea></div>
+      <label class="check"><input type="checkbox" id="firma"> Yo, Andrés Soto, RUT 11.222.333-9, tomé conocimiento de mi evaluación 2026.</label>
+      <div><button class="btn" id="btnF" disabled>Firmar</button></div>
+    </section>
+  </main>`,
+  init() {
+    document.querySelectorAll('[name=acuerdo]').forEach((r) => r.onchange = () => $('#desac').classList.toggle('hidden', r.value === 'si' ? r.checked : !r.checked));
+    $('#firma').onchange = (e) => { $('#btnF').disabled = !e.target.checked; };
+    $('#btnF').onclick = (e) => { e.target.textContent = 'Firmado el 2 dic 2026'; e.target.disabled = true; $('#firma').disabled = true; };
+  }
+};
+
+const CONF = [
+  { c: 'Aseo', g: 'Operativo', t: 90, pc: 70, n: 6 }, { c: 'Mantención', g: 'Operativo', t: 90, pc: 70, n: 6 },
+  { c: 'Guest Service', g: 'Operativo', t: 180, pc: 70, n: 6 }, { c: 'Building Manager Assistant', g: 'Edificio', t: 180, pc: 50, n: 7 },
+  { c: 'Building Manager', g: 'Edificio', t: 360, pc: 50, n: 7 }, { c: 'Analista', g: 'Oficina central', t: 180, pc: 50, n: 6 },
+  { c: 'People Partner', g: 'Oficina central', t: 360, pc: 50, n: 7 }, { c: 'HR Business Partner', g: 'Oficina central', t: 360, pc: 50, n: 7 },
+  { c: 'Gerente de Operaciones', g: 'Gerencia', t: 360, pc: 40, n: 8 }
+];
+S.admin = {
+  tab: 'Configurar ciclo', render: () => `${header(NAV_A, 'Ciclos', 'Josefina Chaná', 'Administración · RRHH')}
+  <main class="main stack-lg">
+    <div class="row-between"><div><p class="eyebrow">Ciclos</p><h1 class="h1">Evaluación de Desempeño 2026</h1>
+      <p class="lead">En evaluación. 16 personas en el ciclo.</p></div>
+      <div class="row"><button class="btn2">Exportar avance</button><button class="btn2">Recordar a atrasados</button></div></div>
+    ${etapas(3)}
+    <div class="grid">
+      ${[['Objetivos aceptados', 15, 16], ['Autoevaluaciones', 6, 11], ['Evaluaciones de jefatura', 7, 16], ['Pares y equipos', 19, 32]].map(([t, a, b]) =>
+        `<div class="card pad stack-sm"><p class="eyebrow">${t}</p><p class="kpi">${a} <span class="small muted">de ${b}</span></p><div class="bar-row"><div class="bar"><span style="width:${Math.round(a / b * 100)}%"></span></div><span class="bar-pct">${Math.round(a / b * 100)} %</span></div></div>`).join('')}
+    </div>
+    <section class="card stack">
+      <div class="pad-sm" style="padding-bottom:0"><h2 class="h2">Tipo de evaluación y pesos por cargo</h2>
+        <p class="small muted">Cambia el tipo o el peso de competencias; los objetivos toman el resto. Las excepciones por persona se hacen desde su ficha.</p></div>
+      <div class="table-wrap"><table>
+        <thead><tr><th>Cargo</th><th>Grupo</th><th>Tipo</th><th>Quién evalúa</th><th class="num">Competencias %</th><th class="num">Objetivos %</th><th class="num">N.º comp.</th></tr></thead>
+        <tbody id="conf"></tbody></table></div>
+    </section>
+    <div class="split">
+      <section class="grow card pad stack">
+        <h2 class="h2">Peso de cada evaluador en 360°</h2>
+        <div class="table-wrap"><table><thead><tr><th>Evaluador</th><th class="num">Peso</th><th>Regla</th></tr></thead><tbody>
+          <tr><td>Jefatura</td><td class="num">60 %</td><td class="small">Recibe el peso de un grupo con menos de 3 respuestas</td></tr>
+          <tr><td>Pares</td><td class="num">20 %</td><td class="small">Entre 3 y 5, propuestos por la persona y aprobados por su jefatura</td></tr>
+          <tr><td>Equipo a cargo</td><td class="num">20 %</td><td class="small">Todos sus reportes directos</td></tr>
+          <tr><td>Autoevaluación</td><td class="num">—</td><td class="small">Referencial, no pondera</td></tr>
+        </tbody></table></div>
+      </section>
+      <aside class="side card pad stack-sm">
+        <h2 class="h3">Competencias del ciclo</h2>
+        <p class="small strong" style="margin-top:6px">Corporativas (todos)</p>
+        <div class="row">${['Servicio al residente', 'Trabajo en equipo', 'Responsabilidad', 'Comunicación'].map((x) => `<span class="chip c-none">${x}</span>`).join('')}</div>
+        <p class="small strong" style="margin-top:10px">De cargo (ejemplos)</p>
+        <div class="row">${['Orden y limpieza', 'Diagnóstico y reparación', 'Registro de solicitudes', 'Liderazgo de equipo', 'Gestión del edificio'].map((x) => `<span class="chip c-sky">${x}</span>`).join('')}</div>
+        <div style="margin-top:10px"><button class="btn2 btn-sm">Editar catálogo</button></div>
+      </aside>
+    </div>
+  </main>`,
+  init() {
+    const QUIEN = { 90: 'Jefatura', 180: 'Auto + jefatura', 360: 'Auto + jefatura + pares + equipo' };
+    const draw = () => {
+      $('#conf').innerHTML = CONF.map((r, i) => `<tr>
+        <td class="strong">${r.c}</td><td class="small muted">${r.g}</td>
+        <td><select class="input" data-i="${i}" data-k="t" aria-label="Tipo para ${r.c}" style="width:auto">${[90, 180, 360].map((t) => `<option value="${t}" ${t === r.t ? 'selected' : ''}>${t}°</option>`).join('')}</select></td>
+        <td class="small">${QUIEN[r.t]}</td>
+        <td class="num"><input class="input input-num" type="number" min="0" max="100" step="5" value="${r.pc}" data-i="${i}" data-k="pc" aria-label="Peso competencias para ${r.c}"></td>
+        <td class="num">${100 - r.pc} %</td><td class="num">${r.n}</td></tr>`).join('');
+    };
+    $('#conf').addEventListener('change', (e) => { const el = e.target; if (el.dataset.k) { CONF[el.dataset.i][el.dataset.k] = Math.max(0, Math.min(100, +el.value)); draw(); } });
+    draw();
+  }
+};
+
+// ---------- Navegación del mockup ----------
+const ORDEN = ['inicio', 'form', 'equipo', 'objetivos', 'calibracion', 'resultado', 'admin'];
+function ir(k) {
+  $('#root').innerHTML = S[k].render();
+  document.querySelectorAll('.pv-tab').forEach((b) => b.setAttribute('aria-current', b.dataset.k === k ? 'page' : 'false'));
+  if (S[k].init) S[k].init();
+  history.replaceState(null, '', '#' + k);
+  window.scrollTo(0, 0);
+}
+$('#tabs').innerHTML = ORDEN.map((k, i) => `<button class="pv-tab" data-k="${k}">${i + 1}. ${S[k].tab}</button>`).join('');
+$('#tabs').onclick = (e) => { const b = e.target.closest('[data-k]'); if (b) ir(b.dataset.k); };
+$('#root').addEventListener('click', (e) => { const b = e.target.closest('[data-go]'); if (b) ir(b.dataset.go); });
+ir(ORDEN.includes(location.hash.slice(1)) ? location.hash.slice(1) : 'inicio');
+</script>
+</body>
+</html>
