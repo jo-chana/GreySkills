@@ -537,8 +537,7 @@ window.GS = window.GS || {};
     if (st.vista === 'unidad') filas = [['Unidad', 'Personas activas', 'Con cursos', 'Avance promedio %', 'Cursos vencidos']].concat(porUnidad(res, personas).map((f) => [f.u, f.n, f.con, f.a, f.v]));
     else if (st.vista === 'curso') filas = [['Curso', 'Personas', 'Completado', 'Avance promedio %', 'Vencidos', 'Valoración']].concat(porCurso(res).map((f) => [f.t, f.n, f.comp, f.a, f.v, f.val]));
     else {
-      filas = [['Persona', 'RUT', 'Unidad', 'Cargo', 'Curso', 'Origen', 'Plazo', 'Avance %', 'Estado', 'Terminado el']];
-      res.forEach((r) => r.cursos.forEach((c) => filas.push([r.persona.nombre, r.persona.rut, GS.unidadDe(r.persona), GS.cargoDe(r.persona), c.curso.titulo, c.ins.origen === 'asignado' ? 'Asignado' : 'Inscrito', c.ins.plazo || '', c.pct, GS.SEM[c.k].l, c.ins.completadoEn || ''])));
+      filas = C.filasAvance(res.filter((r) => r.cursos.length));
     }
     GS.descargarCSV('grey-skills-reporte-' + st.vista + '-' + GS.hoy() + '.csv', filas);
     return false;

@@ -18,7 +18,7 @@ window.GS = window.GS || {};
       else if (sub === 'usuarios') cuerpo = vistaUsuarios(yo);
       else if (sub === 'crear') cuerpo = vistaCrear(yo);
       else if (sub === 'presencial') cuerpo = vistaPresencial(yo, ctxEq);
-      else cuerpo = vistaAvances(ctxEq);
+      else cuerpo = vistaAvances(ctxEq, yo);
 
       return html`<section class="stack-lg" style="gap:22px">
         <div class="row-between">
@@ -32,10 +32,32 @@ window.GS = window.GS || {};
       </section>`;
     }
   };
+  const nombreArchivo = (txt) => 'avance-' + GS.normalizar(txt).replace(/[^a-z0-9]+/g, '-').replace(/^-|-$/g, '') + '-' + GS.hoy() + '.csv';
+  GS.accion('exportar-equipo', () => {
+    const yo = GS.yo();
+    const ctxEq = GS.contextoEquipo(yo, GS.ui.equipoSel);
+    const res = ctxEq.personas.map(GS.resumenPersona).sort((a, b) => a.persona.nombre.localeCompare(b.persona.nombre, 'es'));
+    GS.descargarCSV(nombreArchivo(ctxEq.sub.split(' · ')[0]), C.filasAvance(res));
+    return false;
+  });
+  // Gerente: su equipo directo y los equipos de cada jefatura, en un solo archivo.
+  GS.accion('exportar-equipos', () => {
+    const yo = GS.yo();
+    const res = [];
+    GS.contextoEquipo(yo, 'directo').opciones.forEach((o) => {
+      const ctxEq = GS.contextoEquipo(yo, o.id);
+      ctxEq.personas.map(GS.resumenPersona).sort((a, b) => a.persona.nombre.localeCompare(b.persona.nombre, 'es'))
+        .forEach((r) => res.push(Object.assign(r, { equipo: o.l })));
+    });
+    GS.descargarCSV(nombreArchivo('todos mis equipos'), C.filasAvance(res, true));
+    return false;
+  });
   GS.accion('equipo-sel', (el) => { GS.ui.equipoSel = el.dataset.v; if (GS.ruta().params[0] && GS.ruta().params[0] !== 'avances') { GS.ir('#/equipo/avances'); return false; } });
 
   // ---------- Avances ----------
-  function vistaAvances(ctxEq) {
+  // Jefaturas y gerentes pueden exportar a Excel el avance del equipo que están viendo.
+  const puedeExportar = (yo) => yo.rol === 'jefatura' || yo.rol === 'gerente';
+  function vistaAvances(ctxEq, yo) {
     const res = C.ordenarResumenes(ctxEq.personas.map(GS.resumenPersona).filter((r) => r.total > 0));
     const avance = res.length ? Math.round(res.reduce((a, r) => a + r.avg, 0) / res.length) + '%' : '—';
     return html`<div class="stack" style="gap:20px">
@@ -44,6 +66,10 @@ window.GS = window.GS || {};
         <div class="card card-pad-sm"><div class="kpi-num">${res.length}</div><div class="muted small">personas con cursos</div></div>
         <div class="card card-pad-sm"><div class="kpi-num kpi-red">${res.filter((r) => r.vencidos).length}</div><div class="muted small">personas con algún curso vencido</div></div>
       </div>
+      ${puedeExportar(yo) && ctxEq.personas.length ? html`<div class="row">
+        <button type="button" class="btn2" data-action="exportar-equipo">Exportar a Excel</button>
+        ${yo.rol === 'gerente' && ctxEq.opciones.length > 1 ? html`<button type="button" class="btn2" data-action="exportar-equipos">Exportar todos mis equipos</button>` : ''}
+      </div>` : ''}
       ${res.length ? C.tablaAvance(res, 'eq') : C.vacio('Esta unidad todavía no tiene personas con cursos.')}
       <p class="muted small" style="margin:0">Haz clic en una persona para ver el detalle de cada curso. La lista parte por quien tiene menor avance.</p>
     </div>`;
@@ -238,13 +264,14 @@ window.GS = window.GS || {};
         ${sel ? html`<div class="small" style="background:var(--fondo);border-radius:var(--radio);padding:12px 14px;display:flex;flex-direction:column;gap:4px">
           <span><strong class="strong">Relator:</strong> ${sel.relator}</span><span><strong class="strong">Duración:</strong> ${sel.duracion}</span><span><strong class="strong">Para:</strong> ${sel.para}</span></div>` : ''}
         <div class="grid-form" style="grid-template-columns:repeat(2,minmax(0,1fr))">
-          <div><label class="label" for="c-f">Fecha</label><input id="c-f" class="input" type="date" min="${GS.hoy()}" data-bind="conv.fecha" value="${f.fecha}" required></div>
+          <div><label class="label" for="c-f">Fecha</label><input id="c-f" class="input" type="date" data-bind="conv.fecha" value="${f.fecha}" data-rerender required></div>
           <div><label class="label" for="c-h">Hora</label><input id="c-h" class="input" type="time" data-bind="conv.hora" value="${f.hora}" required></div>
         </div>
         <div><label class="label" for="c-l">Lugar</label><input id="c-l" class="input" data-bind="conv.lugar" value="${f.lugar}" required maxlength="120"></div>
         <fieldset class="stack-sm" style="gap:0"><legend class="label">Convocados</legend>
           ${equipo.map((p) => html`<label class="check"><input type="checkbox" data-action="conv-persona" data-id="${p.id}"${GS.attr(f.sel.includes(p.id), 'checked')}>${p.nombre}</label>`)}</fieldset>
-        <button class="btn self-start" type="submit"${GS.attr(!f.sel.length, 'disabled')}>Enviar convocatoria</button>
+        ${f.fecha && f.fecha < GS.hoy() ? html`<div class="notice">Esta fecha ya pasó: se registrará como capacitación realizada y luego marcas quiénes asistieron.</div>` : html`<p class="muted small" style="margin:0">¿Ya se hizo? Elige la fecha en que fue y podrás registrarla con su asistencia.</p>`}
+        <button class="btn self-start" type="submit"${GS.attr(!f.sel.length, 'disabled')}>${f.fecha && f.fecha < GS.hoy() ? 'Registrar capacitación realizada' : 'Enviar convocatoria'}</button>
       </form>`;
       der = html`<div class="grow stack">
         <h2 class="h2">Convocatorias</h2>
@@ -303,10 +330,13 @@ window.GS = window.GS || {};
   GS.accion('convocar', async () => {
     const f = GS.ui.conv;
     if (!f.fecha || !f.hora || !String(f.lugar).trim()) throw new Error('Completa fecha, hora y lugar.');
-    if (f.fecha < GS.hoy()) throw new Error('La fecha no puede ser anterior a hoy.');
-    await S().add('convocatorias', { presencialId: f.presencialId, fecha: f.fecha, hora: f.hora, lugar: f.lugar.trim(), convocados: f.sel.slice(), asistencia: null, convocadoPor: GS.yo().id, creadoEn: GS.ahora() });
+    if (!f.sel.length) throw new Error('Elige al menos a una persona.');
+    const pasada = f.fecha < GS.hoy();
+    const c = await S().add('convocatorias', { presencialId: f.presencialId, fecha: f.fecha, hora: f.hora, lugar: f.lugar.trim(), convocados: f.sel.slice(), asistencia: null, convocadoPor: GS.yo().id, creadoEn: GS.ahora() });
     delete GS.ui.conv;
-    GS.toast('Convocatoria enviada. Las personas la verán en su perfil.');
+    // Capacitación que ya se hizo: se abre de inmediato para marcar la asistencia.
+    if (pasada) GS.ui.marcar = { id: c.id };
+    GS.toast(pasada ? 'Capacitación registrada. Ahora marca quiénes asistieron.' : 'Convocatoria enviada. Las personas la verán en su perfil.');
   }, { escribe: true });
   GS.accion('marcar', (el) => { GS.ui.marcar = el.dataset.id ? { id: el.dataset.id } : null; });
   GS.accion('guardar-asistencia', async (form, ev, fd) => {

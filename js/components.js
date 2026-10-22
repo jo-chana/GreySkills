@@ -125,6 +125,18 @@ window.GS = window.GS || {};
   GS.accion('toggle-fila', (el) => { GS.ui.abiertos[el.dataset.id] = !GS.ui.abiertos[el.dataset.id]; });
 
   // Ordena resúmenes: menor avance primero.
+  // Filas para exportar a Excel el avance por persona y curso. equipo: agrega la columna "Equipo".
+  C.filasAvance = (resumenes, equipo) => {
+    const cab = ['Persona', 'RUT', 'Unidad', 'Cargo', 'Curso', 'Origen', 'Plazo', 'Avance %', 'Estado', 'Terminado el'];
+    const filas = [equipo ? ['Equipo'].concat(cab) : cab];
+    resumenes.forEach((r) => {
+      const base = [r.persona.nombre, r.persona.rut, GS.unidadDe(r.persona), GS.cargoDe(r.persona)];
+      const cursos = r.cursos.length ? r.cursos.map((c) => base.concat([c.curso.titulo, c.ins.origen === 'asignado' ? 'Asignado' : 'Inscrito', c.ins.plazo || '', c.pct, GS.SEM[c.k].l, c.ins.completadoEn || '']))
+        : [base.concat(['Sin cursos', '', '', '', '', ''])];
+      cursos.forEach((f) => filas.push(equipo ? [r.equipo].concat(f) : f));
+    });
+    return filas;
+  };
   C.ordenarResumenes = (lista, orden) => {
     const r = lista.slice();
     if (orden === 'vencidos') r.sort((a, b) => b.vencidos - a.vencidos || a.avg - b.avg);
