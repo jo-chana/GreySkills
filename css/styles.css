@@ -169,6 +169,7 @@ button:focus-visible, a:focus-visible, input:focus-visible, select:focus-visible
 .c-sky { background: var(--sky); color: var(--navy); }
 .c-gris { background: var(--gris-chip); color: var(--navy); }
 .c-suave { background: var(--gris-barra); color: var(--navy); }
+.c-juego { background: #E3F0FB; color: var(--ocean); }
 .c-blanco { background: #FFF; color: var(--navy); border: 1px solid var(--borde); }
 .bar { flex: 1; height: 8px; background: var(--gris-barra); border-radius: var(--radio); overflow: hidden; min-width: 40px; }
 .bar > span { display: block; height: 100%; background: var(--ocean); }
@@ -281,6 +282,30 @@ tr.inactivo td { color: var(--deshabilitado); }
 .quiz-opt .tag { margin-left: auto; font: 700 12px var(--sans); }
 .quiz-opt.bien .tag { color: var(--verde); }
 .quiz-opt.mal .tag { color: var(--rojo); }
+
+/* Juegos: todo se juega tocando (sin arrastrar), pensado para celular */
+.juego-escena { background: var(--stucco); border-radius: var(--radio); padding: 18px 20px; font-size: 17px; line-height: 1.5; }
+.juego-opt { display: flex; align-items: center; gap: 12px; width: 100%; min-height: 52px; padding: 10px 14px; border-radius: var(--radio); border: 2px solid var(--borde); background: #FFF; color: var(--navy); font: 400 16px var(--serif); text-align: left; cursor: pointer; }
+.juego-opt:hover:not(:disabled) { border-color: var(--ocean); }
+.juego-opt:disabled { cursor: default; }
+.juego-opt.sel { border-color: var(--ocean); background: #EEF5FC; }
+.juego-opt.bien { border-color: var(--verde); background: #EEF7EF; }
+.juego-opt.mal { border-color: var(--rojo); background: #FBEFED; }
+.juego-opt .tag { margin-left: auto; font: 700 12px var(--sans); color: var(--rojo); text-align: right; }
+.juego-orden { list-style: none; margin: 0; padding: 0; display: flex; flex-direction: column; gap: 8px; }
+.juego-fichas { display: flex; flex-wrap: wrap; gap: 8px; }
+.juego-ficha { min-height: 44px; padding: 8px 14px; border-radius: var(--radio); border: 2px dashed var(--borde-fuerte); background: #FFF; color: var(--navy); font: 400 15px var(--serif); text-align: left; cursor: pointer; }
+.juego-ficha:hover:not(:disabled) { border-color: var(--ocean); border-style: solid; }
+.juego-ficha.bien { border: 2px solid var(--verde); background: #EEF7EF; }
+.juego-ficha.mal { border: 2px solid var(--rojo); background: #FBEFED; }
+.juego-ficha .tag { display: block; font: 700 12px var(--sans); color: var(--rojo); }
+.juego-pares { display: grid; grid-template-columns: 1fr 1fr; gap: 14px; }
+.juego-tarjeta { background: var(--navy); color: #FFF; border-radius: var(--radio); padding: 26px 22px; font-size: 19px; line-height: 1.4; text-align: center; }
+.juego-bins { display: grid; grid-template-columns: repeat(auto-fit, minmax(200px, 1fr)); gap: 12px; }
+.juego-bin { border: 1px solid var(--borde); border-radius: var(--radio); padding: 12px; display: flex; flex-direction: column; gap: 8px; background: #FAFBFC; min-height: 90px; }
+.juego-repaso { margin: 0; padding-left: 20px; display: flex; flex-direction: column; gap: 10px; }
+.t-ok { color: var(--verde); font-weight: 700; }
+.t-late { color: var(--rojo); font-weight: 700; }
 .scale { width: 56px; height: 52px; border-radius: var(--radio); border: 2px solid var(--borde-fuerte); background: #FFF; color: var(--navy); font: 700 18px var(--sans); cursor: pointer; }
 .scale[aria-pressed="true"], .pill[aria-pressed="true"] { background: var(--navy); border-color: var(--navy); color: #FFF; }
 .pill { min-height: 48px; padding: 0 20px; border-radius: var(--radio); border: 2px solid var(--borde-fuerte); background: #FFF; color: var(--navy); font: 700 15px var(--sans); cursor: pointer; }
@@ -340,6 +365,8 @@ tr.inactivo td { color: var(--deshabilitado); }
   .header .wrap { padding-top: 10px; padding-bottom: 0; gap: 4px 12px; }
   .brand-name { font-size: 21px; }
   .me-box { order: 2; }
+  .juego-pares { gap: 8px; }
+  .juego-pares .juego-opt { padding: 8px 10px; gap: 8px; font-size: 15px; }
   .me-txt { display: none; }
   .avatar { width: 36px; height: 36px; font-size: 13px; }
   .nav { order: 3; flex: 1 1 100%; flex-wrap: nowrap; overflow-x: auto; scrollbar-width: none; margin: 0 -16px; padding: 0 8px; }

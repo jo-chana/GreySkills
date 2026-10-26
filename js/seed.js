@@ -323,6 +323,40 @@ window.GS = window.GS || {};
     return { unidades, personas, inscripciones };
   };
 
+  // ---------- Curso de ejemplo con juegos ----------
+  // Muestra los 4 formatos de juego. Se agrega si falta y se le asigna a Vista Trabajador.
+  GS.cursoJuegos = function () {
+    const ahora = GS.ahora();
+    return {
+      id: 'k-juegos', titulo: 'Practica jugando: residentes y emergencias', categoria: 'residente', portada: '#0077D4',
+      descripcion: 'Cuatro desafíos cortos para practicar decisiones reales del día a día en el edificio.',
+      autorId: 'v-admin', estado: 'publicado', nota: '', version: 1, alcance: { edificios: 'todos', cargos: 'todos' },
+      config: { orden: 'sec', notaMinima: 70, intentos: 0, duracion: '15 min', certificado: true },
+      creadoEn: ahora, actualizadoEn: ahora, publicadoEn: ahora,
+      modulos: [
+        { id: 'mj1', tipo: 'escenario', titulo: '¿Qué harías? Un residente molesto', quiz: null, indicaciones: 'Elige lo que harías en cada situación. Si te equivocas, verás qué pasaría y podrás elegir de nuevo.',
+          situaciones: [
+            { texto: 'Un residente llega a recepción muy molesto: su encomienda aparece como entregada, pero él no la tiene.', ok: 1,
+              alts: ['Le explicas que el sistema dice que se entregó y que no puedes hacer nada.', 'Lo escuchas, revisas el registro y las cámaras, y le dices cuándo le darás una respuesta.', 'Le pides que escriba un correo a la administración.'],
+              fbs: ['El residente se va más molesto y el problema sigue sin resolverse.', 'Se siente escuchado y sabe qué esperar. Así se resuelve la mayoría de los reclamos.', 'Lo derivas sin ayudarlo: siente que nadie se hace cargo.'] },
+            { texto: 'Son las 23:00 y un vecino reclama por música muy fuerte en el departamento de al lado.', ok: 0,
+              alts: ['Contactas con amabilidad al departamento, le recuerdas el horario de silencio y registras el aviso.', 'Le dices al vecino que lo resuelva directamente con el otro residente.', 'Esperas a ver si la música para sola.'],
+              fbs: ['Bien: actúas rápido, sin conflicto, y queda registro por si se repite.', 'Puede terminar en una discusión entre vecinos y el reclamo vuelve a ti.', 'El reclamo crece y el vecino siente que no hiciste nada.'] },
+            { texto: 'Un residente nuevo pregunta dónde se deja el reciclaje.', ok: 2,
+              alts: ['Le dices que lo deje en la sala de basura con el resto.', 'Le respondes que revise el reglamento.', 'Lo acompañas o le indicas la sala de reciclaje y le cuentas qué va en cada contenedor.'],
+              fbs: ['Se mezcla el reciclaje con la basura y se pierde el esfuerzo.', 'Es correcto, pero poco cercano: probablemente no lo lea.', 'Bien: un buen recibimiento evita problemas futuros.'] }
+          ] },
+        { id: 'mj2', tipo: 'ordenar', titulo: 'Ordena: qué hacer ante un sismo', quiz: null, indicaciones: 'Ordena los pasos del protocolo desde que empieza el sismo.',
+          pasos: ['Mantén la calma y aléjate de ventanas y objetos que puedan caer', 'Ubícate en una zona de seguridad hasta que termine el movimiento', 'Revisa si hay personas lesionadas o atrapadas', 'Sigue las instrucciones del encargado de emergencias', 'Si se indica evacuar, usa las escaleras, nunca el ascensor'] },
+        { id: 'mj3', tipo: 'emparejar', titulo: 'Une cada producto con su uso seguro', quiz: null, indicaciones: 'Une cada situación con la forma correcta de actuar.',
+          pares: [{ a: 'Cloro', b: 'Nunca mezclarlo con otros productos' }, { a: 'Producto sin etiqueta', b: 'No usarlo y avisar a tu jefatura' }, { a: 'Desengrasante', b: 'Usar guantes y ventilar el lugar' }, { a: 'Hoja de seguridad', b: 'Consultarla antes de usar un producto nuevo' }] },
+        { id: 'mj4', tipo: 'clasificar', titulo: 'Clasifica: ¿urgente o puede esperar?', quiz: null, indicaciones: 'Decide si cada caso necesita atención inmediata o puede esperar al siguiente turno.',
+          categorias: ['Urgente', 'Puede esperar'],
+          tarjetas: [{ t: 'Filtración de agua en un pasillo', cat: 0 }, { t: 'Persona atrapada en el ascensor', cat: 0 }, { t: 'Olor a gas en un departamento', cat: 0 }, { t: 'Ampolleta quemada en la bodega', cat: 1 }, { t: 'Residente pide una copia del reglamento', cat: 1 }, { t: 'Reserva del quincho para el sábado', cat: 1 }] }
+      ]
+    };
+  };
+
   // Agrega solo lo que falta: no pisa cambios hechos a estos usuarios ni a su avance.
   GS.asegurarVistas = async function () {
     const d = GS.datosVistas();
@@ -333,5 +367,9 @@ window.GS = window.GS || {};
     if (unidades.length) await GS.store.addMany('unidades', unidades);
     if (personas.length) await GS.store.addMany('personas', personas);
     if (inscripciones.length) await GS.store.addMany('inscripciones', inscripciones);
+    if (!GS.store.get('cursos', 'k-juegos')) await GS.store.add('cursos', GS.cursoJuegos());
+    if (GS.store.get('personas', 'v-trabajador') && !GS.ins('v-trabajador', 'k-juegos')) {
+      await GS.store.add('inscripciones', Object.assign({ id: 'i-v-trabajador-k-juegos' }, GS.ops.nuevaInscripcion('v-trabajador', 'k-juegos', 'asignado', GS.sumarDias(GS.hoy(), 14), 'v-jefatura')));
+    }
   };
 })(window.GS);

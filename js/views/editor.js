@@ -36,6 +36,7 @@ window.GS = window.GS || {};
       if ((m.tipo === 'video' || m.tipo === 'documento') && !GS.urlSegura(m.url)) p.push(GS.t('{modulo}: falta el link (debe empezar con https://).', { modulo: n }));
       if (m.tipo === 'checklist' && !m.items.some((x) => String(x).trim())) p.push(GS.t('{modulo}: el checklist no tiene ítems.', { modulo: n }));
       if (m.tipo === 'politica' && !String(m.texto).trim()) p.push(GS.t('{modulo}: falta el texto de la política.', { modulo: n }));
+      if (GS.juegos.es(m.tipo)) p.push(...GS.juegos.problemas(m, n));
       if (m.quiz) {
         if (!m.quiz.preguntas.length) p.push(GS.t('{modulo}: el quiz no tiene preguntas.', { modulo: n }));
         m.quiz.preguntas.forEach((q, j) => {
@@ -132,6 +133,8 @@ window.GS = window.GS || {};
             <input id="ed-it-${j}" class="input" data-bind="${base}.items.${j}" value="${v}" maxlength="160">
             <button type="button" class="icon-btn" aria-label="${GS.t('Eliminar ítem {n}', { n: j + 1 })}" data-action="ed-item-del" data-j="${j}">×</button></div>`)}
           <button type="button" class="btn2 btn-sm self-start" data-action="ed-item-add">${GS.t('+ Agregar ítem')}</button></div>`;
+      } else if (GS.juegos.es(m.tipo)) {
+        campos = GS.juegos.campos(m, base);
       } else {
         campos = html`<div><label class="label" for="ed-txt">${GS.t('Texto de la política')}</label><textarea id="ed-txt" class="input" rows="7" placeholder="${GS.t('Pega aquí el texto o un resumen')}" data-bind="${base}.texto">${m.texto || ''}</textarea></div>
           <div><label class="label" for="ed-url">${GS.t('Link al documento completo (opcional)')}</label><input id="ed-url" class="input" type="url" placeholder="https://" data-bind="${base}.url" value="${m.url || ''}"></div>
@@ -142,7 +145,7 @@ window.GS = window.GS || {};
         <div class="row">${C.chipTipo(m.tipo)}<span class="muted xs">${GS.t('Módulo {n} de {total}', { n: i + 1, total: d.modulos.length })}</span></div>
         <div><label class="label" for="ed-mt">${GS.t('Título del módulo')}</label><input id="ed-mt" class="input" data-bind="${base}.titulo" value="${m.titulo}" maxlength="120"></div>
         ${campos}
-        <div class="stack" style="border-top:1px solid var(--borde);padding-top:18px">
+        ${GS.juegos.es(m.tipo) ? html`<p class="muted small" style="margin:0;border-top:1px solid var(--borde);padding-top:14px">${GS.t('Este juego ya evalúa: se aprueba con la nota mínima del curso (paso 3). No lleva quiz aparte.')}</p>` : html`<div class="stack" style="border-top:1px solid var(--borde);padding-top:18px">
           <label class="check check-strong"><input type="checkbox" data-action="ed-quiz"${GS.attr(!!m.quiz, 'checked')}>${GS.t('Agregar quiz al final de este módulo')}</label>
           ${m.quiz ? html`${preguntas.map((q, j) => html`<div class="q-box">
               <div class="row" style="justify-content:space-between"><label class="label" style="margin:0" for="ed-q-${j}">${GS.t('Pregunta {n}', { n: j + 1 })}</label>
@@ -155,7 +158,7 @@ window.GS = window.GS || {};
                 <input class="input" placeholder="${GS.t('Alternativa')}" aria-label="${GS.t('Alternativa {letra}', { letra: 'ABCD'[x] })}" data-bind="${base}.quiz.preguntas.${j}.alts.${x}" value="${a}" maxlength="200"></div>`)}
             </div>`)}
             <button type="button" class="btn2 btn-sm self-start" data-action="ed-preg-add">${GS.t('+ Agregar pregunta')}</button>` : ''}
-        </div>
+        </div>`}
       </div>`;
     }
     return html`<div class="split">
@@ -163,7 +166,7 @@ window.GS = window.GS || {};
         <h2 class="h2">${GS.t('Módulos ({n})', { n: d.modulos.length })}</h2>
         ${d.modulos.map((x, j) => html`<div class="mod-edit${x.id === st.sel ? ' sel' : ''}">
           <button type="button" class="mod-edit-main" data-action="ed-sel" data-id="${x.id}">
-            <span class="row" style="gap:8px"><span class="muted xs strong">${j + 1}.</span>${C.chipTipo(x.tipo)}<span class="muted xs">${x.quiz ? GS.t('Con quiz') : GS.t('Sin quiz')}</span></span>
+            <span class="row" style="gap:8px"><span class="muted xs strong">${j + 1}.</span>${C.chipTipo(x.tipo)}<span class="muted xs">${GS.juegos.es(x.tipo) ? GS.t('Juego') : x.quiz ? GS.t('Con quiz') : GS.t('Sin quiz')}</span></span>
             <b>${x.titulo || GS.t('Sin título')}</b></button>
           <div class="row" style="gap:4px;flex-wrap:nowrap">
             <button type="button" class="icon-btn" aria-label="${GS.t('Subir módulo')}" data-action="ed-mover" data-j="${j}" data-d="-1"${GS.attr(j === 0, 'disabled')}>↑</button>
@@ -190,7 +193,7 @@ window.GS = window.GS || {};
         <label class="check" style="align-items:flex-start"><input type="radio" name="orden" value="libre" data-bind="editor.draft.config.orden"${GS.attr(c.orden === 'libre', 'checked')} style="margin-top:2px"><span><strong class="strong">${GS.t('Libre')}</strong><br><span class="muted small">${GS.t('La persona elige por dónde partir')}</span></span></label>
       </fieldset>
       <div class="stack">
-        <div><label class="label" for="cf-n">${GS.t('Nota mínima para aprobar los quiz')}</label><select id="cf-n" class="input" data-bind="editor.draft.config.notaMinima">${C.opciones([[60, '60 %'], [70, '70 %'], [80, '80 %'], [100, '100 %']], c.notaMinima)}</select></div>
+        <div><label class="label" for="cf-n">${GS.t('Nota mínima para aprobar los quiz y juegos')}</label><select id="cf-n" class="input" data-bind="editor.draft.config.notaMinima">${C.opciones([[60, '60 %'], [70, '70 %'], [80, '80 %'], [100, '100 %']], c.notaMinima)}</select></div>
         <div><label class="label" for="cf-i">${GS.t('Intentos por quiz')}</label><select id="cf-i" class="input" data-bind="editor.draft.config.intentos">${C.opciones([[0, GS.t('Ilimitados')], [3, GS.plural(3, 'intento', 'intentos')], [1, GS.plural(1, 'intento', 'intentos')]], c.intentos)}</select></div>
       </div>
       <div class="stack">
@@ -255,6 +258,7 @@ window.GS = window.GS || {};
     const base = { id: 'm' + GS.uid(), tipo, titulo: GS.t('Nuevo {tipo}', { tipo: GS.TIPOS_MODULO[tipo].l.toLowerCase() }), quiz: null };
     if (tipo === 'video' || tipo === 'documento') return Object.assign(base, { url: '', indicaciones: '' });
     if (tipo === 'checklist') return Object.assign(base, { items: [''] });
+    if (GS.juegos.es(tipo)) return GS.juegos.nuevo(tipo, base);
     return Object.assign(base, { titulo: GS.t('Nueva política'), texto: '', url: '' });
   };
   const preguntaVacia = () => ({ q: '', alts: ['', '', '', ''], ok: 0 });

@@ -130,6 +130,10 @@ window.GS = window.GS || {};
         ${m.items.map((t, j) => { const on = !!marcas[j] || hecho; return html`<label class="check-box${on ? ' on' : ''}"><input type="checkbox" data-action="curso-check" data-id="${m.id}" data-j="${j}"${GS.attr(on, 'checked')}${GS.attr(hecho, 'disabled')}>${t}</label>`; })}
         <span class="xs strong">${GS.t('{n} de {total} revisados', { n, total: m.items.length })}</span>
       </div>`;
+    } else if (GS.juegos.es(m.tipo)) {
+      const j = GS.juegos.render(m, { k, ins, st, hecho });
+      puede = j.aprobado;
+      cuerpo = j.cuerpo;
     } else {
       const firma = ins && ins.firmas[m.id];
       const acepta = st.acepta[m.id] || !!firma;

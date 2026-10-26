@@ -19,7 +19,12 @@ window.GS = window.GS || {};
     video: { l: GS.t('Video'), c: 'c-sky' },
     documento: { l: GS.t('Documento'), c: 'c-none' },
     checklist: { l: GS.t('Checklist'), c: 'c-suave' },
-    politica: { l: GS.t('Política'), c: 'c-gris' }
+    politica: { l: GS.t('Política'), c: 'c-gris' },
+    // Juegos (js/views/juegos.js)
+    escenario: { l: GS.t('¿Qué harías?'), c: 'c-juego' },
+    ordenar: { l: GS.t('Ordenar pasos'), c: 'c-juego' },
+    emparejar: { l: GS.t('Emparejar'), c: 'c-juego' },
+    clasificar: { l: GS.t('Clasificar'), c: 'c-juego' }
   };
   GS.ESTADOS_CURSO = {
     borrador: { l: GS.t('Borrador'), c: 'c-gris' },
